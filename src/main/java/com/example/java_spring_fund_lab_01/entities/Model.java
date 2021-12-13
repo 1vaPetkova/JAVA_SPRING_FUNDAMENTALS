@@ -20,7 +20,7 @@ private Instant created;
 private Instant modified;
 private Brand brand;
 
-    @Column
+    @Column(nullable = false)
     public String getName() {
         return name;
     }
@@ -38,7 +38,7 @@ private Brand brand;
         this.category = category;
     }
 
-    @Column(name = "image_url", columnDefinition = "VARCHAR (MAX)")
+    @Column(name = "image_url", columnDefinition = "VARCHAR (512)")
     public String getImageUrl() {
         return imageUrl;
     }

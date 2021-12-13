@@ -2,9 +2,7 @@ package com.example.java_spring_fund_lab_01.entities;
 
 import com.example.java_spring_fund_lab_01.entities.enums.Role;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
@@ -12,15 +10,16 @@ import java.time.Instant;
 public class User extends BaseEntity {
 
     private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private boolean isActive;
-    private Role role;
+    private UserRole role;
     private String imageUrl;
     private Instant created;
     private Instant modified;
 
-    @Column
+    @Column(nullable = false,unique = true)
     public String getUsername() {
         return username;
     }
@@ -29,6 +28,16 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
+    @Column(nullable = false)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -37,6 +46,7 @@ public class User extends BaseEntity {
         this.firstName = firstName;
     }
 
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -45,6 +55,7 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
+    @Column(name = "is_active")
     public boolean isActive() {
         return isActive;
     }
@@ -53,14 +64,16 @@ public class User extends BaseEntity {
         isActive = active;
     }
 
-    public Role getRole() {
+    @ManyToOne
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
+    @Column(name = "image_url")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -69,6 +82,7 @@ public class User extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
+    @Column
     public Instant getCreated() {
         return created;
     }
@@ -77,6 +91,7 @@ public class User extends BaseEntity {
         this.created = created;
     }
 
+    @Column
     public Instant getModified() {
         return modified;
     }
