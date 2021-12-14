@@ -1,9 +1,6 @@
-package com.example.java_spring_fund_lab_01.entities;
-
-import com.example.java_spring_fund_lab_01.entities.enums.Role;
+package com.example.java_spring_fund_lab_01.domain.entities;
 
 import javax.persistence.*;
-import java.time.Instant;
 
 @Entity
 @Table(name = "users")

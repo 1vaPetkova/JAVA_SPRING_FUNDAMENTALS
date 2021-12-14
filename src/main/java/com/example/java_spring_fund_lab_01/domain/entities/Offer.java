@@ -1,11 +1,10 @@
-package com.example.java_spring_fund_lab_01.entities;
+package com.example.java_spring_fund_lab_01.domain.entities;
 
-import com.example.java_spring_fund_lab_01.entities.enums.Engine;
-import com.example.java_spring_fund_lab_01.entities.enums.Transmission;
+import com.example.java_spring_fund_lab_01.domain.entities.enums.Engine;
+import com.example.java_spring_fund_lab_01.domain.entities.enums.Transmission;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Instant;
 
 @Entity
 @Table(name = "offers")
@@ -102,5 +101,21 @@ public class Offer extends BaseEntity {
 
     public void setSeller(User seller) {
         this.seller = seller;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Offer{");
+        sb.append("description='").append(description).append('\'');
+        sb.append(", engine=").append(engine);
+        sb.append(", imageUrl='").append(imageUrl).append('\'');
+        sb.append(", mileage=").append(mileage);
+        sb.append(", price=").append(price);
+        sb.append(", transmission=").append(transmission);
+        sb.append(", year=").append(year);
+        sb.append(", model=").append(model);
+        sb.append(", seller=").append(seller);
+        sb.append('}');
+        return sb.toString();
     }
 }

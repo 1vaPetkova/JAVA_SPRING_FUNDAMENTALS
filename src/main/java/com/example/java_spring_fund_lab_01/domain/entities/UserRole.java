@@ -1,7 +1,6 @@
-package com.example.java_spring_fund_lab_01.entities;
+package com.example.java_spring_fund_lab_01.domain.entities;
 
-import com.example.java_spring_fund_lab_01.entities.BaseEntity;
-import com.example.java_spring_fund_lab_01.entities.enums.Role;
+import com.example.java_spring_fund_lab_01.domain.entities.enums.Role;
 
 import javax.persistence.*;
 

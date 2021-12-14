@@ -1,4 +1,4 @@
-package com.example.java_spring_fund_lab_01.entities;
+package com.example.java_spring_fund_lab_01.domain.entities;
 
 import javax.persistence.*;
 import java.time.Instant;

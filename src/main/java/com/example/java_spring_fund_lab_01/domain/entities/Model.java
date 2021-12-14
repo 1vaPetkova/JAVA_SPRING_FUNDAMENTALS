@@ -1,12 +1,11 @@
-package com.example.java_spring_fund_lab_01.entities;
+package com.example.java_spring_fund_lab_01.domain.entities;
 
-import com.example.java_spring_fund_lab_01.entities.enums.Category;
+import com.example.java_spring_fund_lab_01.domain.entities.enums.Category;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.Instant;
 
 @Entity
 @Table( name = "models")

@@ -1,15 +1,13 @@
-package com.example.java_spring_fund_lab_01.entities;
+package com.example.java_spring_fund_lab_01.domain.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.Instant;
 
 @Entity
 @Table(name = "brands")
 public class Brand extends BaseEntity{
 
-    private String name;
 
     @Column(name = "name",unique = true,nullable = false)
     public String getName() {
