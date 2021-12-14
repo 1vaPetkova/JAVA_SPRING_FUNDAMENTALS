@@ -18,8 +18,6 @@ public class Offer extends BaseEntity {
     private BigDecimal price;
     private Transmission transmission;
     private Integer year;
-    private Instant created;
-    private Instant modified;
     private Model model;
     private User seller;
 
@@ -86,24 +84,6 @@ public class Offer extends BaseEntity {
 
     public void setYear(Integer year) {
         this.year = year;
-    }
-
-    @Column
-    public Instant getCreated() {
-        return created;
-    }
-
-    public void setCreated(Instant created) {
-        this.created = created;
-    }
-
-    @Column
-    public Instant getModified() {
-        return modified;
-    }
-
-    public void setModified(Instant modified) {
-        this.modified = modified;
     }
 
     @ManyToOne

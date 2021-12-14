@@ -16,8 +16,6 @@ private Category category;
 private String imageUrl;
 private Integer startYear;
 private Integer endYear;
-private Instant created;
-private Instant modified;
 private Brand brand;
 
     @Column(nullable = false)
@@ -64,24 +62,6 @@ private Brand brand;
 
     public void setEndYear(Integer endYear) {
         this.endYear = endYear;
-    }
-
-    @Column
-    public Instant getCreated() {
-        return created;
-    }
-
-    public void setCreated(Instant created) {
-        this.created = created;
-    }
-
-    @Column
-    public Instant getModified() {
-        return modified;
-    }
-
-    public void setModified(Instant modified) {
-        this.modified = modified;
     }
 
     @ManyToOne

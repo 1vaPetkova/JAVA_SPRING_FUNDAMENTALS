@@ -16,8 +16,6 @@ public class User extends BaseEntity {
     private boolean isActive;
     private UserRole role;
     private String imageUrl;
-    private Instant created;
-    private Instant modified;
 
     @Column(nullable = false,unique = true)
     public String getUsername() {
@@ -82,21 +80,4 @@ public class User extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @Column
-    public Instant getCreated() {
-        return created;
-    }
-
-    public void setCreated(Instant created) {
-        this.created = created;
-    }
-
-    @Column
-    public Instant getModified() {
-        return modified;
-    }
-
-    public void setModified(Instant modified) {
-        this.modified = modified;
-    }
 }
