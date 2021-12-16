@@ -19,12 +19,12 @@ import java.time.Instant;
 import java.util.List;
 
 @Component
-public class DataInitializer implements CommandLineRunner {
+public class DBInit implements CommandLineRunner {
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
     private final OfferRepository offerRepository;
 
-    public DataInitializer(BrandRepository brandRepository, ModelRepository modelRepository, OfferRepository offerRepository) {
+    public DBInit(BrandRepository brandRepository, ModelRepository modelRepository, OfferRepository offerRepository) {
         this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
         this.offerRepository = offerRepository;
@@ -53,7 +53,7 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         //Create offer
-        Offer fiestaOffer = createFiestaOffer(this.modelRepository.findByName(fiesta.getName()));
+        Offer fiestaOffer = createFiestaOffer(fiesta);
         if (this.offerRepository.count() == 0) {
             this.offerRepository.saveAndFlush(fiestaOffer);
         }
