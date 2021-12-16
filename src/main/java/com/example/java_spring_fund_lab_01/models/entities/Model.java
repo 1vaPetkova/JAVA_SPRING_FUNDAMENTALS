@@ -1,6 +1,6 @@
-package com.example.java_spring_fund_lab_01.domain.entities;
+package com.example.java_spring_fund_lab_01.models.entities;
 
-import com.example.java_spring_fund_lab_01.domain.entities.enums.Category;
+import com.example.java_spring_fund_lab_01.models.entities.enums.Category;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
