@@ -28,6 +28,10 @@ public class BrandViewDto {
         this.models = models;
     }
 
+    public BrandViewDto addModel(ModelViewDto modelViewDto){
+        this.getModels().add(modelViewDto);
+        return this;
+    }
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("BrandViewDto{");
