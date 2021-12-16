@@ -49,7 +49,7 @@ public class DataInitializer implements CommandLineRunner {
         Model nc750s = new Model();
         nc750s.setName("NC750S")
                 .setCategory(Category.MOTORCYCLE)
-                .setImageUrl("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.kB4DaQ5H_OyUKMc35aC5WgHaFj%26pid%3DApi&f=1")
+                .setImageUrl("https://image.hojtorget.se/live/51633/honda-nc750s-91379759-medium.jpg")
                 .setBrand(hondaBrand)
                 .setStartYear(2014);
         setCurrentTimeStamps(nc750s);

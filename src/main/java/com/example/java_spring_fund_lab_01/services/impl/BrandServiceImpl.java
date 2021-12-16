@@ -1,10 +1,8 @@
 package com.example.java_spring_fund_lab_01.services.impl;
 
 import com.example.java_spring_fund_lab_01.models.entities.Brand;
-import com.example.java_spring_fund_lab_01.models.entities.Model;
 import com.example.java_spring_fund_lab_01.models.view.BrandViewDto;
 import com.example.java_spring_fund_lab_01.models.view.ModelViewDto;
-import com.example.java_spring_fund_lab_01.repositories.BrandRepository;
 import com.example.java_spring_fund_lab_01.repositories.ModelRepository;
 import com.example.java_spring_fund_lab_01.services.BrandService;
 import org.modelmapper.ModelMapper;
@@ -29,13 +27,13 @@ public class BrandServiceImpl implements BrandService {
         this.modelRepository.findAll()
                 .forEach(model -> {
                     Brand brand = model.getBrand();
-                    ModelViewDto modelViewDto = this.modelMapper.map(model, ModelViewDto.class);
                     BrandViewDto brandViewDto = findByName(result, brand.getName());
                     if (brandViewDto == null) {
                         brandViewDto = this.modelMapper.map(brand, BrandViewDto.class);
                         result.add(brandViewDto);
                     }
-                    brandViewDto.getModels().add(modelViewDto);
+                    ModelViewDto modelViewDto = this.modelMapper.map(model, ModelViewDto.class);
+                    brandViewDto.addModel(modelViewDto);
                 });
         return result;
     }
