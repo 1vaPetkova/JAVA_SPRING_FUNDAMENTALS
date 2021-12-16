@@ -11,6 +11,7 @@ public abstract class BaseEntity {
 
     private Instant created;
     private Instant modified;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
@@ -21,20 +22,23 @@ public abstract class BaseEntity {
         this.id = id;
     }
 
-    @Column
+    @Column(nullable = false)
     public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(Instant created) {
+    public BaseEntity setCreated(Instant created) {
         this.created = created;
+        return this;
     }
 
+    @Column(nullable = false)
     public Instant getModified() {
         return modified;
     }
 
-    public void setModified(Instant repeated) {
-        this.modified = repeated;
+    public BaseEntity setModified(Instant modified) {
+        this.modified = modified;
+        return this;
     }
 }

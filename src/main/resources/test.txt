@@ -14,16 +14,26 @@ spring:
     #For MySQL 8 uncomment bellow (comment MySQL 5)
     #database-platform: org.hibernate.dialect.MySQL8Dialect
     #For MySQL 5 (innodb dialect below)
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate:
-      ddl-auto: create-drop
-   replace that-change that text-view: false
-    properties:
-      hibernate:
-        format_sql: true
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: truethis is the row below
-let's try to edit some text with vim
-this is the row below
+        database-platform: org.hiberna
+            hibernate:
+                      ddl-auto: create-drop
+                   replace that-cwhange  -: aw
+                    properties:
+                      hibernate:
+                        format_sql: true
+                  mvc:
+                    hiddenmethod:
+                      filter:
+                        enabled: truethis is the row below
+                let's try to edit some text with vim
+                this is the row below
+ var foo = 1;
+var bar = 'a';
+var foobar = foo+var;
+var foobar = foo+var;
+var bar = 'a';var foobar = foo+var;
+var bar = 'a';var foobar = foo+var;
+var bar = 'a';
+var bar = 'a';
+var bar = 'a';
+

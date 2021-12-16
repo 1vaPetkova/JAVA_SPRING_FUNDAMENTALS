@@ -22,8 +22,9 @@ private Brand brand;
         return name;
     }
 
-    public void setName(String name) {
+    public Model setName(String name) {
         this.name = name;
+        return this;
     }
 
     @Column
@@ -31,17 +32,21 @@ private Brand brand;
         return category;
     }
 
-    public void setCategory(Category category) {
+    public Model setCategory(Category category) {
         this.category = category;
+        return this;
     }
+
+
 
     @Column(name = "image_url", columnDefinition = "VARCHAR (512)")
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public Model setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     @Column(name = "start_year")
@@ -49,18 +54,19 @@ private Brand brand;
         return startYear;
     }
 
-    public void setStartYear(Integer startYear) {
+    public Model setStartYear(Integer startYear) {
         this.startYear = startYear;
+        return this;
     }
-
 
     @Column(name = "end_year")
     public Integer getEndYear() {
         return endYear;
     }
 
-    public void setEndYear(Integer endYear) {
+    public Model setEndYear(Integer endYear) {
         this.endYear = endYear;
+        return this;
     }
 
     @ManyToOne
@@ -68,7 +74,8 @@ private Brand brand;
         return brand;
     }
 
-    public void setBrand(Brand brand) {
+    public Model setBrand(Brand brand) {
         this.brand = brand;
+        return this;
     }
 }
