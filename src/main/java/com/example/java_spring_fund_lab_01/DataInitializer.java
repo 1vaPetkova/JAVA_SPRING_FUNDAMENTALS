@@ -26,7 +26,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Transactional
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args)  {
         Brand fordBrand = new Brand();
         fordBrand.setName("Ford");
         setCurrentTimeStamps(fordBrand);
@@ -34,11 +34,15 @@ public class DataInitializer implements CommandLineRunner {
         Brand hondaBrand = new Brand();
         hondaBrand.setName("Honda");
         setCurrentTimeStamps(hondaBrand);
-        this.brandRepository.saveAll(List.of(fordBrand, hondaBrand));
+        if (this.brandRepository.count()==0){
+            this.brandRepository.saveAll(List.of(fordBrand, hondaBrand));
+        }
         Model fiesta = initFiesta(fordBrand);
         Model escort = initEscort(fordBrand);
         Model nc750S = initNC750S(hondaBrand);
-        this.modelRepository.saveAll(List.of(fiesta, escort,nc750S));
+        if (this.modelRepository.count()==0){
+            this.modelRepository.saveAll(List.of(fiesta, escort,nc750S));
+        }
     }
 
     private Model initNC750S(Brand hondaBrand) {
