@@ -1,7 +1,7 @@
-package com.example.java_spring_fund_lab_01.domain.entities;
+package com.example.java_spring_fund_lab_01.models.entities;
 
-import com.example.java_spring_fund_lab_01.domain.entities.enums.Engine;
-import com.example.java_spring_fund_lab_01.domain.entities.enums.Transmission;
+import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
+import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
