@@ -18,15 +18,11 @@ public class Offer extends BaseEntity {
     private Transmission transmission;
     private Integer year;
     private Model model;
-    private User seller;
+   // private User seller;
 
     @Column(columnDefinition = "TEXT")
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Column
@@ -35,17 +31,9 @@ public class Offer extends BaseEntity {
         return engine;
     }
 
-    public void setEngine(Engine engine) {
-        this.engine = engine;
-    }
-
     @Column(name = "image_url")
     public String getImageUrl() {
         return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     @Column
@@ -53,17 +41,9 @@ public class Offer extends BaseEntity {
         return mileage;
     }
 
-    public void setMileage(Integer mileage) {
-        this.mileage = mileage;
-    }
-
     @Column
     public BigDecimal getPrice() {
         return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     @Column
@@ -72,17 +52,9 @@ public class Offer extends BaseEntity {
         return transmission;
     }
 
-    public void setTransmission(Transmission transmission) {
-        this.transmission = transmission;
-    }
-
     @Column
     public Integer getYear() {
         return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
     }
 
     @ManyToOne
@@ -90,17 +62,54 @@ public class Offer extends BaseEntity {
         return model;
     }
 
-    public void setModel(Model model) {
+//    @ManyToOne
+//    public User getSeller() {
+//        return seller;
+//    }
+//
+//    public void setSeller(User seller) {
+//        this.seller = seller;
+//    }
+
+
+    public Offer setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Offer setEngine(Engine engine) {
+        this.engine = engine;
+        return this;
+    }
+
+    public Offer setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Offer setMileage(Integer mileage) {
+        this.mileage = mileage;
+        return this;
+    }
+
+    public Offer setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
+
+    public Offer setTransmission(Transmission transmission) {
+        this.transmission = transmission;
+        return this;
+    }
+
+    public Offer setYear(Integer year) {
+        this.year = year;
+        return this;
+    }
+
+    public Offer setModel(Model model) {
         this.model = model;
-    }
-
-    @ManyToOne
-    public User getSeller() {
-        return seller;
-    }
-
-    public void setSeller(User seller) {
-        this.seller = seller;
+        return this;
     }
 
     @Override
@@ -114,7 +123,7 @@ public class Offer extends BaseEntity {
         sb.append(", transmission=").append(transmission);
         sb.append(", year=").append(year);
         sb.append(", model=").append(model);
-        sb.append(", seller=").append(seller);
+       // sb.append(", seller=").append(seller);
         sb.append('}');
         return sb.toString();
     }

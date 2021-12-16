@@ -3,14 +3,18 @@ package com.example.java_spring_fund_lab_01;
 import com.example.java_spring_fund_lab_01.models.entities.BaseEntity;
 import com.example.java_spring_fund_lab_01.models.entities.Brand;
 import com.example.java_spring_fund_lab_01.models.entities.Model;
+import com.example.java_spring_fund_lab_01.models.entities.Offer;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Category;
+import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
+import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
 import com.example.java_spring_fund_lab_01.repositories.BrandRepository;
 import com.example.java_spring_fund_lab_01.repositories.ModelRepository;
-import com.example.java_spring_fund_lab_01.services.BrandService;
+import com.example.java_spring_fund_lab_01.repositories.OfferRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -18,15 +22,17 @@ import java.util.List;
 public class DataInitializer implements CommandLineRunner {
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
+    private final OfferRepository offerRepository;
 
-    public DataInitializer(BrandRepository brandRepository, ModelRepository modelRepository) {
+    public DataInitializer(BrandRepository brandRepository, ModelRepository modelRepository, OfferRepository offerRepository) {
         this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
+        this.offerRepository = offerRepository;
     }
 
     @Transactional
     @Override
-    public void run(String... args)  {
+    public void run(String... args) {
         Brand fordBrand = new Brand();
         fordBrand.setName("Ford");
         setCurrentTimeStamps(fordBrand);
@@ -34,16 +40,40 @@ public class DataInitializer implements CommandLineRunner {
         Brand hondaBrand = new Brand();
         hondaBrand.setName("Honda");
         setCurrentTimeStamps(hondaBrand);
-        if (this.brandRepository.count()==0){
-            this.brandRepository.saveAll(List.of(fordBrand, hondaBrand));
+        //Create brands
+        if (this.brandRepository.count() == 0) {
+            this.brandRepository.saveAllAndFlush(List.of(fordBrand, hondaBrand));
         }
+        //Create models
         Model fiesta = initFiesta(fordBrand);
         Model escort = initEscort(fordBrand);
         Model nc750S = initNC750S(hondaBrand);
-        if (this.modelRepository.count()==0){
-            this.modelRepository.saveAll(List.of(fiesta, escort,nc750S));
+        if (this.modelRepository.count() == 0) {
+            this.modelRepository.saveAllAndFlush(List.of(fiesta, escort, nc750S));
+        }
+
+        //Create offer
+        Offer fiestaOffer = createFiestaOffer(this.modelRepository.findByName(fiesta.getName()));
+        if (this.offerRepository.count() == 0) {
+            this.offerRepository.saveAndFlush(fiestaOffer);
         }
     }
+
+    private Offer createFiestaOffer(Model fiestaModel) {
+        Offer offer = new Offer();
+        offer
+                .setEngine(Engine.GASOLINE)
+                .setImageUrl("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.investireoggi.it%2Fmotori%2Fwp-content%2Fuploads%2Fsites%2F17%2F2020%2F02%2FFord-Fiesta.jpg&f=1&nofb=1")
+                .setMileage(80000)
+                .setPrice(new BigDecimal(10000))
+                .setYear(2005)
+                .setDescription("Driven by a german grandmother")
+                .setTransmission(Transmission.MANUAL)
+                .setModel(fiestaModel);
+        setCurrentTimeStamps(offer);
+        return offer;
+    }
+
 
     private Model initNC750S(Brand hondaBrand) {
         Model nc750s = new Model();
