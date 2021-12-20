@@ -2,7 +2,6 @@ package com.example.java_spring_fund_lab_01.models.entities;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class BaseEntity {
