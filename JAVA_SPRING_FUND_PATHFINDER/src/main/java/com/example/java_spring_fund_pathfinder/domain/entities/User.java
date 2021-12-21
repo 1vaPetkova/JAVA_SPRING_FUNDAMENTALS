@@ -16,9 +16,19 @@ public class User extends BaseEntity {
     private String password;
     private String username;
     private Set<Role> roles;
+    private Set<Route> routes;
+    private Set<Comment> comments;
+    private Set<Picture> pictures;
+    private Set<Message> messagesSent;
+    private Set<Message> messagesReceived;
 
     public User() {
         this.roles = new HashSet<>();
+        this.routes = new HashSet<>();
+        this.comments = new HashSet<>();
+        this.pictures = new HashSet<>();
+        this.messagesSent = new HashSet<>();
+        this.messagesReceived = new HashSet<>();
     }
 
     @Column(nullable = false, unique = true)
@@ -50,7 +60,8 @@ public class User extends BaseEntity {
         this.age = age;
         return this;
     }
-@Column(name = "full_name")
+
+    @Column(name = "full_name", nullable = false)
     public String getFullName() {
         return fullName;
     }
@@ -80,6 +91,56 @@ public class User extends BaseEntity {
 
     public User setLevel(Level level) {
         this.level = level;
+        return this;
+    }
+
+    @OneToMany(mappedBy = "author")
+    public Set<Route> getRoutes() {
+        return routes;
+    }
+
+    public User setRoutes(Set<Route> routes) {
+        this.routes = routes;
+        return this;
+    }
+
+    @OneToMany(mappedBy = "author")
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public User setComments(Set<Comment> comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    @OneToMany(mappedBy = "author")
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public User setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
+        return this;
+    }
+
+    @OneToMany(mappedBy = "author")
+    public Set<Message> getMessagesSent() {
+        return messagesSent;
+    }
+
+    public User setMessagesSent(Set<Message> messagesSent) {
+        this.messagesSent = messagesSent;
+        return this;
+    }
+
+    @OneToMany(mappedBy = "recipient")
+    public Set<Message> getMessagesReceived() {
+        return messagesReceived;
+    }
+
+    public User setMessagesReceived(Set<Message> messagesReceived) {
+        this.messagesReceived = messagesReceived;
         return this;
     }
 }
