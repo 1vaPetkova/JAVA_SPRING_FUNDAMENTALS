@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "roles")
 public class Role extends BaseEntity {
 
-    private RoleType name;
+    private RoleType role;
     private Set<User> users;
 
     public Role() {
@@ -18,18 +18,18 @@ public class Role extends BaseEntity {
     }
 
     @Enumerated(EnumType.STRING)
-    public RoleType getName() {
-        return name;
-    }
-
-    public Role setName(RoleType name) {
-        this.name = name;
-        return this;
+    public RoleType getRole() {
+        return role;
     }
 
     @ManyToMany(mappedBy = "roles")
     public Set<User> getUsers() {
         return users;
+    }
+
+    public Role setRole(RoleType role) {
+        this.role = role;
+        return this;
     }
 
     public Role setUsers(Set<User> users) {

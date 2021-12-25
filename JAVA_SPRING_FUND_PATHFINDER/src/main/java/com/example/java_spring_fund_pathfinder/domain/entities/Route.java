@@ -42,7 +42,6 @@ public class Route extends BaseEntity {
         return this;
     }
 
-    @Column(name = "level_enum")
     @Enumerated(EnumType.STRING)
     public Level getLevel() {
         return level;
