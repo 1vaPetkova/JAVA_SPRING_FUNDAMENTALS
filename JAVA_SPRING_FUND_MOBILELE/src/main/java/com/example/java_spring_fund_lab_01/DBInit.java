@@ -1,33 +1,37 @@
 package com.example.java_spring_fund_lab_01;
 
-import com.example.java_spring_fund_lab_01.models.entities.BaseEntity;
-import com.example.java_spring_fund_lab_01.models.entities.Brand;
-import com.example.java_spring_fund_lab_01.models.entities.Model;
-import com.example.java_spring_fund_lab_01.models.entities.Offer;
+import com.example.java_spring_fund_lab_01.models.entities.*;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Category;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
+import com.example.java_spring_fund_lab_01.models.entities.enums.Role;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
-import com.example.java_spring_fund_lab_01.repositories.BrandRepository;
-import com.example.java_spring_fund_lab_01.repositories.ModelRepository;
-import com.example.java_spring_fund_lab_01.repositories.OfferRepository;
+import com.example.java_spring_fund_lab_01.repositories.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class DBInit implements CommandLineRunner {
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
     private final OfferRepository offerRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final UserRolesRepository userRolesRepository;
 
-    public DBInit(BrandRepository brandRepository, ModelRepository modelRepository, OfferRepository offerRepository) {
+    public DBInit(BrandRepository brandRepository, ModelRepository modelRepository, OfferRepository offerRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, UserRolesRepository userRolesRepository) {
         this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
         this.offerRepository = offerRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+        this.userRolesRepository = userRolesRepository;
     }
 
     @Transactional
@@ -56,6 +60,10 @@ public class DBInit implements CommandLineRunner {
         Offer fiestaOffer = createFiestaOffer(fiesta);
         if (this.offerRepository.count() == 0) {
             this.offerRepository.saveAndFlush(fiestaOffer);
+        }
+        //Create users
+        if (this.userRepository.count() == 0) {
+            initUsers();
         }
     }
 
@@ -112,6 +120,37 @@ public class DBInit implements CommandLineRunner {
     private static void setCurrentTimeStamps(BaseEntity baseEntity) {
         baseEntity.setCreated(Instant.now());
         baseEntity.setModified(Instant.now());
+    }
+
+    private void initUsers() {
+        UserRole adminRole = new UserRole().setRole(Role.ADMIN);
+        if (this.userRolesRepository.findByRole(Role.ADMIN) == null) {
+            this.userRolesRepository.save(adminRole);
+        }
+
+        UserRole userRole = new UserRole().setRole(Role.USER);
+        if (this.userRolesRepository.findByRole(Role.USER) == null) {
+            this.userRolesRepository.save(userRole);
+        }
+
+        User admin = new User();
+        admin.
+                setFirstName("Pesho").
+                setLastName("Peshov").
+                setUsername("admin").
+                setPassword(passwordEncoder.encode("topsecret")).
+                setRoles(Set.of(adminRole, userRole));
+        setCurrentTimeStamps(admin);
+
+        User kiro = new User();
+        kiro.
+                setFirstName("Kiro").
+                setLastName("Kirov").
+                setUsername("kireto").
+                setPassword(passwordEncoder.encode("topsecret")).
+                setRoles(Set.of(userRole));
+        setCurrentTimeStamps(kiro);
+        this.userRepository.saveAll(List.of(admin, kiro));
     }
 
 }
