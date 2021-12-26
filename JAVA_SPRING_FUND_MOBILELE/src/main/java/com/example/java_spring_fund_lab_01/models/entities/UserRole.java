@@ -10,7 +10,7 @@ import java.util.Set;
 public class UserRole {
 
     private Long id;
-    private Role name;
+    private Role role;
     private Set<User> users;
 
     @Id
@@ -24,12 +24,13 @@ public class UserRole {
     }
 
     @Enumerated(EnumType.ORDINAL)
-    public Role getName() {
-        return name;
+    public Role getRole() {
+        return role;
     }
 
-    public void setName(Role name) {
-        this.name = name;
+    public UserRole setRole(Role role) {
+        this.role = role;
+        return this;
     }
 
     @ManyToMany(mappedBy = "roles")

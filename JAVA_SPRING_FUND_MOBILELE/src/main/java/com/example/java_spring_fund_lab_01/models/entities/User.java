@@ -20,8 +20,9 @@ public class User extends BaseEntity {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     @Column(nullable = false)
@@ -29,8 +30,9 @@ public class User extends BaseEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     @Column(name = "first_name")
@@ -38,8 +40,9 @@ public class User extends BaseEntity {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public User setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     @Column(name = "last_name")
@@ -47,8 +50,9 @@ public class User extends BaseEntity {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public User setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     @Column(name = "is_active")
@@ -56,8 +60,9 @@ public class User extends BaseEntity {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public User setActive(boolean active) {
         isActive = active;
+        return this;
     }
 
     @ManyToMany
@@ -75,8 +80,21 @@ public class User extends BaseEntity {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public User setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isActive=" + isActive +
+                ", roles=" + roles +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }
