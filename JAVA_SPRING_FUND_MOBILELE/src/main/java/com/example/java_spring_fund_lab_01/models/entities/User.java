@@ -1,6 +1,7 @@
 package com.example.java_spring_fund_lab_01.models.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -11,10 +12,10 @@ public class User extends BaseEntity {
     private String firstName;
     private String lastName;
     private boolean isActive;
-    private UserRole role;
+    private Set<UserRole> roles;
     private String imageUrl;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     public String getUsername() {
         return username;
     }
@@ -59,13 +60,14 @@ public class User extends BaseEntity {
         isActive = active;
     }
 
-    @ManyToOne
-    public UserRole getRole() {
-        return role;
+    @ManyToMany
+    public Set<UserRole> getRoles() {
+        return roles;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public User setRoles(Set<UserRole> roles) {
+        this.roles = roles;
+        return this;
     }
 
     @Column(name = "image_url")
