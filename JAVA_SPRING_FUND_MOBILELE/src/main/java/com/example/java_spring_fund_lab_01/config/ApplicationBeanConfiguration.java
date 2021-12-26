@@ -14,18 +14,12 @@ public class ApplicationBeanConfiguration {
         return new FileUtilImpl();
     }
 
-//    @Bean
-//    public Gson gson() {
-//        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
-//    }
+
 
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 
-//    @Bean
-//    public XmlParser xmlParser() {
-//        return new XmlParserImpl();
-//    }
+
 }
