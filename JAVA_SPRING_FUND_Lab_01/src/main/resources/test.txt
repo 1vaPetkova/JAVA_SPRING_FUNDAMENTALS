@@ -1,0 +1,39 @@
+
+
+this is the row above
+let's try to edit some text with vim
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    # Put here your user name
+    username: root
+    # Put here your password
+    password: ''
+    url: jdbc:mysql://localhost:3306/spring_data_lab_db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+  jpa:
+    #For MySQL 8 uncomment bellow (comment MySQL 5)
+    #database-platform: org.hibernate.dialect.MySQL8Dialect
+    #For MySQL 5 (innodb dialect below)
+        database-platform: org.hiberna
+            hibernate:
+                      ddl-auto: create-drop
+                   replace that-cwhange  -: aw
+                    properties:
+                      hibernate:
+                        format_sql: true
+                  mvc:
+                    hiddenmethod:
+                      filter:
+                        enabled: truethis is the row below
+                let's try to edit some text with vim
+                this is the row below
+ var foo = 1;
+var bar = 'a';
+var foobar = foo+var;
+var foobar = foo+var;
+var bar = 'a';var foobar = foo+var;
+var bar = 'a';var foobar = foo+var;
+var bar = 'a';
+var bar = 'a';
+var bar = 'a';
+
