@@ -4,4 +4,6 @@ public interface UserService {
     boolean isAuthenticated(String username, String password);
 
     void loginUser(String username);
+
+    void logoutCurrentUser();
 }
