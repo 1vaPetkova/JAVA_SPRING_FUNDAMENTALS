@@ -23,7 +23,6 @@ public class LoginController {
 
     @ModelAttribute("userModel")
     public UserLoginServiceModel userModel() {
-
         return new UserLoginServiceModel();
     }
 
@@ -39,7 +38,7 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindigResult.userModel",
+                    "org.springframework.validation.BindingResult.userModel",
                     bindingResult
             );
             return "redirect:/users/login";
