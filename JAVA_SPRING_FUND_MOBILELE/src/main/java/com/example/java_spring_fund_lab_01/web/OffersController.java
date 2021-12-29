@@ -14,6 +14,12 @@ public class OffersController {
     public OffersController(OfferService offerService) {
         this.offerService = offerService;
     }
+
+    @GetMapping("/add")
+    public String addOffer(){
+        return "offer-add";
+    }
+
     @GetMapping("/all")
     public String allBrands(Model model) {
         model.addAttribute("offers", offerService.getAllOffers());
