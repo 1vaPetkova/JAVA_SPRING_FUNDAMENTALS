@@ -1,6 +1,6 @@
 package com.example.java_spring_fund_lab_01.models.entities;
 
-import com.example.java_spring_fund_lab_01.models.entities.enums.Role;
+import com.example.java_spring_fund_lab_01.models.entities.enums.RoleEnum;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,7 +10,7 @@ import java.util.Set;
 public class UserRole {
 
     private Long id;
-    private Role role;
+    private RoleEnum role;
     private Set<User> users;
 
     @Id
@@ -24,11 +24,11 @@ public class UserRole {
     }
 
     @Enumerated(EnumType.STRING)
-    public Role getRole() {
+    public RoleEnum getRole() {
         return role;
     }
 
-    public UserRole setRole(Role role) {
+    public UserRole setRole(RoleEnum role) {
         this.role = role;
         return this;
     }

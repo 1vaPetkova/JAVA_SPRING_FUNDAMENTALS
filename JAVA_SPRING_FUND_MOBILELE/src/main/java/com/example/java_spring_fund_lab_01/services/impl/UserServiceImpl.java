@@ -1,11 +1,16 @@
 package com.example.java_spring_fund_lab_01.services.impl;
 
 import com.example.java_spring_fund_lab_01.models.entities.User;
+import com.example.java_spring_fund_lab_01.models.entities.UserRole;
+import com.example.java_spring_fund_lab_01.models.entities.enums.RoleEnum;
 import com.example.java_spring_fund_lab_01.repositories.UserRepository;
 import com.example.java_spring_fund_lab_01.security.CurrentUser;
 import com.example.java_spring_fund_lab_01.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,13 +35,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void loginUser(String username) {
+        User user = this.userRepository.findByUsername(username);
+        Set<RoleEnum> userRoles = user.getRoles()
+                .stream().map(UserRole::getRole)
+                .collect(Collectors.toSet());
+
         this.currentUser
                 .setAnonymous(false)
-                .setName(username);
+                .setName(username)
+                .setUserRoles(userRoles);
     }
 
     @Override
     public void logoutCurrentUser() {
-    this.currentUser.setAnonymous(true);
+        this.currentUser.setAnonymous(true);
     }
+
 }
