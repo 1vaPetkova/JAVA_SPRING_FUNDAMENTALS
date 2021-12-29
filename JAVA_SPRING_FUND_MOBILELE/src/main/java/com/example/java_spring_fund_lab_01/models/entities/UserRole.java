@@ -23,7 +23,7 @@ public class UserRole {
         this.id = id;
     }
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     public Role getRole() {
         return role;
     }

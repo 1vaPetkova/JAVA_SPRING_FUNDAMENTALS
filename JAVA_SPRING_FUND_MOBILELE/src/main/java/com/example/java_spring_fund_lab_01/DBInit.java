@@ -123,6 +123,28 @@ public class DBInit implements CommandLineRunner {
     }
 
     private void initUsers() {
+        initRoles();
+
+        User admin = new User().
+                setFirstName("Pesho").
+                setLastName("Peshov").
+                setUsername("admin").
+                setPassword(passwordEncoder.encode("topsecret")).
+                setRoles(Set.of(this.userRolesRepository.findByRole(Role.ADMIN),
+                        this.userRolesRepository.findByRole(Role.USER)));
+        setCurrentTimeStamps(admin);
+
+        User kiro = new User().
+                setFirstName("Kiro").
+                setLastName("Kirov").
+                setUsername("kireto").
+                setPassword(passwordEncoder.encode("topsecret")).
+                setRoles(Set.of(this.userRolesRepository.findByRole(Role.USER)));
+        setCurrentTimeStamps(kiro);
+        this.userRepository.saveAll(List.of(admin, kiro));
+    }
+
+    private void initRoles() {
         UserRole adminRole = new UserRole().setRole(Role.ADMIN);
         if (this.userRolesRepository.findByRole(Role.ADMIN) == null) {
             this.userRolesRepository.save(adminRole);
@@ -132,25 +154,6 @@ public class DBInit implements CommandLineRunner {
         if (this.userRolesRepository.findByRole(Role.USER) == null) {
             this.userRolesRepository.save(userRole);
         }
-
-        User admin = new User();
-        admin.
-                setFirstName("Pesho").
-                setLastName("Peshov").
-                setUsername("admin").
-                setPassword(passwordEncoder.encode("topsecret")).
-                setRoles(Set.of(adminRole, userRole));
-        setCurrentTimeStamps(admin);
-
-        User kiro = new User();
-        kiro.
-                setFirstName("Kiro").
-                setLastName("Kirov").
-                setUsername("kireto").
-                setPassword(passwordEncoder.encode("topsecret")).
-                setRoles(Set.of(userRole));
-        setCurrentTimeStamps(kiro);
-        this.userRepository.saveAll(List.of(admin, kiro));
     }
 
 }
