@@ -8,7 +8,6 @@ import com.example.java_spring_fund_pathfinder.repositories.UserRepository;
 import com.example.java_spring_fund_pathfinder.services.UserService;
 import com.example.java_spring_fund_pathfinder.util.CurrentUser;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -18,14 +17,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private final PasswordEncoder passwordEncoder;
+  //  private final PasswordEncoder passwordEncoder;
     private final CurrentUser currentUser;
 
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, CurrentUser currentUser) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, /*PasswordEncoder passwordEncoder,*/ CurrentUser currentUser) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
-        this.passwordEncoder = passwordEncoder;
+      //  this.passwordEncoder = passwordEncoder;
         this.currentUser = currentUser;
     }
 
@@ -36,17 +35,15 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return false;
         }
-        if (this.passwordEncoder.encode(password).length() != password.length()) {
             return user.getPassword().equals(password);
-        }
-        return this.passwordEncoder.matches(password, user.getPassword());
+      //  return this.passwordEncoder.matches(password, user.getPassword());
     }
 
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
         User user = this.modelMapper.map(userServiceModel, User.class)
-                .setLevel(Level.BEGINNER)
-                .setPassword(this.passwordEncoder.encode(userServiceModel.getPassword()));
+                .setLevel(Level.BEGINNER);
+              //  .setPassword(this.passwordEncoder.encode(userServiceModel.getPassword()));
         this.userRepository.save(user);
     }
 
@@ -68,5 +65,10 @@ public class UserServiceImpl implements UserService {
                         .findByUsername(username).getRoles()
                         .stream()
                         .map(Role::getRole).collect(Collectors.toSet()));
+    }
+
+    @Override
+    public void logoutCurrentUser() {
+        this.currentUser.setLoggedOut(true);
     }
 }

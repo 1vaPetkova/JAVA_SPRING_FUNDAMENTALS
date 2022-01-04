@@ -40,7 +40,7 @@ public class CurrentUser {
         return this;
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return this.userRoles.contains(RoleType.ADMIN);
     }
 
@@ -56,6 +56,16 @@ public class CurrentUser {
 
     public CurrentUser setLoggedIn(boolean loggedIn) {
         isLoggedIn = loggedIn;
+        return this;
+    }
+
+    public CurrentUser setLoggedOut(boolean loggedOut) {
+        if (loggedOut) {
+            this.id = null;
+            this.username = null;
+            this.userRoles.clear();
+        }
+        this.isLoggedIn = false;
         return this;
     }
 }
