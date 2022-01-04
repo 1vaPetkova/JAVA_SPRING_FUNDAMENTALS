@@ -3,6 +3,7 @@ package com.example.java_spring_fund_pathfinder.models.service;
 import com.example.java_spring_fund_pathfinder.models.entities.Role;
 import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserServiceModel {
@@ -16,6 +17,7 @@ public class UserServiceModel {
     private Set<Role> roles;
 
     public UserServiceModel() {
+        this.roles = new HashSet<>();
     }
 
     public Long getId() {
