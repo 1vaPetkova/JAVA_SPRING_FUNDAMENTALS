@@ -1,5 +1,6 @@
 package com.example.java_spring_fund_pathfinder.models.binding;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 public class UserRegisterBindingModel {
@@ -42,6 +43,7 @@ public class UserRegisterBindingModel {
         return this;
     }
 
+    @Min(10)
     public Integer getAge() {
         return age;
     }

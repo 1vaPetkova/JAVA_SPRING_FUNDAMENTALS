@@ -17,6 +17,11 @@ public class Role extends BaseEntity {
         this.users = new HashSet<>();
     }
 
+    public Role(RoleType role) {
+        this();
+        this.role = role;
+    }
+
     @Enumerated(EnumType.STRING)
     public RoleType getRole() {
         return role;
