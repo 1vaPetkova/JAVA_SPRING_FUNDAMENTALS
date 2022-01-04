@@ -1,5 +1,6 @@
 package com.example.java_spring_fund_pathfinder.services.impl;
 
+import com.example.java_spring_fund_pathfinder.models.entities.Role;
 import com.example.java_spring_fund_pathfinder.models.entities.User;
 import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
 import com.example.java_spring_fund_pathfinder.models.service.UserServiceModel;
@@ -9,6 +10,8 @@ import com.example.java_spring_fund_pathfinder.util.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,8 +36,10 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return false;
         }
-        return  this.passwordEncoder.matches(password, user.getPassword())
-                || user.getPassword().equals(password);
+        if (this.passwordEncoder.encode(password).length() != password.length()) {
+            return user.getPassword().equals(password);
+        }
+        return this.passwordEncoder.matches(password, user.getPassword());
     }
 
     @Override
@@ -58,6 +63,10 @@ public class UserServiceImpl implements UserService {
     public void loginUser(Long id, String username) {
         this.currentUser
                 .setId(id)
-                .setUsername(username);
+                .setUsername(username)
+                .setUserRoles(this.userRepository
+                        .findByUsername(username).getRoles()
+                        .stream()
+                        .map(Role::getRole).collect(Collectors.toSet()));
     }
 }
