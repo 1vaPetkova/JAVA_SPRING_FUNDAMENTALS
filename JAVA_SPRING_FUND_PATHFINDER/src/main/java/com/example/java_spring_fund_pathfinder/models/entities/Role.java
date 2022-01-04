@@ -1,6 +1,6 @@
-package com.example.java_spring_fund_pathfinder.domain.entities;
+package com.example.java_spring_fund_pathfinder.models.entities;
 
-import com.example.java_spring_fund_pathfinder.domain.entities.enums.RoleType;
+import com.example.java_spring_fund_pathfinder.models.entities.enums.RoleType;
 
 import javax.persistence.*;
 import java.util.HashSet;

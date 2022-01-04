@@ -1,10 +1,9 @@
-package com.example.java_spring_fund_pathfinder.domain.entities;
+package com.example.java_spring_fund_pathfinder.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.Set;
 
 @Entity
 @Table(name = "pictures")

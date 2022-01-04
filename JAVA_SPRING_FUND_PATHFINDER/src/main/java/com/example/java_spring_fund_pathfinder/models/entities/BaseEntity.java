@@ -1,4 +1,4 @@
-package com.example.java_spring_fund_pathfinder.domain.entities;
+package com.example.java_spring_fund_pathfinder.models.entities;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
