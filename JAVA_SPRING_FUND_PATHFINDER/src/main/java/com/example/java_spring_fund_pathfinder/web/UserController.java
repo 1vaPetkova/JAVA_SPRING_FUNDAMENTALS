@@ -4,7 +4,6 @@ import com.example.java_spring_fund_pathfinder.models.binding.UserLoginBindingMo
 import com.example.java_spring_fund_pathfinder.models.binding.UserRegisterBindingModel;
 import com.example.java_spring_fund_pathfinder.models.service.UserServiceModel;
 import com.example.java_spring_fund_pathfinder.services.UserService;
-import com.example.java_spring_fund_pathfinder.util.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +27,6 @@ public class UserController {
         this.userService = userService;
         this.modelMapper = modelMapper;
     }
-
 
     @ModelAttribute
     public UserRegisterBindingModel userRegisterBindingModel() {
@@ -89,6 +87,12 @@ public class UserController {
             this.userService.loginUser(user.getId(), user.getUsername());
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        this.userService.logoutCurrentUser();
+        return "redirect:/";
     }
 
 }

@@ -15,7 +15,7 @@ public class UserRegisterBindingModel {
     public UserRegisterBindingModel() {
     }
 
-    @Size(min = 2)
+    @Size(min = 4, max = 20)
     public String getUsername() {
         return username;
     }
@@ -52,7 +52,7 @@ public class UserRegisterBindingModel {
         this.age = age;
         return this;
     }
-
+    @Size(min = 4, max = 20)
     public String getPassword() {
         return password;
     }
