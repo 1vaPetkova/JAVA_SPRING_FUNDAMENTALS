@@ -1,5 +1,6 @@
 package com.example.java_spring_fund_pathfinder.web;
 
+import com.example.java_spring_fund_pathfinder.models.binding.UserLoginBindingModel;
 import com.example.java_spring_fund_pathfinder.models.binding.UserRegisterBindingModel;
 import com.example.java_spring_fund_pathfinder.models.service.UserServiceModel;
 import com.example.java_spring_fund_pathfinder.services.UserService;
@@ -33,6 +34,11 @@ public class UserController {
         return new UserRegisterBindingModel();
     }
 
+    @ModelAttribute
+    public UserLoginBindingModel userLoginBindingModel() {
+        return new UserLoginBindingModel();
+    }
+
     @GetMapping("/register")
     public String register(Model model) {
         return "register";
@@ -56,12 +62,30 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
+
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginConfirm() {
+    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
+                               BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel");
+            return "redirect:login";
+        }
+
+        UserServiceModel user = this.userService
+                .findUserByUsernameAndPassword(userLoginBindingModel.getUsername(),
+                        userLoginBindingModel.getPassword());
         //TODO:
+        if (user == null) {
+            redirectAttributes
+                    .addFlashAttribute("doesExist",false)
+                    .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel");
+        }
         return "redirect:/";
     }
 
