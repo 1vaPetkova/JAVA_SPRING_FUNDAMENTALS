@@ -1,5 +1,7 @@
 package com.example.java_spring_fund_lab_01.models.entities;
 
+
+
 import com.example.java_spring_fund_lab_01.models.entities.enums.RoleEnum;
 
 import javax.persistence.*;
