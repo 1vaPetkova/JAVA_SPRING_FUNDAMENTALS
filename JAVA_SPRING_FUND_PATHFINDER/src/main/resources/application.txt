@@ -1,35 +1,23 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pathfinder_db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-    # Put here your username
-    username: *****
+    # Put here your user name
+    username: ******
     # Put here your password
     password: '****'
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: true
-  servlet:
-    multipart:
-      max-file-size: 1MB
-      max-request-size: 5MB
-  sql:
-    init:
-      mode: always
+    url: jdbc:mysql://localhost:3306/pathfinder_db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
   jpa:
     #For MySQL 8 uncomment bellow (comment MySQL 5)
     database-platform: org.hibernate.dialect.MySQL8Dialect
     #For MySQL 5 (innodb dialect below)
-    #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
     open-in-view: false
     properties:
       hibernate:
-        show_sql: true
-  #Cloudinary Properties
-  #cloudinary:
-  #api-key:
-  #api-secret:
-  #cloud-name:
+        format_sql: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

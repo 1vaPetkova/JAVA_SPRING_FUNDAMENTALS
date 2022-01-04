@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "spring.spring.batch.jdbc.initialize-schema",
-      "type": "java.lang.String",
-      "description": "Description for spring.spring.batch.jdbc.initialize-schema."
-  }
-] }
