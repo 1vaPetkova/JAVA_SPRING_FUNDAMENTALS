@@ -71,4 +71,11 @@ public class UserServiceImpl implements UserService {
     public void logoutCurrentUser() {
         this.currentUser.setLoggedOut(true);
     }
+
+    @Override
+    public UserServiceModel findById(Long id) {
+        return this.userRepository.findById(id)
+                .map(user->this.modelMapper.map(user, UserServiceModel.class))
+                .orElse(null);
+    }
 }
