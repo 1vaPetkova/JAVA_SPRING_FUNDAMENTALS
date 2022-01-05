@@ -1,5 +1,6 @@
 package com.example.java_spring_fund_pathfinder.services;
 
+import com.example.java_spring_fund_pathfinder.models.entities.User;
 import com.example.java_spring_fund_pathfinder.models.service.UserServiceModel;
 
 public interface UserService {
@@ -15,4 +16,7 @@ public interface UserService {
 
     void logoutCurrentUser();
 
+    UserServiceModel findById(Long id);
+
+    boolean doesNameExist(String username);
 }
