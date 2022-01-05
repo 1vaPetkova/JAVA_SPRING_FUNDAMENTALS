@@ -6,9 +6,8 @@ import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserServiceModel {
+public class UserServiceModel extends BaseServiceModel{
 
-    private Long id;
     private Integer age;
     private String fullName;
     private Level level;
@@ -18,15 +17,6 @@ public class UserServiceModel {
 
     public UserServiceModel() {
         this.roles = new HashSet<>();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public UserServiceModel setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public Integer getAge() {

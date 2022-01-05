@@ -38,6 +38,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model) {
+        model.addAttribute("userExists", false);
         return "register";
     }
 
@@ -52,6 +53,17 @@ public class UserController {
                     .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel");
             return "redirect:register";
         }
+
+        boolean doesNameExist = this.userService.doesNameExist(userRegisterBindingModel.getUsername());
+        //TODO: redirect with message
+        if (doesNameExist) {
+            redirectAttributes
+                    .addFlashAttribute("userExists", true)
+                    .addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel");
+            return "redirect:register";
+        }
+
         this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
         return "redirect:login";
     }
@@ -76,6 +88,7 @@ public class UserController {
                 .findUserByUsernameAndPassword(userLoginBindingModel.getUsername(),
                         userLoginBindingModel.getPassword());
         if (user == null) {
+            //TODO: redirect with message
             redirectAttributes
                     .addFlashAttribute("doesExist", false)
                     .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
@@ -97,7 +110,7 @@ public class UserController {
     private String profile(@PathVariable Long id, Model model) {
         model
                 .addAttribute("user",
-                this.modelMapper.map(this.userService.findById(id), UserViewModel.class));
+                        this.modelMapper.map(this.userService.findById(id), UserViewModel.class));
         return "profile";
     }
 }

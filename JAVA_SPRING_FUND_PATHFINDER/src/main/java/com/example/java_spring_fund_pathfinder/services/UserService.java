@@ -17,4 +17,6 @@ public interface UserService {
     void logoutCurrentUser();
 
     UserServiceModel findById(Long id);
+
+    boolean doesNameExist(String username);
 }

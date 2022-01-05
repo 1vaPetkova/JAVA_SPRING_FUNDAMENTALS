@@ -17,14 +17,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-  //  private final PasswordEncoder passwordEncoder;
+    //  private final PasswordEncoder passwordEncoder;
     private final CurrentUser currentUser;
 
 
     public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, /*PasswordEncoder passwordEncoder,*/ CurrentUser currentUser) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
-      //  this.passwordEncoder = passwordEncoder;
+        //  this.passwordEncoder = passwordEncoder;
         this.currentUser = currentUser;
     }
 
@@ -35,15 +35,15 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return false;
         }
-            return user.getPassword().equals(password);
-      //  return this.passwordEncoder.matches(password, user.getPassword());
+        return user.getPassword().equals(password);
+        //  return this.passwordEncoder.matches(password, user.getPassword());
     }
 
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
         User user = this.modelMapper.map(userServiceModel, User.class)
                 .setLevel(Level.BEGINNER);
-              //  .setPassword(this.passwordEncoder.encode(userServiceModel.getPassword()));
+        //  .setPassword(this.passwordEncoder.encode(userServiceModel.getPassword()));
         this.userRepository.save(user);
     }
 
@@ -75,7 +75,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserServiceModel findById(Long id) {
         return this.userRepository.findById(id)
-                .map(user->this.modelMapper.map(user, UserServiceModel.class))
+                .map(user -> this.modelMapper.map(user, UserServiceModel.class))
                 .orElse(null);
+    }
+
+    @Override
+    public boolean doesNameExist(String username) {
+        return this.userRepository.existsByUsername(username);
     }
 }
