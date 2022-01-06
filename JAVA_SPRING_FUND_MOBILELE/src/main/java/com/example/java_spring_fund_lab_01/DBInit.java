@@ -39,11 +39,9 @@ public class DBInit implements CommandLineRunner {
     public void run(String... args) {
         Brand fordBrand = new Brand();
         fordBrand.setName("Ford");
-        setCurrentTimeStamps(fordBrand);
 
         Brand hondaBrand = new Brand();
         hondaBrand.setName("Honda");
-        setCurrentTimeStamps(hondaBrand);
         //Create brands
         if (this.brandRepository.count() == 0) {
             this.brandRepository.saveAllAndFlush(List.of(fordBrand, hondaBrand));
@@ -78,7 +76,6 @@ public class DBInit implements CommandLineRunner {
                 .setDescription("Driven by a german grandmother")
                 .setTransmission(Transmission.MANUAL)
                 .setModel(fiestaModel);
-        setCurrentTimeStamps(offer);
         return offer;
     }
 
@@ -90,7 +87,6 @@ public class DBInit implements CommandLineRunner {
                 .setImageUrl("https://image.hojtorget.se/live/51633/honda-nc750s-91379759-medium.jpg")
                 .setBrand(hondaBrand)
                 .setStartYear(2014);
-        setCurrentTimeStamps(nc750s);
         return nc750s;
     }
 
@@ -101,7 +97,6 @@ public class DBInit implements CommandLineRunner {
                 .setImageUrl("https://www.automobilemag.com/uploads/sites/11/2017/04/1995-Ford-Escort-RS-Cosworth-Just-Listed-Front-Three-Quarters.jpg")
                 .setBrand(fordBrand)
                 .setStartYear(1985);
-        setCurrentTimeStamps(escort);
         return escort;
     }
 
@@ -113,13 +108,7 @@ public class DBInit implements CommandLineRunner {
                 .setBrand(brand)
                 .setStartYear(1968)
                 .setEndYear(2002);
-        setCurrentTimeStamps(fiesta);
         return fiesta;
-    }
-
-    private static void setCurrentTimeStamps(BaseEntity baseEntity) {
-        baseEntity.setCreated(Instant.now());
-        baseEntity.setModified(Instant.now());
     }
 
     private void initUsers() {
@@ -132,7 +121,6 @@ public class DBInit implements CommandLineRunner {
                 setPassword(passwordEncoder.encode("topsecret")).
                 setRoles(Set.of(this.userRolesRepository.findByRole(RoleEnum.ADMIN),
                         this.userRolesRepository.findByRole(RoleEnum.USER)));
-        setCurrentTimeStamps(admin);
 
         User kiro = new User().
                 setFirstName("Kiro").
@@ -140,7 +128,6 @@ public class DBInit implements CommandLineRunner {
                 setUsername("kireto").
                 setPassword(passwordEncoder.encode("topsecret")).
                 setRoles(Set.of(this.userRolesRepository.findByRole(RoleEnum.USER)));
-        setCurrentTimeStamps(kiro);
         this.userRepository.saveAll(List.of(admin, kiro));
     }
 
