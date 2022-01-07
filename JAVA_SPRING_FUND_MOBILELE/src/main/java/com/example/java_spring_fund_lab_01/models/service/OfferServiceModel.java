@@ -29,6 +29,7 @@ public class OfferServiceModel {
         return this;
     }
 
+    @NotNull
     @DecimalMin("100")
     public BigDecimal getPrice() {
         return price;
@@ -72,7 +73,7 @@ public class OfferServiceModel {
     }
 
     @NotNull
-    @Positive
+    @PositiveOrZero
     public Integer getMileage() {
         return mileage;
     }
