@@ -1,6 +1,9 @@
 package com.example.java_spring_fund_lab_01.models.service;
 
+import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
+import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
 import com.example.java_spring_fund_lab_01.models.validation.YearInPastOrPresent;
+
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -9,8 +12,8 @@ public class OfferServiceModel {
 
     private Long modelId;
     private BigDecimal price;
-    private String engine;
-    private String transmission;
+    private Engine engine;
+    private Transmission transmission;
     private Integer year;
     private Integer mileage;
     private String description;
@@ -36,25 +39,27 @@ public class OfferServiceModel {
         return this;
     }
 
-    @NotBlank
-    public String getEngine() {
+    @NotNull
+    public Engine getEngine() {
         return engine;
     }
 
-    public OfferServiceModel setEngine(String engine) {
+    public OfferServiceModel setEngine(Engine engine) {
         this.engine = engine;
         return this;
     }
 
-    @NotBlank
-    public String getTransmission() {
+
+    @NotNull
+    public Transmission getTransmission() {
         return transmission;
     }
 
-    public OfferServiceModel setTransmission(String transmission) {
+    public OfferServiceModel setTransmission(Transmission transmission) {
         this.transmission = transmission;
         return this;
     }
+
 
     @YearInPastOrPresent(minYear = 1930)
     public Integer getYear() {
@@ -78,6 +83,7 @@ public class OfferServiceModel {
     }
 
     @NotBlank
+    @Size(min = 10, max = 512)
     public String getDescription() {
         return description;
     }

@@ -58,4 +58,16 @@ public class ModelViewDto {
     public void setEndYear(Integer endYear) {
         this.endYear = endYear;
     }
+
+    @Override
+    public String toString() {
+        return "ModelViewDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", startYear=" + startYear +
+                ", endYear=" + endYear +
+                '}';
+    }
 }
