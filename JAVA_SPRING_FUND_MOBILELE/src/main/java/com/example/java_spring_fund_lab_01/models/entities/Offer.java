@@ -18,7 +18,7 @@ public class Offer extends BaseEntity {
     private Transmission transmission;
     private Integer year;
     private Model model;
-   // private User seller;
+    private User seller;
 
     @Column(columnDefinition = "TEXT")
     public String getDescription() {
@@ -62,14 +62,14 @@ public class Offer extends BaseEntity {
         return model;
     }
 
-//    @ManyToOne
-//    public User getSeller() {
-//        return seller;
-//    }
-//
-//    public void setSeller(User seller) {
-//        this.seller = seller;
-//    }
+    @ManyToOne
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
 
 
     public Offer setDescription(String description) {
@@ -123,7 +123,7 @@ public class Offer extends BaseEntity {
         sb.append(", transmission=").append(transmission);
         sb.append(", year=").append(year);
         sb.append(", model=").append(model);
-       // sb.append(", seller=").append(seller);
+        sb.append(", seller=").append(seller);
         sb.append('}');
         return sb.toString();
     }
