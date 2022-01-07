@@ -3,12 +3,12 @@ package com.example.java_spring_fund_lab_01.models.view;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BrandViewDto {
+public class BrandViewModel {
 
     private String name;
-    private List<ModelViewDto> models;
+    private List<ModelViewModel> models;
 
-    public BrandViewDto() {
+    public BrandViewModel() {
         this.models = new ArrayList<>();
     }
 
@@ -20,15 +20,15 @@ public class BrandViewDto {
         this.name = name;
     }
 
-    public List<ModelViewDto> getModels() {
+    public List<ModelViewModel> getModels() {
         return models;
     }
 
-    public void setModels(List<ModelViewDto> models) {
+    public void setModels(List<ModelViewModel> models) {
         this.models = models;
     }
 
-    public BrandViewDto addModel(ModelViewDto modelViewDto){
+    public BrandViewModel addModel(ModelViewModel modelViewDto){
         this.getModels().add(modelViewDto);
         return this;
     }

@@ -5,7 +5,7 @@ import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
 
 import java.math.BigDecimal;
 
-public class OfferSummaryViewDto {
+public class OfferSummaryViewModel {
 
     private Engine engineType;
     private String imageUrl;
@@ -18,7 +18,7 @@ public class OfferSummaryViewDto {
         return engineType;
     }
 
-    public OfferSummaryViewDto setEngineType(Engine engineType) {
+    public OfferSummaryViewModel setEngineType(Engine engineType) {
         this.engineType = engineType;
         return this;
     }
@@ -27,7 +27,7 @@ public class OfferSummaryViewDto {
         return imageUrl;
     }
 
-    public OfferSummaryViewDto setImageUrl(String imageUrl) {
+    public OfferSummaryViewModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
@@ -36,7 +36,7 @@ public class OfferSummaryViewDto {
         return mileage;
     }
 
-    public OfferSummaryViewDto setMileage(Integer mileage) {
+    public OfferSummaryViewModel setMileage(Integer mileage) {
         this.mileage = mileage;
         return this;
     }
@@ -45,7 +45,7 @@ public class OfferSummaryViewDto {
         return price;
     }
 
-    public OfferSummaryViewDto setPrice(BigDecimal price) {
+    public OfferSummaryViewModel setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -54,7 +54,7 @@ public class OfferSummaryViewDto {
         return year;
     }
 
-    public OfferSummaryViewDto setYear(Integer year) {
+    public OfferSummaryViewModel setYear(Integer year) {
         this.year = year;
         return this;
     }
@@ -63,7 +63,7 @@ public class OfferSummaryViewDto {
         return transmissionType;
     }
 
-    public OfferSummaryViewDto setTransmissionType(Transmission transmissionType) {
+    public OfferSummaryViewModel setTransmissionType(Transmission transmissionType) {
         this.transmissionType = transmissionType;
         return this;
     }

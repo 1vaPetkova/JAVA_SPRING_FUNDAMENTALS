@@ -2,7 +2,7 @@ package com.example.java_spring_fund_lab_01.models.view;
 
 import com.example.java_spring_fund_lab_01.models.entities.enums.Category;
 
-public class ModelViewDto {
+public class ModelViewModel {
     private Long id;
     private String name;
     private Category category;

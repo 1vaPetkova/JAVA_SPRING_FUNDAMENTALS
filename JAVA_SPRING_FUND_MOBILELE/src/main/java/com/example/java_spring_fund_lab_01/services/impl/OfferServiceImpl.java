@@ -2,7 +2,7 @@ package com.example.java_spring_fund_lab_01.services.impl;
 
 import com.example.java_spring_fund_lab_01.models.entities.Offer;
 import com.example.java_spring_fund_lab_01.models.service.OfferServiceModel;
-import com.example.java_spring_fund_lab_01.models.view.OfferSummaryViewDto;
+import com.example.java_spring_fund_lab_01.models.view.OfferSummaryViewModel;
 import com.example.java_spring_fund_lab_01.repositories.ModelRepository;
 import com.example.java_spring_fund_lab_01.repositories.OfferRepository;
 import com.example.java_spring_fund_lab_01.repositories.UserRepository;
@@ -32,7 +32,7 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public List<OfferSummaryViewDto> getAllOffers() {
+    public List<OfferSummaryViewModel> getAllOffers() {
         //TODO
         return null;
     }
@@ -42,6 +42,11 @@ public class OfferServiceImpl implements OfferService {
         Offer offer = asNewEntity(model);
         Offer newEntity = this.offerRepository.save(offer);
         return newEntity.getId();
+    }
+
+    @Override
+    public void deleteOffer(Long id) {
+        this.offerRepository.deleteById(id);
     }
 
     private Offer asNewEntity(OfferServiceModel model) {
