@@ -3,7 +3,6 @@ package com.example.java_spring_fund_lab_01.web;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
 import com.example.java_spring_fund_lab_01.models.service.OfferServiceModel;
-import com.example.java_spring_fund_lab_01.models.service.UserLoginServiceModel;
 import com.example.java_spring_fund_lab_01.services.BrandService;
 import com.example.java_spring_fund_lab_01.services.OfferService;
 import org.springframework.stereotype.Controller;
@@ -54,10 +53,16 @@ public class OffersController {
     }
 
 
-    @GetMapping("offer/{id}")
+    @GetMapping("/offer/{id}")
     public String offerDetails(@PathVariable String id, Model model) {
         model.addAttribute("id", id);
         return "details";
+    }
+
+    @DeleteMapping("/offer/{id}")
+    public String delete(@PathVariable Long id, Model model){
+    this.offerService.deleteOffer(id);
+    return "redirect:/offers/all";
     }
 
     @GetMapping("/all")
