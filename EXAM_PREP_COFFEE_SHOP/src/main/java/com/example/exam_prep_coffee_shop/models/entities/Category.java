@@ -3,7 +3,6 @@ package com.example.exam_prep_coffee_shop.models.entities;
 import com.example.exam_prep_coffee_shop.models.entities.enums.CategoryNameEnum;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "categories")
