@@ -14,7 +14,7 @@
     <name>EXAM_PREP_COFFEE_SHOP</name>
     <description>EXAM_PREP_COFFEE_SHOP</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
