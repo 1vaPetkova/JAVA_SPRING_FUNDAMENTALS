@@ -1,11 +1,12 @@
 package com.example.exam_prep_coffee_shop.models.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     private String username;
     private String firstName;
@@ -16,6 +17,7 @@ public class User extends BaseEntity{
     public User() {
     }
 
+    @Column(nullable = false, unique = true)
     public String getUsername() {
         return username;
     }
@@ -25,6 +27,7 @@ public class User extends BaseEntity{
         return this;
     }
 
+    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -34,6 +37,7 @@ public class User extends BaseEntity{
         return this;
     }
 
+    @Column(name = "last_name", nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -43,6 +47,7 @@ public class User extends BaseEntity{
         return this;
     }
 
+    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
@@ -52,6 +57,7 @@ public class User extends BaseEntity{
         return this;
     }
 
+    @Column(nullable = false)
     public String getEmail() {
         return email;
     }
