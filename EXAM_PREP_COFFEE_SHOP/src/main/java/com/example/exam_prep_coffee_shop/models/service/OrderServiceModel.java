@@ -1,78 +1,87 @@
-package com.example.exam_prep_coffee_shop.models.binding;
+package com.example.exam_prep_coffee_shop.models.service;
 
 import com.example.exam_prep_coffee_shop.models.entities.Category;
 import com.example.exam_prep_coffee_shop.models.entities.User;
 import com.example.exam_prep_coffee_shop.models.entities.enums.CategoryNameEnum;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class OrderAddBindingModel {
+public class OrderServiceModel {
 
+    private Long id;
     private String name;
     private BigDecimal price;
     private LocalDateTime orderTime;
     private CategoryNameEnum category;
     private String description;
+    private User employee;
 
-
-    public OrderAddBindingModel() {
+    public OrderServiceModel() {
     }
 
-    @NotBlank
-    @Size(min = 3, max = 20)
+
+    public Long getId() {
+        return id;
+    }
+
+    public OrderServiceModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
 
-    public OrderAddBindingModel setName(String name) {
+    public OrderServiceModel setName(String name) {
         this.name = name;
         return this;
     }
 
-    @Positive
-    @NotNull
     public BigDecimal getPrice() {
         return price;
     }
 
-    public OrderAddBindingModel setPrice(BigDecimal price) {
+    public OrderServiceModel setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
 
-    @PastOrPresent
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     public LocalDateTime getOrderTime() {
         return orderTime;
     }
 
-    public OrderAddBindingModel setOrderTime(LocalDateTime orderTime) {
+    public OrderServiceModel setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
         return this;
     }
 
-    @NotNull
     public CategoryNameEnum getCategory() {
         return category;
     }
 
-    public OrderAddBindingModel setCategory(CategoryNameEnum category) {
+    public OrderServiceModel setCategory(CategoryNameEnum category) {
         this.category = category;
         return this;
     }
 
-    @Size(min = 5)
     public String getDescription() {
         return description;
     }
 
-    public OrderAddBindingModel setDescription(String description) {
+    public OrderServiceModel setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public User getEmployee() {
+        return employee;
+    }
+
+    public OrderServiceModel setEmployee(User employee) {
+        this.employee = employee;
         return this;
     }
 }

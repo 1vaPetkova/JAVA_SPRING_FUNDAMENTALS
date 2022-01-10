@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -100,8 +101,9 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(){
-        this.userService.logoutUser();
+    public String logout(HttpSession httpSession){
+        httpSession.invalidate();
+      //  this.userService.logoutUser();
         return "redirect:/";
     }
 }

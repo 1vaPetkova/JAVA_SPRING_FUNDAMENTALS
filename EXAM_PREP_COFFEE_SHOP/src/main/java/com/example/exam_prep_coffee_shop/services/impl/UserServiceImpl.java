@@ -2,11 +2,15 @@ package com.example.exam_prep_coffee_shop.services.impl;
 
 import com.example.exam_prep_coffee_shop.models.entities.User;
 import com.example.exam_prep_coffee_shop.models.service.UserServiceModel;
+import com.example.exam_prep_coffee_shop.models.views.UserViewModel;
 import com.example.exam_prep_coffee_shop.repositories.UserRepository;
 import com.example.exam_prep_coffee_shop.security.CurrentUser;
 import com.example.exam_prep_coffee_shop.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -48,5 +52,25 @@ public class UserServiceImpl implements UserService {
                 .setLoggedIn(false)
                 .setId(null)
                 .setUsername(null);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return this.userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<UserViewModel> findAllUsersAndCountOfTheirOrdersOrderByOrdersCount() {
+        return this.userRepository
+                .findAllByOrdersCount()
+                .stream()
+                .map(user -> {
+                           UserViewModel userViewModel = new UserViewModel();
+                            userViewModel
+                                    .setUsername(user.getUsername())
+                                    .setOrdersCount(user.getOrders().size());
+                            return userViewModel;
+                        }
+                ).toList();
     }
 }

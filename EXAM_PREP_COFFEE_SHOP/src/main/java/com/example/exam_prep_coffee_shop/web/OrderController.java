@@ -1,13 +1,12 @@
 package com.example.exam_prep_coffee_shop.web;
 
 import com.example.exam_prep_coffee_shop.models.binding.OrderAddBindingModel;
+import com.example.exam_prep_coffee_shop.models.service.OrderServiceModel;
 import com.example.exam_prep_coffee_shop.services.OrderService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -16,7 +15,13 @@ import javax.validation.Valid;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private OrderService orderService;
+    private final OrderService orderService;
+    private final ModelMapper modelMapper;
+
+    public OrderController(OrderService orderService, ModelMapper modelMapper) {
+        this.orderService = orderService;
+        this.modelMapper = modelMapper;
+    }
 
     @ModelAttribute
     public OrderAddBindingModel orderAddBindingModel() {
@@ -40,8 +45,17 @@ public class OrderController {
                             bindingResult);
             return "redirect:add";
         }
-        //TODO add to db
+
+        OrderServiceModel orderServiceModel = this.orderService
+                .addOrder(this.modelMapper.map(orderAddBindingModel, OrderServiceModel.class));
+        return "redirect:/";
+    }
+
+    @GetMapping("/ready/{id}")
+    public String ready(@PathVariable Long id){
+        this.orderService.readyOrder(id);
 
         return "redirect:/";
     }
+
 }
