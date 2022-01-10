@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Coffee Shop Application</title>
-    <link rel="stylesheet" href="/static/css/reset-css.css"/>
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/static/css/style.css"/>
-</head>
+<head th:replace="fragments/commons::head"></head>
 <body class="bg-secondary">
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info rounded">
@@ -109,8 +102,6 @@
         </div>
     </div>
 </main>
-<footer class="container">
-    <p>&copy;SoftUni Spring Team 2021. All rights reserved.</p>
-</footer>
+<footer th:replace="fragments/commons::footer"></footer>
 </body>
 </html>
