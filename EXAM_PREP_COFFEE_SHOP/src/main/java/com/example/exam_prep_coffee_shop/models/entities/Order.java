@@ -6,6 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -13,7 +14,7 @@ public class Order extends BaseEntity {
 
     private String name;
     private BigDecimal price;
-    private Instant orderTime;
+    private LocalDateTime orderTime;
     private Category category;
     private String description;
     private User employee;
@@ -42,11 +43,11 @@ public class Order extends BaseEntity {
     }
 
     @Column(nullable = false)
-    public Instant getOrderTime() {
+    public LocalDateTime getOrderTime() {
         return orderTime;
     }
 
-    public Order setOrderTime(Instant orderTime) {
+    public Order setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
         return this;
     }
