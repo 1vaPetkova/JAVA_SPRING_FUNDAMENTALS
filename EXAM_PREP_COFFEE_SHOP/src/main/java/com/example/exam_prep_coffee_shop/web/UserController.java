@@ -1,5 +1,6 @@
 package com.example.exam_prep_coffee_shop.web;
 
+import com.example.exam_prep_coffee_shop.models.binding.UserLoginBindingModel;
 import com.example.exam_prep_coffee_shop.models.binding.UserRegisterBindingModel;
 import com.example.exam_prep_coffee_shop.models.entities.User;
 import com.example.exam_prep_coffee_shop.models.service.UserServiceModel;
@@ -39,7 +40,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel, BindingResult bindingResult,
+    public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
+                                  BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()
                 || !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
@@ -55,8 +57,43 @@ public class UserController {
         return "redirect:login";
     }
 
+    @ModelAttribute
+    public UserLoginBindingModel userLoginBindingModel() {
+        return new UserLoginBindingModel();
+    }
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        if (!model.containsAttribute("userFound")){
+            model.addAttribute("userFound", true);
+        }
         return "login";
+    }
+
+
+    @PostMapping("/login")
+    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",
+                            bindingResult);
+            return "redirect:login";
+        }
+
+        UserServiceModel userServiceModel = this.userService.
+                findUserByUsernameAndPassword(userLoginBindingModel.getUsername(), userLoginBindingModel.getPassword());
+
+        if (userServiceModel == null) {
+            redirectAttributes
+                    .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("userFound", false);
+            return "redirect:login";
+        }
+
+        this.userService.loginUser(userServiceModel);
+
+        return "redirect:/";
     }
 }
