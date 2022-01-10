@@ -23,7 +23,7 @@ public class UserLoginBindingModel {
     }
 
     @NotBlank
-    @Size(min = 3,message = "Password must be more than 3 characters long!")
+    @Size(min = 3, message = "Password must be more than 3 characters long!")
     public String getPassword() {
         return password;
     }
