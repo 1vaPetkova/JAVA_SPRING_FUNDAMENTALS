@@ -25,18 +25,24 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/register">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/orders/add">Add Order</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/logout">Logout</a>
-                </li>
+                <!--                Login and Register are available only if user not logged in-->
+                <th:block th:if="${!@currentUser.isLoggedIn()}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/register">Register</a>
+                    </li>
+                </th:block>
+                <!--               Add order and logout are available only if user not logged in-->
+                <th:block th:if="${@currentUser.isLoggedIn()}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/orders/add">Add Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/logout">Logout</a>
+                    </li>
+                </th:block>
             </ul>
             <img width="50px" src="/static/images/coffee.png" alt="Coffee image">
         </div>

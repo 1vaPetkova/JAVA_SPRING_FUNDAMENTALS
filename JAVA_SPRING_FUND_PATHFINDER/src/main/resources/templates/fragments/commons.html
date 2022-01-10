@@ -21,7 +21,7 @@
 <header th:fragment="navbar">
     <nav class="main-nav" >
         <ul>
-            <th:block th:if="*{!@currentUser.isLoggedIn()}">
+            <th:block th:if="${!@currentUser.isLoggedIn()}">
                 <li>
                     <a href="/">Home</a>
                 </li>

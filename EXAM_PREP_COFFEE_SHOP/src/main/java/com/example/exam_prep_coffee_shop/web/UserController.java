@@ -61,9 +61,10 @@ public class UserController {
     public UserLoginBindingModel userLoginBindingModel() {
         return new UserLoginBindingModel();
     }
+
     @GetMapping("/login")
     public String login(Model model) {
-        if (!model.containsAttribute("userFound")){
+        if (!model.containsAttribute("userFound")) {
             model.addAttribute("userFound", true);
         }
         return "login";
@@ -85,6 +86,7 @@ public class UserController {
         UserServiceModel userServiceModel = this.userService.
                 findUserByUsernameAndPassword(userLoginBindingModel.getUsername(), userLoginBindingModel.getPassword());
 
+        //Check if user exists
         if (userServiceModel == null) {
             redirectAttributes
                     .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
@@ -94,6 +96,12 @@ public class UserController {
 
         this.userService.loginUser(userServiceModel);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        this.userService.logoutUser();
         return "redirect:/";
     }
 }

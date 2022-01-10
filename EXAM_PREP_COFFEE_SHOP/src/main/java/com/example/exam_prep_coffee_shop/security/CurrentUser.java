@@ -10,6 +10,7 @@ public class CurrentUser {
 
     private Long id;
     private String username;
+    private Boolean isLoggedIn;
 
     public Long getId() {
         return id;
@@ -26,6 +27,15 @@ public class CurrentUser {
 
     public CurrentUser setUsername(String username) {
         this.username = username;
+        return this;
+    }
+
+    public boolean isLoggedIn() {
+        return this.id != null;
+    }
+
+    public CurrentUser setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
         return this;
     }
 }

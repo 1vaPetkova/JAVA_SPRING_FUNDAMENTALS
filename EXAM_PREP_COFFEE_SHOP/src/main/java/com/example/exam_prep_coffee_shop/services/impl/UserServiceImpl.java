@@ -37,7 +37,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void loginUser(UserServiceModel userServiceModel) {
         this.currentUser
+                .setLoggedIn(true)
                 .setId(userServiceModel.getId())
                 .setUsername(userServiceModel.getUsername());
+    }
+
+    @Override
+    public void logoutUser() {
+        this.currentUser
+                .setLoggedIn(false)
+                .setId(null)
+                .setUsername(null);
     }
 }
