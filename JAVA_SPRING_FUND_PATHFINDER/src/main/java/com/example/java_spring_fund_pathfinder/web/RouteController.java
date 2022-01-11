@@ -21,7 +21,7 @@ public class RouteController {
 
     @GetMapping("/all")
     public String allRoutes(Model model){
-        List<RouteViewModel> routeViewModels = this.routeService.findAllRoutesView();
+        model.addAttribute("routes",this.routeService.findAllRoutesView());
         return "routes";
     }
 }

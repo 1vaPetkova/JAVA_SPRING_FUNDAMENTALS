@@ -26,9 +26,11 @@ public class RouteServiceImpl implements RouteService {
                 .stream()
                 .map(route -> {
                     RouteViewModel routeViewModel = this.modelMapper.map(route, RouteViewModel.class);
-                    routeViewModel.setImageUrl(route.getPictures().isEmpty() ?
+                    routeViewModel.setImageUrl(
+                            route.getPictures().isEmpty() ?
                             "/images/pic4.jpg"
-                            : route.getPictures().stream().findFirst().get().getUrl());
+                            : route.getPictures().stream().findFirst().get().getUrl()
+                    );
                     return routeViewModel;
                 }).collect(Collectors.toList());
     }
