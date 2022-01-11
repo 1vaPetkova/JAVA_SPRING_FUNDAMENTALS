@@ -5,6 +5,7 @@ import com.example.java_spring_fund_pathfinder.repositories.RouteRepository;
 import com.example.java_spring_fund_pathfinder.services.RouteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,4 +35,5 @@ public class RouteServiceImpl implements RouteService {
                     return routeViewModel;
                 }).collect(Collectors.toList());
     }
-}
+
+  }
