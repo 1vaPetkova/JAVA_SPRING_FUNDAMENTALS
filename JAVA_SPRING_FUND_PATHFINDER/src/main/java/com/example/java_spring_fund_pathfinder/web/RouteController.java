@@ -45,8 +45,11 @@ public class RouteController {
 
 
     @GetMapping("/details/{id}")
-    public String details(@PathVariable Long id, Model model){
-    model.addAttribute("route", this.routeService.findRouteById(id));
+    public String details(@PathVariable Long id, Model model) {
+        if (this.currentUser.getId() == null) {
+            return "redirect:/users/login";
+        }
+        model.addAttribute("route", this.routeService.findRouteById(id));
 
         return "route-details";
     }
