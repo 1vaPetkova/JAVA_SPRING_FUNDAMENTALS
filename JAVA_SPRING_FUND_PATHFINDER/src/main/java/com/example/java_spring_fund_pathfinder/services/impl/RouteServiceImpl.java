@@ -3,6 +3,7 @@ package com.example.java_spring_fund_pathfinder.services.impl;
 import com.example.java_spring_fund_pathfinder.models.entities.Category;
 import com.example.java_spring_fund_pathfinder.models.entities.Route;
 import com.example.java_spring_fund_pathfinder.models.service.RouteServiceModel;
+import com.example.java_spring_fund_pathfinder.models.view.RouteDetailsViewModel;
 import com.example.java_spring_fund_pathfinder.models.view.RouteViewModel;
 import com.example.java_spring_fund_pathfinder.repositories.RouteRepository;
 import com.example.java_spring_fund_pathfinder.services.CategoryService;
@@ -54,6 +55,14 @@ public class RouteServiceImpl implements RouteService {
                         .map(this.categoryService::findByCategoryNameEnum)
                         .collect(Collectors.toSet()));
         this.routeRepository.save(route);
+    }
+
+    @Override
+    public RouteDetailsViewModel findRouteById(Long id) {
+        return this.routeRepository
+                .findById(id)
+                .map(route -> this.modelMapper.map(route, RouteDetailsViewModel.class))
+                .orElse(null);
     }
 
 }
