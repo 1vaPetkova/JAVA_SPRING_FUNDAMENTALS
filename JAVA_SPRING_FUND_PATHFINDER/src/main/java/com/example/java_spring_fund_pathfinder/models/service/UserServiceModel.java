@@ -1,7 +1,7 @@
 package com.example.java_spring_fund_pathfinder.models.service;
 
 import com.example.java_spring_fund_pathfinder.models.entities.Role;
-import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
+import com.example.java_spring_fund_pathfinder.models.entities.enums.LevelEnum;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +10,7 @@ public class UserServiceModel extends BaseServiceModel{
 
     private Integer age;
     private String fullName;
-    private Level level;
+    private LevelEnum level;
     private String password;
     private String username;
     private Set<Role> roles;
@@ -37,11 +37,11 @@ public class UserServiceModel extends BaseServiceModel{
         return this;
     }
 
-    public Level getLevel() {
+    public LevelEnum getLevel() {
         return level;
     }
 
-    public UserServiceModel setLevel(Level level) {
+    public UserServiceModel setLevel(LevelEnum level) {
         this.level = level;
         return this;
     }

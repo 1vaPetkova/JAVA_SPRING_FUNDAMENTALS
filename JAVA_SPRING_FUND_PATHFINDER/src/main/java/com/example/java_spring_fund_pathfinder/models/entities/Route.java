@@ -1,6 +1,6 @@
 package com.example.java_spring_fund_pathfinder.models.entities;
 
-import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
+import com.example.java_spring_fund_pathfinder.models.entities.enums.LevelEnum;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,7 +12,7 @@ public class Route extends BaseEntity {
 
     private String description;
     private String gpxCoordinates;
-    private Level level;
+    private LevelEnum level;
     private String name;
     private String videoUrl;
     private User author;
@@ -45,11 +45,11 @@ public class Route extends BaseEntity {
     }
 
     @Enumerated(EnumType.STRING)
-    public Level getLevel() {
+    public LevelEnum getLevel() {
         return level;
     }
 
-    public Route setLevel(Level level) {
+    public Route setLevel(LevelEnum level) {
         this.level = level;
         return this;
     }

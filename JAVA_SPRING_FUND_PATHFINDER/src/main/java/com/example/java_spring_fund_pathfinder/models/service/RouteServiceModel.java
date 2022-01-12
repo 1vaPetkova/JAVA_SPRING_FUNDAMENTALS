@@ -3,7 +3,7 @@ package com.example.java_spring_fund_pathfinder.models.service;
 import com.example.java_spring_fund_pathfinder.models.entities.Category;
 import com.example.java_spring_fund_pathfinder.models.entities.Picture;
 import com.example.java_spring_fund_pathfinder.models.entities.User;
-import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
+import com.example.java_spring_fund_pathfinder.models.entities.enums.LevelEnum;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class RouteServiceModel extends BaseServiceModel {
     private String description;
     private String gpxCoordinates;
-    private Level level;
+    private LevelEnum level;
     private String name;
     private String videoUrl;
     private User author;
@@ -42,11 +42,11 @@ public class RouteServiceModel extends BaseServiceModel {
         return this;
     }
 
-    public Level getLevel() {
+    public LevelEnum getLevel() {
         return level;
     }
 
-    public RouteServiceModel setLevel(Level level) {
+    public RouteServiceModel setLevel(LevelEnum level) {
         this.level = level;
         return this;
     }

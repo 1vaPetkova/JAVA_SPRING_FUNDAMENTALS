@@ -80,7 +80,8 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             redirectAttributes
                     .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",
+                            bindingResult);
             return "redirect:login";
         }
 
