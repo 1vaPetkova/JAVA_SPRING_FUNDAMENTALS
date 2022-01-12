@@ -20,11 +20,16 @@
                     <div class="col-auto">
                         <input type="text"
                                th:field="*{username}"
-                               required minlength="4" maxlength="20"
+                               th:errorclass="'is-invalid bg-danger'"
+                               required minlength="1" maxlength="20"
                                id="inputUsername"
                                class="form-control"
                                aria-describedby="usernameHelpInline">
+                        <small
+                                th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                                class="is-invalid rounded">Username is invalid!</small>
                     </div>
+
                 </div>
                 <div>
                     <div class="col-auto">
@@ -33,10 +38,15 @@
                     <div class="col-auto">
                         <input type="password"
                                th:field="*{password}"
-                               required minlength="4" maxlength="20"
+                               th:errorclass="'is-invalid bg-danger'"
+                               required minlength="1" maxlength="20"
                                id="inputPassword" class="form-control"
                                aria-describedby="passwordHelpInline">
+                        <small
+                                th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                class="invalid-feedback rounded">Password is invalid!</small>
                     </div>
+
                 </div>
                 <div class="d-flex justify-content-center mt-2">
                     <button class="btn btn-primary btn-block w-50" type="submit">Login</button>

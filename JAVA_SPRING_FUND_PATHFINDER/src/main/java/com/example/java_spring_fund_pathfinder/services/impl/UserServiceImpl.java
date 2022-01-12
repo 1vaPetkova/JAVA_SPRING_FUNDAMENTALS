@@ -2,7 +2,7 @@ package com.example.java_spring_fund_pathfinder.services.impl;
 
 import com.example.java_spring_fund_pathfinder.models.entities.Role;
 import com.example.java_spring_fund_pathfinder.models.entities.User;
-import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
+import com.example.java_spring_fund_pathfinder.models.entities.enums.LevelEnum;
 import com.example.java_spring_fund_pathfinder.models.service.UserServiceModel;
 import com.example.java_spring_fund_pathfinder.repositories.UserRepository;
 import com.example.java_spring_fund_pathfinder.services.UserService;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
         User user = this.modelMapper.map(userServiceModel, User.class)
-                .setLevel(Level.BEGINNER);
+                .setLevel(LevelEnum.BEGINNER);
         //  .setPassword(this.passwordEncoder.encode(userServiceModel.getPassword()));
         this.userRepository.save(user);
     }
@@ -82,5 +82,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean doesNameExist(String username) {
         return this.userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public User findCurrentUser() {
+        return this.userRepository.findById(this.currentUser.getId()).orElse(null);
     }
 }

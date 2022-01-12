@@ -1,9 +1,8 @@
 package com.example.java_spring_fund_pathfinder.models.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import com.example.java_spring_fund_pathfinder.models.entities.enums.CategoryNameEnum;
+
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +11,7 @@ import java.util.Set;
 public class Category extends BaseEntity {
 
     private String description;
-    private String name;
+    private CategoryNameEnum name;
     private Set<Route> routes;
 
     public Category() {
@@ -29,12 +28,13 @@ public class Category extends BaseEntity {
         return this;
     }
 
-    @Column(nullable = false,unique = true)
-    public String getName() {
+    @Column(nullable = false, unique = true)
+    @Enumerated(EnumType.STRING)
+    public CategoryNameEnum getName() {
         return name;
     }
 
-    public Category setName(String name) {
+    public Category setName(CategoryNameEnum name) {
         this.name = name;
         return this;
     }

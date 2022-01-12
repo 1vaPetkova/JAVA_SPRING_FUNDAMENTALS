@@ -19,4 +19,6 @@ public interface UserService {
     UserServiceModel findById(Long id);
 
     boolean doesNameExist(String username);
+
+    User findCurrentUser();
 }

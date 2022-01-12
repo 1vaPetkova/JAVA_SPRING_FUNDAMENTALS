@@ -1,13 +1,13 @@
 package com.example.java_spring_fund_pathfinder.models.view;
 
-import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
+import com.example.java_spring_fund_pathfinder.models.entities.enums.LevelEnum;
 
 public class UserViewModel {
     private Long id;
     private String fullName;
     private String username;
     private Integer age;
-    private Level level;
+    private LevelEnum level;
 
     public UserViewModel() {
     }
@@ -48,11 +48,11 @@ public class UserViewModel {
         return this;
     }
 
-    public Level getLevel() {
+    public LevelEnum getLevel() {
         return level;
     }
 
-    public UserViewModel setLevel(Level level) {
+    public UserViewModel setLevel(LevelEnum level) {
         this.level = level;
         return this;
     }

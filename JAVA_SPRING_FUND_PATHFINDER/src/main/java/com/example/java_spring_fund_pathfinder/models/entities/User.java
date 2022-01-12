@@ -1,6 +1,6 @@
 package com.example.java_spring_fund_pathfinder.models.entities;
 
-import com.example.java_spring_fund_pathfinder.models.entities.enums.Level;
+import com.example.java_spring_fund_pathfinder.models.entities.enums.LevelEnum;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,7 +12,7 @@ public class User extends BaseEntity {
 
     private Integer age;
     private String fullName;
-    private Level level;
+    private LevelEnum level;
     private String password;
     private String username;
     private Set<Role> roles;
@@ -85,11 +85,11 @@ public class User extends BaseEntity {
     }
 
     @Enumerated(EnumType.STRING)
-    public Level getLevel() {
+    public LevelEnum getLevel() {
         return level;
     }
 
-    public User setLevel(Level level) {
+    public User setLevel(LevelEnum level) {
         this.level = level;
         return this;
     }

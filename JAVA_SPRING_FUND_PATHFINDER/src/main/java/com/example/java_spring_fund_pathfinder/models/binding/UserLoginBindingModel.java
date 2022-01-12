@@ -9,7 +9,7 @@ public class UserLoginBindingModel {
     public UserLoginBindingModel() {
     }
 
-    @Size(min = 4, max = 20)
+    @Size(min = 4, max = 20, message = "Invalid Username!")
     public String getUsername() {
         return username;
     }
@@ -19,7 +19,7 @@ public class UserLoginBindingModel {
         return this;
     }
 
-    @Size(min = 4, max = 20)
+    @Size(min = 4, max = 20, message = "Invalid password!")
     public String getPassword() {
         return password;
     }
