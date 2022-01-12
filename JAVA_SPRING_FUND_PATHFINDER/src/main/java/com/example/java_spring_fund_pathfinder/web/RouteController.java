@@ -1,8 +1,10 @@
 package com.example.java_spring_fund_pathfinder.web;
 
 import com.example.java_spring_fund_pathfinder.models.binding.RouteAddBindingModel;
+import com.example.java_spring_fund_pathfinder.models.service.RouteServiceModel;
 import com.example.java_spring_fund_pathfinder.services.RouteService;
 import com.example.java_spring_fund_pathfinder.util.CurrentUser;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 
 @Controller
@@ -21,10 +24,12 @@ public class RouteController {
 
     private final RouteService routeService;
     private final CurrentUser currentUser;
+    private final ModelMapper modelMapper;
 
-    public RouteController(RouteService routeService, CurrentUser currentUser) {
+    public RouteController(RouteService routeService, CurrentUser currentUser, ModelMapper modelMapper) {
         this.routeService = routeService;
         this.currentUser = currentUser;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/all")
@@ -43,15 +48,15 @@ public class RouteController {
 
     @GetMapping("/add")
     public String addRoute() {
-//        if (this.currentUser.getId() == null) {
-//            return "redirect:/users/login";
-//        }
+        if (this.currentUser.getId() == null) {
+            return "redirect:/users/login";
+        }
         return "add-route";
     }
 
     @PostMapping("/add")
     public String addRouteConfirm(@Valid RouteAddBindingModel routeAddBindingModel, BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes) {
+                                  RedirectAttributes redirectAttributes) throws IOException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("routeAddBindingModel", routeAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.routeAddBindingModel",
@@ -59,7 +64,11 @@ public class RouteController {
             return "redirect:add";
         }
 
+        RouteServiceModel routeServiceModel = this.modelMapper.map(routeAddBindingModel, RouteServiceModel.class);
+        routeServiceModel
+                .setGpxCoordinates(new String(routeAddBindingModel.getGpxCoordinates().getBytes()));
 
+        this.routeService.addNewRoute(routeServiceModel);
         return "redirect:all";
     }
 }
