@@ -13,7 +13,7 @@
     <form id="add-route-form" class="w-50 rounded text-white mt-5"
           th:action="@{/routes/add}"
           method="POST"
-<!--          th:object="${}"-->
+          th:object="${routeAddBindingModel}"
           enctype="multipart/form-data">
 
         <h3 class="border-left border-light pl-2">Add a new route</h3>
@@ -22,7 +22,9 @@
                 <label for="inputName" class="col-form-label ">Name</label>
             </div>
             <div class="form-group">
-                <input name="name" 
+                <input name="name"
+                       th:field="*{name}"
+                       th:errorclass="'is-invalid bg-danger'"
                        required minlength="5" maxlength="20"
                        type="text"
                        id="inputName"
@@ -39,11 +41,14 @@
                 <label for="inputDescription" class="col-form-label ">Description</label>
             </div>
             <div class="form-group">
-                    <textarea name="description" 
-                              required minlength="5"
-                              id="inputDescription"
-                              class="form-control"
-                              aria-describedby="inputDescriptionError"></textarea>
+                    <textarea
+                            th:field="*{description}"
+                            th:errorclass="'is-invalid bg-danger'"
+                            name="description"
+                            required minlength="5"
+                            id="inputDescription"
+                            class="form-control"
+                            aria-describedby="inputDescriptionError"></textarea>
                 <small id="inputDescriptionError"
                        class="invalid-feedback  form-text bg-danger rounded">Description length must be more than 5
                     characters</small>
@@ -55,11 +60,14 @@
                 <label for="inputGpx" class="col-form-label ">GPX Coordinates</label>
             </div>
             <div class="form-group">
-                <input type="file" name="gpxCoordinates"
-					   required
-                       id="inputGpx"
-                       class="form-control-file"
-                       aria-describedby="inputGpxError">
+                <input
+                        th:field="*{gpxCoordinates}"
+                        th:errorclass="'is-invalid bg-danger'"
+                        type="file" name="gpxCoordinates"
+                        required
+                        id="inputGpx"
+                        class="form-control-file"
+                        aria-describedby="inputGpxError">
                 <small id="inputGpxError"
                        class="invalid-feedback  form-text bg-danger rounded">Must be valid GPX Coordinates</small>
             </div>
@@ -67,9 +75,16 @@
         <div>
             <div class="form-group">
                 <label for="level">Level</label>
-                <select id="level" class="custom-select">
-                    <option value="" selected>Select level</option>
-                    <option value="1" text="ADVANCED">Select level</option>
+                <select
+                        th:field="*{level}"
+                        th:errorclass="'is-invalid bg-danger'"
+                        id="level" class="custom-select">
+                    <option
+                            th:each="level : ${T(com.example.java_spring_fund_pathfinder.models.entities.enums.LevelEnum).values()}"
+                            th:value="${level}"
+                            th:text="${level}"
+                    >Select level
+                    </option>
                 </select>
             </div>
         </div>
@@ -77,17 +92,24 @@
 
             <div class="form-group">
                 <label for="videoUrl">Video Url (only last eleven characters from Youtube)</label>
-                <input id="videoUrl" type="text"
-                       class="form-control" placeholder="Video url">
+                <input
+                        th:field="*{videoUrl}"
+                        id="videoUrl" type="text"
+                        class="form-control" placeholder="Video url">
             </div>
         </div>
 
         <div>
             <div class="form-group p-3">
                 <label class="p-2" for="categories">Categories:</label>
-                <input class="m-3" type="checkbox" name="categories" id="categories"
-                       value="1" text="Category">
-				<br>
+                <input
+                        th:each="category : ${T(com.example.java_spring_fund_pathfinder.models.entities.enums.CategoryNameEnum).values()}"
+                        th:object="${category}"
+                        th:text="${category}"
+                        th:value="${category}"
+                        class="m-3" type="checkbox" name="categories" id="categories"
+                        value="1" text="Category">
+                <br>
             </div>
         </div>
 
