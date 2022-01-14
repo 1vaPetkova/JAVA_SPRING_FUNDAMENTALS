@@ -33,12 +33,12 @@
             <input
                     th:field="*{email}"
                     th:errorclass="'is-invalid bg-danger'"
-                    type="email" class="form-control" id="email" name="email"/>
+                    type="text" class="form-control" id="email" name="email"/>
 
             <small
                     th:if="${#fields.hasErrors('email')}"
                     th:errors="*{email}"
-                    class="text-danger">Invalid email!</small>
+                    class="is-invalid text-danger">Invalid email!</small>
 
         </div>
         <div class="form-group">

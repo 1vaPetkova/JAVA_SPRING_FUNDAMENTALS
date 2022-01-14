@@ -14,7 +14,7 @@ public class UserRegisterBindingModel {
     public UserRegisterBindingModel() {
     }
 
-    @NotBlank
+    @NotBlank(message = "Username must be between 3 and 20 characters!")
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters!")
     public String getUsername() {
         return username;
@@ -34,7 +34,7 @@ public class UserRegisterBindingModel {
         this.email = email;
         return this;
     }
-    @NotBlank
+    @NotBlank(message = "Password must be between 3 and 20 characters!")
     @Size(min = 3, max = 20, message = "Password must be between 3 and 20 characters!")
     public String getPassword() {
         return password;

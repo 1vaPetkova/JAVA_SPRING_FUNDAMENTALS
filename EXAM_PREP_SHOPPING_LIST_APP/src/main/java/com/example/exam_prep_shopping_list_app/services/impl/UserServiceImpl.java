@@ -1,5 +1,6 @@
 package com.example.exam_prep_shopping_list_app.services.impl;
 
+import com.example.exam_prep_shopping_list_app.models.binding.UserLoginBindingModel;
 import com.example.exam_prep_shopping_list_app.models.binding.UserRegisterBindingModel;
 import com.example.exam_prep_shopping_list_app.models.entities.User;
 import com.example.exam_prep_shopping_list_app.models.services.UserServiceModel;
@@ -8,6 +9,8 @@ import com.example.exam_prep_shopping_list_app.security.CurrentUser;
 import com.example.exam_prep_shopping_list_app.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,6 +27,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerUser(UserRegisterBindingModel userRegisterBindingModel) {
         UserServiceModel userServiceModel = this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class);
-        this.userRepository.save( this.modelMapper.map(userServiceModel, User.class));
+        this.userRepository.save(this.modelMapper.map(userServiceModel, User.class));
     }
+
+    @Override
+    public UserServiceModel findUserNameByUserNameAndPassword(String username, String password) {
+        return this.userRepository
+                .findByUsernameAndPassword(username, password)
+                .map(user -> this.modelMapper.map(user, UserServiceModel.class))
+                .orElse(null);
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return this.userRepository.findById(id).orElse(null);
+    }
+
+
+    @Override
+    public void loginUser(UserServiceModel userServiceModel) {
+        this.currentUser
+                .setId(userServiceModel.getId())
+                .setUsername(userServiceModel.getUsername())
+                .setLoggedIn(true);
+
+    }
+
 }

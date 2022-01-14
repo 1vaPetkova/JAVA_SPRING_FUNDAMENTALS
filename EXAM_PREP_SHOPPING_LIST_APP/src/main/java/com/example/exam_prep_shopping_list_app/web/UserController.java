@@ -1,8 +1,11 @@
 package com.example.exam_prep_shopping_list_app.web;
 
+import com.example.exam_prep_shopping_list_app.models.binding.UserLoginBindingModel;
 import com.example.exam_prep_shopping_list_app.models.binding.UserRegisterBindingModel;
+import com.example.exam_prep_shopping_list_app.models.services.UserServiceModel;
 import com.example.exam_prep_shopping_list_app.services.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,8 +51,42 @@ public class UserController {
         return "redirect:login";
     }
 
+    @ModelAttribute
+    public UserLoginBindingModel userLoginBindingModel() {
+        return new UserLoginBindingModel();
+    }
+
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        if (!model.containsAttribute("userNotFound")) {
+            model.addAttribute("userNotFound", false);
+        }
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
+                               BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("userRegisterLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",
+                            bindingResult);
+            return "redirect:login";
+        }
+
+        //CheckIfUserExists
+        UserServiceModel userServiceModel = this.userService.findUserNameByUserNameAndPassword(userLoginBindingModel.getUsername(),
+                userLoginBindingModel.getPassword());
+        if (userServiceModel == null) {
+            redirectAttributes
+                    .addFlashAttribute("userRegisterLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("userNotFound", true);
+            return "redirect:login";
+        }
+
+        this.userService.loginUser(userServiceModel);
+        return "redirect:/";
     }
 }
