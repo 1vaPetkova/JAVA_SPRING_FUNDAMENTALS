@@ -14,8 +14,9 @@ public class Category extends BaseEntity {
     public Category() {
     }
 
-    public Category(CategoryEnum name) {
+    public Category(CategoryEnum name, String description) {
         this.name = name;
+        this.description = description;
     }
 
     @Enumerated(EnumType.STRING)
@@ -29,6 +30,7 @@ public class Category extends BaseEntity {
         return this;
     }
 
+    @Column(columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }

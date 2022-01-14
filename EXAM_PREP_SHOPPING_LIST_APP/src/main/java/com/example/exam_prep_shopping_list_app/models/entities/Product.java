@@ -30,6 +30,7 @@ public class Product extends BaseEntity {
         return this;
     }
 
+    @Column(columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
