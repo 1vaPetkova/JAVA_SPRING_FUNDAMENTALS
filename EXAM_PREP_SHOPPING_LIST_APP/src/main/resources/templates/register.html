@@ -19,12 +19,12 @@
             </div>
             <input
                     th:field="*{username}"
-                    th:errorclass="'is-invalid bg-danger'"
+                    th:errorclass="bg-danger"
                     type="text" class="form-control" id="username" name="username"/>
             <small
                     th:if="${#fields.hasErrors('username')}"
                     th:errors="*{username}"
-                    class="is-invalid text-danger">Invalid username!</small>
+                    class="text-danger">Invalid username!</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
@@ -32,13 +32,13 @@
             </div>
             <input
                     th:field="*{email}"
-                    th:errorclass="'is-invalid bg-danger'"
+                    th:errorclass="bg-danger"
                     type="text" class="form-control" id="email" name="email"/>
 
             <small
                     th:if="${#fields.hasErrors('email')}"
                     th:errors="*{email}"
-                    class="is-invalid text-danger">Invalid email!</small>
+                    class="text-danger">Invalid email!</small>
 
         </div>
         <div class="form-group">
@@ -47,7 +47,7 @@
             </div>
             <input
                     th:field="*{password}"
-                    th:errorclass="'is-invalid bg-danger'"
+                    th:errorclass="bg-danger"
                     type="password" class="form-control" id="password" name="password"/>
             <small
                     th:if="${#fields.hasErrors('password')}"

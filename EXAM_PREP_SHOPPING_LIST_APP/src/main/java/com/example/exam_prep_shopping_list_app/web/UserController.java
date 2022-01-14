@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -66,7 +67,8 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
-                               BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                               BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                               HttpSession httpSession) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes
@@ -77,16 +79,17 @@ public class UserController {
         }
 
         //CheckIfUserExists
-        UserServiceModel userServiceModel = this.userService.findUserNameByUserNameAndPassword(userLoginBindingModel.getUsername(),
-                userLoginBindingModel.getPassword());
+        UserServiceModel userServiceModel = this.userService
+                .findUserNameByUserNameAndPassword(userLoginBindingModel.getUsername(),
+                        userLoginBindingModel.getPassword());
         if (userServiceModel == null) {
             redirectAttributes
                     .addFlashAttribute("userRegisterLoginBindingModel", userLoginBindingModel)
                     .addFlashAttribute("userNotFound", true);
             return "redirect:login";
         }
-
-        this.userService.loginUser(userServiceModel);
+        httpSession.setAttribute("user", userServiceModel);
+        //   this.userService.loginUser(userServiceModel);
         return "redirect:/";
     }
 }
