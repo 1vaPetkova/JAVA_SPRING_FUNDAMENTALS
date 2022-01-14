@@ -44,7 +44,8 @@ public class UserRegisterBindingModel {
         this.password = password;
         return this;
     }
-
+    @NotBlank
+    @Size(min = 3, max = 20, message = "Password must be between 3 and 20 characters!")
     public String getConfirmPassword() {
         return confirmPassword;
     }

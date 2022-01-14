@@ -45,7 +45,7 @@ public class UserController {
             return "redirect:register";
         }
         this.userService.registerUser(userRegisterBindingModel);
-
+        return "redirect:login";
     }
 
     @GetMapping("/login")
