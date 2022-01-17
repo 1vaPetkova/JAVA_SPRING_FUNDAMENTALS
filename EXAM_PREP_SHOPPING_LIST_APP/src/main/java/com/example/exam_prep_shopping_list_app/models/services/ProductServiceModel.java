@@ -1,6 +1,7 @@
 package com.example.exam_prep_shopping_list_app.models.services;
 
 import com.example.exam_prep_shopping_list_app.models.entities.Category;
+import com.example.exam_prep_shopping_list_app.models.entities.enums.CategoryEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ public class ProductServiceModel {
     private String description;
     private BigDecimal price;
     private LocalDateTime neededBefore;
-    private Category category;
+    private CategoryEnum category;
 
     public ProductServiceModel() {
     }
@@ -62,11 +63,11 @@ public class ProductServiceModel {
         return this;
     }
 
-    public Category getCategory() {
+    public CategoryEnum getCategory() {
         return category;
     }
 
-    public ProductServiceModel setCategory(Category category) {
+    public ProductServiceModel setCategory(CategoryEnum category) {
         this.category = category;
         return this;
     }

@@ -2,12 +2,18 @@ package com.example.exam_prep_shopping_list_app.services.impl;
 
 import com.example.exam_prep_shopping_list_app.models.binding.ProductAddBindingModel;
 import com.example.exam_prep_shopping_list_app.models.entities.Product;
+import com.example.exam_prep_shopping_list_app.models.entities.enums.CategoryEnum;
 import com.example.exam_prep_shopping_list_app.models.services.ProductServiceModel;
+import com.example.exam_prep_shopping_list_app.models.views.ProductViewModel;
 import com.example.exam_prep_shopping_list_app.repositories.ProductRepository;
 import com.example.exam_prep_shopping_list_app.services.CategoryService;
 import com.example.exam_prep_shopping_list_app.services.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -25,10 +31,24 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(ProductAddBindingModel productAddBindingModel) {
         ProductServiceModel productServiceModel = this.modelMapper.map(productAddBindingModel, ProductServiceModel.class);
-        productServiceModel
-                .setCategory(
-                        this.categoryService
-                                .findCategoryByCategoryEnum(productAddBindingModel.getCategory()));
-        this.productRepository.save(this.modelMapper.map(productServiceModel, Product.class));
+        Product product = this.modelMapper.map(productServiceModel, Product.class);
+        product.setCategory(
+                this.categoryService
+                        .findCategoryByCategoryEnum(productServiceModel.getCategory()));
+        this.productRepository.save(product);
+    }
+
+    @Override
+    public BigDecimal getTotalProductsPrice() {
+        return this.productRepository.findTotalProductsSum();
+    }
+
+    @Override
+    public List<ProductViewModel> findProductsByCategoryName(CategoryEnum categoryEnum) {
+        return this.productRepository
+                .findAllByCategory_Name(categoryEnum)
+                .stream()
+                .map(product -> this.modelMapper.map(product, ProductViewModel.class))
+                .collect(Collectors.toList());
     }
 }
