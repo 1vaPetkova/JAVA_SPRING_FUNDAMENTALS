@@ -52,14 +52,20 @@ public class ProductsController {
     }
 
     @GetMapping("/buy/{id}")
-    public String buyItem(@PathVariable Long id) {
+    public String buyItem(@PathVariable Long id, HttpSession httpSession) {
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:/users/login";
+        }
         this.productService.buyItem(id);
         return "redirect:/";
     }
 
     @GetMapping("buy/all")
-    public String buyAllItems(){
+    public String buyAllItems(HttpSession httpSession){
         this.productService.buyAllItems();
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:/users/login";
+        }
         return "redirect:/";
     }
 
