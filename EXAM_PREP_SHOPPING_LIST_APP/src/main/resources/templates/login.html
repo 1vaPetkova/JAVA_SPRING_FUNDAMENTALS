@@ -14,8 +14,8 @@
         <th:block th:each="error : ${#fields.errors()}"
                   th:object="${error}">
             <small th:text="${error}" class="text-danger">Error message</small>
+            <br />
         </th:block>
-        <br/>
         <small
                 th:if="${userNotFound}"
                 class="text-danger">Incorrect username or password!</small>
