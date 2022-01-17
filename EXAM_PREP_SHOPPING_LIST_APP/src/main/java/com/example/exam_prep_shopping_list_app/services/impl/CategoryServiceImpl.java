@@ -24,14 +24,13 @@ public class CategoryServiceImpl implements CategoryService {
             return;
         }
         Arrays.stream(CategoryEnum.values()).forEach(categoryEnum -> {
-            Category category = new Category(categoryEnum);
-            switch (categoryEnum) {
-                case FOOD -> category.setDescription("Home food groceries");
-                case DRINK -> category.setDescription("Home drinks");
-                case HOUSEHOLD -> category.setDescription("Household stuff");
-                case OTHER -> category.setDescription("Other stuff");
-            }
+            Category category = new Category(categoryEnum, categoryEnum.name() + " description");
             this.categoryRepository.save(category);
         });
+    }
+
+    @Override
+    public Category findCategoryByCategoryEnum(CategoryEnum categoryEnum) {
+        return this.categoryRepository.findByName(categoryEnum).orElse(null);
     }
 }
