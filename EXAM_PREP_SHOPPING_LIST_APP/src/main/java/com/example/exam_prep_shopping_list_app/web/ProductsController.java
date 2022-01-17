@@ -1,13 +1,11 @@
 package com.example.exam_prep_shopping_list_app.web;
 
 import com.example.exam_prep_shopping_list_app.models.binding.ProductAddBindingModel;
+import com.example.exam_prep_shopping_list_app.models.entities.enums.CategoryEnum;
 import com.example.exam_prep_shopping_list_app.services.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -25,7 +23,7 @@ public class ProductsController {
 
     @GetMapping("/add")
     public String addProduct(HttpSession httpSession) {
-        if (httpSession.getAttribute("user")==null){
+        if (httpSession.getAttribute("user") == null) {
             return "redirect:/users/login";
         }
         return "product-add";
@@ -48,8 +46,26 @@ public class ProductsController {
             return "redirect:add";
         }
 
-    this.productService.addProduct(productAddBindingModel);
+        this.productService.addProduct(productAddBindingModel);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/buy/{id}")
+    public String buyItem(@PathVariable Long id, HttpSession httpSession) {
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:/users/login";
+        }
+        this.productService.buyItem(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("buy/all")
+    public String buyAllItems(HttpSession httpSession){
+        this.productService.buyAllItems();
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:/users/login";
+        }
         return "redirect:/";
     }
 

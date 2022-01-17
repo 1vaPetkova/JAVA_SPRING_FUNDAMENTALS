@@ -13,4 +13,8 @@ public interface ProductService {
     BigDecimal getTotalProductsPrice();
 
     List<ProductViewModel> findProductsByCategoryName(CategoryEnum categoryEnum);
+
+    void buyItem(Long id);
+
+    void buyAllItems();
 }

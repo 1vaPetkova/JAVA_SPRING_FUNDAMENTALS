@@ -1,5 +1,8 @@
 package com.example.exam_prep_shopping_list_app.models.views;
 
+import com.example.exam_prep_shopping_list_app.models.entities.Category;
+import com.example.exam_prep_shopping_list_app.models.entities.enums.CategoryEnum;
+
 import java.math.BigDecimal;
 
 public class ProductViewModel {
@@ -9,6 +12,15 @@ public class ProductViewModel {
     private BigDecimal price;
 
     public ProductViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public ProductViewModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
@@ -29,3 +41,4 @@ public class ProductViewModel {
         return this;
     }
 }
+
