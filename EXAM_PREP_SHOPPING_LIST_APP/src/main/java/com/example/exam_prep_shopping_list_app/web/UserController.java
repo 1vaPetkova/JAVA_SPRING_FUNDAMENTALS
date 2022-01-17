@@ -26,14 +26,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
-
     @ModelAttribute
     public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("userAlreadyRegistered", false);
+        return "register";
     }
 
     @PostMapping("/register")
@@ -48,7 +49,14 @@ public class UserController {
                             bindingResult);
             return "redirect:register";
         }
-        this.userService.registerUser(userRegisterBindingModel);
+
+        boolean isSaved = this.userService.registerUser(userRegisterBindingModel);
+        if (!isSaved) {
+            redirectAttributes
+                    .addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
+                    .addFlashAttribute("userAlreadyRegistered", true);
+            return "redirect:register";
+        }
         return "redirect:login";
     }
 
@@ -94,7 +102,7 @@ public class UserController {
     }
 
     @GetMapping("logout")
-    public String logout(HttpSession httpSession){
+    public String logout(HttpSession httpSession) {
         httpSession.invalidate();
         return "redirect:/";
     }
