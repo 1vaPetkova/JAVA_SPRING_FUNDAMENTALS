@@ -9,6 +9,8 @@ import com.example.exam_prep_shopping_list_app.services.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -25,10 +27,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(ProductAddBindingModel productAddBindingModel) {
         ProductServiceModel productServiceModel = this.modelMapper.map(productAddBindingModel, ProductServiceModel.class);
-        productServiceModel
-                .setCategory(
-                        this.categoryService
-                                .findCategoryByCategoryEnum(productAddBindingModel.getCategory()));
-        this.productRepository.save(this.modelMapper.map(productServiceModel, Product.class));
+        Product product = this.modelMapper.map(productServiceModel, Product.class);
+        product.setCategory(
+                this.categoryService
+                        .findCategoryByCategoryEnum(productServiceModel.getCategory()));
+        this.productRepository.save(product);
+    }
+
+    @Override
+    public BigDecimal getTotalProductsPrice() {
+        return this.productRepository.findTotalProductsSum();
     }
 }

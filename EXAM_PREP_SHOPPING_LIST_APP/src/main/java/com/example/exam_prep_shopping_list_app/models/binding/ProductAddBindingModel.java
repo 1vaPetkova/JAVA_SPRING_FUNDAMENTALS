@@ -62,7 +62,7 @@ public class ProductAddBindingModel {
         return this;
     }
 
-    @NotNull
+    @NotNull(message = "Category cannot be empty!")
     public CategoryEnum getCategory() {
         return category;
     }
