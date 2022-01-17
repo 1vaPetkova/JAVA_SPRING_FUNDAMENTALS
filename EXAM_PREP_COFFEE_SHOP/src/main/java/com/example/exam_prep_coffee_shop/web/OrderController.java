@@ -54,7 +54,6 @@ public class OrderController {
     @GetMapping("/ready/{id}")
     public String ready(@PathVariable Long id){
         this.orderService.readyOrder(id);
-
         return "redirect:/";
     }
 

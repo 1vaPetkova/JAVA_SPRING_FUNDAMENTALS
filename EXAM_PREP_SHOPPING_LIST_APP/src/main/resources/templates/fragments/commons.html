@@ -49,6 +49,13 @@
     </nav>
 </header>
 
+
+<!--Buy product-->
+<a th:fragment="buy-product"
+   class="ml-3 text-danger"
+   th:href="@{/products/buy/{id}(id=*{id})}"
+>Buy</a>
+
 <!--Footer-->
 <footer th:fragment="footer"
         class="footer bg-transparent  py-2">

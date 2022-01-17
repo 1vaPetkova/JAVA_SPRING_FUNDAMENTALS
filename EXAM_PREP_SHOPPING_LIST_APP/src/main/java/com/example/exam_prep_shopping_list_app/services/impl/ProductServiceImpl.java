@@ -51,4 +51,14 @@ public class ProductServiceImpl implements ProductService {
                 .map(product -> this.modelMapper.map(product, ProductViewModel.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void buyItem(Long id) {
+        this.productRepository.deleteById(id);
+    }
+
+    @Override
+    public void buyAllItems() {
+        this.productRepository.deleteAll();
+    }
 }
