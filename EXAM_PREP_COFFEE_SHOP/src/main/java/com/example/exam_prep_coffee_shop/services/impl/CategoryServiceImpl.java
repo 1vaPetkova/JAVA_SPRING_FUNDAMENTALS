@@ -19,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void initCategories() {
-        if (categoryRepository.count() != 0) {
+        if (this.categoryRepository.count() != 0) {
             return;
         }
         Arrays.stream(CategoryNameEnum.values())
