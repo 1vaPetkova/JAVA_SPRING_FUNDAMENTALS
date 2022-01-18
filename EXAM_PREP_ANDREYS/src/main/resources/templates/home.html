@@ -20,7 +20,7 @@
                         <img
 
                                 class="card-img-top"
-                                th:src="'/img/' + *{gender.name()} +'-'+ *{categoryNameEnum.name()} + '.jpg'"
+                                th:src="*{imageUrl}"
                                 alt="image">
                     </div>
                     <div class="card-body pb-1">

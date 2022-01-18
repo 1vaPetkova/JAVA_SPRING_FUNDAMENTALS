@@ -57,6 +57,7 @@ public class Item extends BaseEntity{
         return this;
     }
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     public GenderEnum getGender() {
         return gender;
     }
