@@ -57,26 +57,19 @@ public class ItemServiceImpl implements ItemService {
                 .stream()
                 .map(item -> {
                     ItemViewModel itemViewModel = this.modelMapper.map(item, ItemViewModel.class);
-                    itemViewModel
-                            .setImageUrl("/img/"
-                                    + item.getGender().name()
-                                    + "-" + item.getCategory().getName()
-                                    + ".jpg");
+                    createItemViewModel(itemViewModel, item);
                     return itemViewModel;
                 })
                 .collect(Collectors.toList());
     }
 
+
     @Override
     public ItemDetailedViewModel getItemDetails(String id) {
         Item item = this.itemRepository.findById(id).orElse(null);
         ItemViewModel itemViewModel = this.modelMapper.map(item, ItemViewModel.class);
-        itemViewModel
-                .setImageUrl("/img/"
-                        + item.getGender().name()
-                        + "-" + item.getCategory().getName()
-                        + ".jpg");
-        return new ItemDetailedViewModel(itemViewModel,item.getDescription());
+        createItemViewModel(itemViewModel, item);
+        return new ItemDetailedViewModel(itemViewModel, item.getDescription());
     }
 
     @Override
@@ -87,5 +80,12 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void deleteAllItems() {
         this.itemRepository.deleteAll();
+    }
+
+    private void createItemViewModel(ItemViewModel itemViewModel, Item item) {
+        itemViewModel
+                .setImageUrl(String.format("/img/%s-%s.jpg",
+                        item.getGender().name(),
+                        item.getCategory().getName().name()));
     }
 }
