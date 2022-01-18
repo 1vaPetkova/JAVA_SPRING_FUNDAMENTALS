@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/common::head"></head>
 <body>
 <header th:replace="fragments/common::navbar"></header>
 <main>
@@ -16,10 +15,13 @@
             class="container-fluid">
         <div class="offers row mx-auto d-flex flex-row justify-content-center">
             <div class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
-                <a href="/">
+                <a th:href="@{/items/details/{id}(id=*{id})}">
                     <div class="card-img-top-wrapper">
-                        <img class="card-img-top"
-                             th:src="'/img/' + *{gender.name()} +'-'+ *{categoryNameEnum.name()} + '.jpg'" alt="image">
+                        <img
+
+                                class="card-img-top"
+                                th:src="'/img/' + *{gender.name()} +'-'+ *{categoryNameEnum.name()} + '.jpg'"
+                                alt="image">
                     </div>
                     <div class="card-body pb-1">
                         <h5
@@ -38,6 +40,12 @@
         </div>
     </div>
 </main>
+
+<div class="col-md-12 text-center">
+    <a th:href="@{/delete/all}"
+       class="btn btn-danger btn">Delete All Items</a>
+</div>
 <footer th:replace="fragments/common::footer"></footer>
 </body>
+<head th:replace="fragments/common::head"></head>
 </html>

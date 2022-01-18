@@ -5,6 +5,7 @@ import com.example.exam_prep_andreys.models.entities.Item;
 import com.example.exam_prep_andreys.models.entities.enums.CategoryNameEnum;
 import com.example.exam_prep_andreys.models.entities.enums.GenderEnum;
 import com.example.exam_prep_andreys.models.services.ItemServiceModel;
+import com.example.exam_prep_andreys.models.views.ItemDetailedViewModel;
 import com.example.exam_prep_andreys.models.views.ItemViewModel;
 import com.example.exam_prep_andreys.repositories.ItemRepository;
 import com.example.exam_prep_andreys.services.CategoryService;
@@ -56,5 +57,21 @@ public class ItemServiceImpl implements ItemService {
                     return itemViewModel;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ItemDetailedViewModel getItemDetails(String id) {
+        Item item = this.itemRepository.findById(id).orElse(null);
+        return this.modelMapper.map(item, ItemDetailedViewModel.class);
+    }
+
+    @Override
+    public void deleteItem(String id) {
+        this.itemRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllItems() {
+        this.itemRepository.deleteAll();
     }
 }
