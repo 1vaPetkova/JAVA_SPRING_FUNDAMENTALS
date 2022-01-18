@@ -2,10 +2,7 @@ package com.example.exam_prep_andreys.models.entities;
 
 import com.example.exam_prep_andreys.models.entities.enums.GenderEnum;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -59,7 +56,7 @@ public class Item extends BaseEntity{
         this.category = category;
         return this;
     }
-
+    @Enumerated(EnumType.STRING)
     public GenderEnum getGender() {
         return gender;
     }
