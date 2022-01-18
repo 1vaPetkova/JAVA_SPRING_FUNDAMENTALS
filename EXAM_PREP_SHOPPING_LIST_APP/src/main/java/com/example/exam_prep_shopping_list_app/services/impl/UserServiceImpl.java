@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
         try {
             UserServiceModel userServiceModel = this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class);
             this.userRepository.save(this.modelMapper.map(userServiceModel, User.class));
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;
