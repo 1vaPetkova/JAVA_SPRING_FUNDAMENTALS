@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,18 +26,15 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping("/register")
     public String register(Model model) {
-        if (!model.containsAttribute("userRegisterBindingModel")) {
-            model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
-        }
         model.addAttribute("usernameNotAvailable", false);
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
+    public String registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel")
+                                              UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()
@@ -57,13 +55,8 @@ public class UserController {
         return "redirect:login";
     }
 
-
     @GetMapping("/login")
     public String login(Model model) {
-        if (!model.containsAttribute("userLoginBindingModel")) {
-            model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
-        }
-
         if (!model.containsAttribute("userNotFound")) {
             model.addAttribute("userNotFound", false);
         }
@@ -71,7 +64,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
+    public String loginConfirm(@Valid
+                                   @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
                                HttpSession httpSession) {
@@ -95,7 +89,6 @@ public class UserController {
         httpSession.setAttribute("user",userServiceModel);
         return "redirect:/";
     }
-
 
     @GetMapping("logout")
     public String logout(HttpSession httpSession) {
