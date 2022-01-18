@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -57,4 +58,26 @@ public class ItemController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/details/{id}")
+    public String itemDetails(@PathVariable String id, HttpSession httpSession, Model model) {
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:/users/login";
+        }
+        model.addAttribute("details",this.itemService.getItemDetails(id));
+        return "details-item";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteItem(@PathVariable String id, HttpSession httpSession){
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:/users/login";
+        }
+        this.itemService.deleteItem(id);
+        return "redirect:/";
+    }
+
+
+
+
 }

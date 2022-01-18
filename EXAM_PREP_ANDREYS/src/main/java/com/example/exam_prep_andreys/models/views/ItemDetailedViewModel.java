@@ -1,26 +1,28 @@
 package com.example.exam_prep_andreys.models.views;
 
+import com.example.exam_prep_andreys.models.entities.Category;
 import com.example.exam_prep_andreys.models.entities.enums.CategoryNameEnum;
 import com.example.exam_prep_andreys.models.entities.enums.GenderEnum;
 
 import java.math.BigDecimal;
 
-public class ItemViewModel {
+public class ItemDetailedViewModel {
 
     private String id;
     private String name;
+    private String description;
     private BigDecimal price;
     private CategoryNameEnum categoryNameEnum;
     private GenderEnum gender;
 
-    public ItemViewModel() {
+    public ItemDetailedViewModel() {
     }
 
     public String getId() {
         return id;
     }
 
-    public ItemViewModel setId(String id) {
+    public ItemDetailedViewModel setId(String id) {
         this.id = id;
         return this;
     }
@@ -29,8 +31,17 @@ public class ItemViewModel {
         return name;
     }
 
-    public ItemViewModel setName(String name) {
+    public ItemDetailedViewModel setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ItemDetailedViewModel setDescription(String description) {
+        this.description = description;
         return this;
     }
 
@@ -38,7 +49,7 @@ public class ItemViewModel {
         return price;
     }
 
-    public ItemViewModel setPrice(BigDecimal price) {
+    public ItemDetailedViewModel setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -47,7 +58,7 @@ public class ItemViewModel {
         return categoryNameEnum;
     }
 
-    public ItemViewModel setCategoryNameEnum(CategoryNameEnum categoryNameEnum) {
+    public ItemDetailedViewModel setCategoryNameEnum(CategoryNameEnum categoryNameEnum) {
         this.categoryNameEnum = categoryNameEnum;
         return this;
     }
@@ -56,7 +67,7 @@ public class ItemViewModel {
         return gender;
     }
 
-    public ItemViewModel setGender(GenderEnum gender) {
+    public ItemDetailedViewModel setGender(GenderEnum gender) {
         this.gender = gender;
         return this;
     }

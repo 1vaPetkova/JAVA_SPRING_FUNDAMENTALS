@@ -62,10 +62,10 @@ public class ProductsController {
 
     @GetMapping("buy/all")
     public String buyAllItems(HttpSession httpSession){
-        this.productService.buyAllItems();
         if (httpSession.getAttribute("user") == null) {
             return "redirect:/users/login";
         }
+        this.productService.buyAllItems();
         return "redirect:/";
     }
 

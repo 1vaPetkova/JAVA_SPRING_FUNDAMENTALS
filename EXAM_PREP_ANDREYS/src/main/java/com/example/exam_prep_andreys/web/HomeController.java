@@ -21,8 +21,18 @@ public class HomeController {
         if (httpSession.getAttribute("user") == null) {
             return "index";
         }
-        model.addAttribute("totalItems",this.itemService.getTotalItems());
-
+        model.addAttribute("totalItems", this.itemService.getTotalItems());
+        model.addAttribute("items", this.itemService.findItems());
         return "home";
+    }
+
+
+    @GetMapping("/delete/all")
+    public String deleteAllItems(HttpSession httpSession) {
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:/users/login";
+        }
+        this.itemService.deleteAllItems();
+        return "redirect:/";
     }
 }
