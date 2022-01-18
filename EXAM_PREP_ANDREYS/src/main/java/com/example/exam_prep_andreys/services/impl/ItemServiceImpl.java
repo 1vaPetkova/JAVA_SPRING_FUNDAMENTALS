@@ -2,12 +2,18 @@ package com.example.exam_prep_andreys.services.impl;
 
 import com.example.exam_prep_andreys.models.binding.ItemAddBindingModel;
 import com.example.exam_prep_andreys.models.entities.Item;
+import com.example.exam_prep_andreys.models.entities.enums.CategoryNameEnum;
+import com.example.exam_prep_andreys.models.entities.enums.GenderEnum;
 import com.example.exam_prep_andreys.models.services.ItemServiceModel;
+import com.example.exam_prep_andreys.models.views.ItemViewModel;
 import com.example.exam_prep_andreys.repositories.ItemRepository;
 import com.example.exam_prep_andreys.services.CategoryService;
 import com.example.exam_prep_andreys.services.ItemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -38,5 +44,13 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Long getTotalItems() {
         return this.itemRepository.count();
+    }
+
+    @Override
+    public List<ItemViewModel> findProductsByCategoryNameAndGender(CategoryNameEnum categoryNameEnum, GenderEnum gender) {
+        return this.itemRepository.findAllByCategory_NameAndGender(categoryNameEnum, gender)
+                .stream()
+                .map(item -> this.modelMapper.map(item, ItemViewModel.class))
+                .collect(Collectors.toList());
     }
 }
