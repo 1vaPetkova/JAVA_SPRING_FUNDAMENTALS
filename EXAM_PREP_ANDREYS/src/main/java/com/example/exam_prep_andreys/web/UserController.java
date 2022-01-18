@@ -25,13 +25,14 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping("/register")
     public String register(Model model) {
         if (!model.containsAttribute("userRegisterBindingModel")) {
             model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
         }
-        model.addAttribute("usernameNotAvailable", false);
+        if (!model.containsAttribute("userExists")){
+            model.addAttribute("userExists", false);
+        }
         return "register";
     }
 
@@ -51,19 +52,17 @@ public class UserController {
         if (!isSaved) {
             redirectAttributes
                     .addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
-                    .addFlashAttribute("usernameNotAvailable", true);
+                    .addFlashAttribute("userExists", true);
             return "redirect:register";
         }
         return "redirect:login";
     }
-
 
     @GetMapping("/login")
     public String login(Model model) {
         if (!model.containsAttribute("userLoginBindingModel")) {
             model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
         }
-
         if (!model.containsAttribute("userNotFound")) {
             model.addAttribute("userNotFound", false);
         }
@@ -86,16 +85,16 @@ public class UserController {
         //Check if user exists
         UserServiceModel userServiceModel = this.userService.findUserByUsernameAndPassword(userLoginBindingModel);
 
-        if (userServiceModel == null) {
+        if (userServiceModel == null
+                || !userServiceModel.getPassword().equals(userLoginBindingModel.getPassword())) {
             redirectAttributes
                     .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
-                    .addFlashAttribute("userNotFound",true);
+                    .addFlashAttribute("userNotFound", true);
             return "redirect:login";
         }
-        httpSession.setAttribute("user",userServiceModel);
+        httpSession.setAttribute("user", userServiceModel);
         return "redirect:/";
     }
-
 
     @GetMapping("logout")
     public String logout(HttpSession httpSession) {

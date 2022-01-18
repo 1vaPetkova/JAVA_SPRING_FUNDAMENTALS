@@ -11,7 +11,7 @@ public class ItemServiceModel {
     private String name;
     private String description;
     private BigDecimal price;
-    private CategoryNameEnum category;
+    private CategoryServiceModel category;
     private GenderEnum gender;
 
     public ItemServiceModel() {
@@ -53,11 +53,11 @@ public class ItemServiceModel {
         return this;
     }
 
-    public CategoryNameEnum getCategory() {
+    public CategoryServiceModel getCategory() {
         return category;
     }
 
-    public ItemServiceModel setCategory(CategoryNameEnum category) {
+    public ItemServiceModel setCategory(CategoryServiceModel category) {
         this.category = category;
         return this;
     }

@@ -1,8 +1,5 @@
 package com.example.exam_prep_andreys.models.views;
 
-import com.example.exam_prep_andreys.models.entities.enums.CategoryNameEnum;
-import com.example.exam_prep_andreys.models.entities.enums.GenderEnum;
-
 import java.math.BigDecimal;
 
 public class ItemViewModel {
@@ -10,8 +7,7 @@ public class ItemViewModel {
     private String id;
     private String name;
     private BigDecimal price;
-    private CategoryNameEnum categoryNameEnum;
-    private GenderEnum gender;
+    private String imageUrl;
 
     public ItemViewModel() {
     }
@@ -43,21 +39,12 @@ public class ItemViewModel {
         return this;
     }
 
-    public CategoryNameEnum getCategoryNameEnum() {
-        return categoryNameEnum;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public ItemViewModel setCategoryNameEnum(CategoryNameEnum categoryNameEnum) {
-        this.categoryNameEnum = categoryNameEnum;
-        return this;
-    }
-
-    public GenderEnum getGender() {
-        return gender;
-    }
-
-    public ItemViewModel setGender(GenderEnum gender) {
-        this.gender = gender;
+    public ItemViewModel setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 }

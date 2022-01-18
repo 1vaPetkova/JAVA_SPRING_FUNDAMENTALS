@@ -4,6 +4,7 @@ import com.example.exam_prep_andreys.services.ItemService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,13 +18,15 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index(HttpSession httpSession, Model model) {
+    public ModelAndView index(HttpSession httpSession, ModelAndView modelAndView) {
         if (httpSession.getAttribute("user") == null) {
-            return "index";
+            modelAndView.setViewName("index");
+        } else {
+            modelAndView.addObject("totalItems", this.itemService.getTotalItems());
+            modelAndView.addObject("items", this.itemService.findItems());
+            modelAndView.setViewName("home");
         }
-        model.addAttribute("totalItems", this.itemService.getTotalItems());
-        model.addAttribute("items", this.itemService.findItems());
-        return "home";
+        return modelAndView;
     }
 
 

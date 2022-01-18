@@ -32,7 +32,9 @@ public class ItemController {
         if (!model.containsAttribute("itemAddBindingModel")) {
             model.addAttribute("itemAddBindingModel", new ItemAddBindingModel());
         }
-        model.addAttribute("itemExists", false);
+        if (!model.containsAttribute("itemExists")){
+            model.addAttribute("itemExists", false);
+        }
         return "add-item";
     }
 

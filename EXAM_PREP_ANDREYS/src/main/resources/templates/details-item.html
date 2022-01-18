@@ -14,15 +14,15 @@
         <div class="row justify-content-center ">
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top"
-                     th:src="'/img/' + *{gender.name()} +'-'+ *{categoryNameEnum.name()} + '.jpg'" alt="Card image cap">
+                     th:src="*{itemViewModel.getImageUrl()}" alt="Card image cap">
                 <div class="card-body bg-gray align-content-center text-center">
-                    <h6 th:text="*{name}">Item name</h6>
+                    <h6 th:text="*{itemViewModel.getName()}">Item name</h6>
                     <p
                             th:text="*{description}"
                             class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi enim,
                         excepturi ha </p>
-                    <h6 th:text="*{price}">Price</h6>
-                    <a th:href="@{/items/delete/{id}(id=*{id})}"
+                    <h6 th:text="*{itemViewModel.price}">Price</h6>
+                    <a th:href="@{/items/delete/{id}(id=*{itemViewModel.id})}"
                        class="btn btn-danger">Delete</a>
                 </div>
             </div>

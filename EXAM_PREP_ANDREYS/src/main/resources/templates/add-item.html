@@ -13,7 +13,7 @@
           th:action="@{/items/add}"
           th:object="${itemAddBindingModel}">
         <div class="form-group">
-            <h5 class="text-danger" th:if="${itemExists}">Item name occupied!</h5>
+            <h5 class="text-danger" th:if="${itemExists==true}">Item name occupied!</h5>
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="name" class="h4 mb-2">Name</label>
             </div>
@@ -48,7 +48,6 @@
                 <option
                         th:each="category : ${T(com.example.exam_prep_andreys.models.entities.enums.CategoryNameEnum).values()}"
                         th:value="${category}"
-                        th:erroclass="bg-danger"
                         th:text="${category}">Category
                 </option>
             </select>

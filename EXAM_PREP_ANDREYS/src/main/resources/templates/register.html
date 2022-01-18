@@ -13,9 +13,8 @@
           th:method="POST"
           th:object="${userRegisterBindingModel}">
         <div class="form-group">
-            <h5 class="text-danger"
-                th:if="${usernameNotAvailable}"
-            >Username occupied!</h5>
+            <h5 class="text-danger" th:if="${userExists==true}">Username occupied!</h5>
+
             <div class="label-holder textCol d-flex justify-content-center">
                 <label for="username" class="h4 mb-2 text-white">Username</label>
             </div>
@@ -35,7 +34,7 @@
             <input
                     th:field="*{email}"
                     th:errorclass="bg-danger"
-                    type="text" class="form-control" id="email" name="email"/>
+                    type="email" class="form-control" id="email" name="email"/>
             <small
                     th:if="${#fields.hasErrors('email')}"
                     th:errors="*{email}"
