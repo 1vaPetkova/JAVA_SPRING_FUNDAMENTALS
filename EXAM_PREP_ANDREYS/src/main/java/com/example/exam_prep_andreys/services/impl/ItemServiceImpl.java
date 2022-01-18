@@ -47,10 +47,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemViewModel> findProductsByCategoryNameAndGender(CategoryNameEnum categoryNameEnum, GenderEnum gender) {
-        return this.itemRepository.findAllByCategory_NameAndGender(categoryNameEnum, gender)
+    public List<ItemViewModel> findItems() {
+        return this.itemRepository.findAll()
                 .stream()
-                .map(item -> this.modelMapper.map(item, ItemViewModel.class))
+                .map(item -> {
+                    ItemViewModel itemViewModel = this.modelMapper.map(item, ItemViewModel.class);
+                    itemViewModel.setCategoryNameEnum(item.getCategory().getName());
+                    return itemViewModel;
+                })
                 .collect(Collectors.toList());
     }
 }

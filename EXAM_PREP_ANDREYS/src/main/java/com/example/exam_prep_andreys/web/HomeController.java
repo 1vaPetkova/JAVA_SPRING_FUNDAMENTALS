@@ -26,15 +26,8 @@ public class HomeController {
         if (httpSession.getAttribute("user") == null) {
             return "index";
         }
-        Arrays.stream(CategoryNameEnum.values())
-                .forEach(categoryNameEnum -> {
-                    Arrays.stream(GenderEnum.values()).forEach(genderEnum -> {
-                        List<ItemViewModel> items =
-                                this.itemService.findProductsByCategoryNameAndGender(categoryNameEnum, genderEnum);
-                        model.addAttribute(genderEnum.name().toLowerCase() + categoryNameEnum.name().toLowerCase(),
-                                items);
-                    });
-                });
+        model.addAttribute("totalItems",this.itemService.getTotalItems());
+       model.addAttribute("items",this.itemService.findItems());
         return "home";
     }
 }

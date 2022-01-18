@@ -11,5 +11,4 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, String> {
 
-    List<Item> findAllByCategory_NameAndGender(CategoryNameEnum category_name, GenderEnum gender);
 }

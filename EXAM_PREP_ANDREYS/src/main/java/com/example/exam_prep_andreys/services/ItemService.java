@@ -12,5 +12,5 @@ public interface ItemService {
 
      Long getTotalItems();
 
-    List<ItemViewModel> findProductsByCategoryNameAndGender(CategoryNameEnum categoryNameEnum, GenderEnum genderEnum);
+    List<ItemViewModel> findItems();
 }
