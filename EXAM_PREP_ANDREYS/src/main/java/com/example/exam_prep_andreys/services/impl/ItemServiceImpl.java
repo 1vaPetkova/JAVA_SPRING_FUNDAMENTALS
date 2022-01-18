@@ -3,8 +3,6 @@ package com.example.exam_prep_andreys.services.impl;
 import com.example.exam_prep_andreys.models.binding.ItemAddBindingModel;
 import com.example.exam_prep_andreys.models.entities.Category;
 import com.example.exam_prep_andreys.models.entities.Item;
-import com.example.exam_prep_andreys.models.entities.enums.CategoryNameEnum;
-import com.example.exam_prep_andreys.models.entities.enums.GenderEnum;
 import com.example.exam_prep_andreys.models.services.CategoryServiceModel;
 import com.example.exam_prep_andreys.models.services.ItemServiceModel;
 import com.example.exam_prep_andreys.models.views.ItemDetailedViewModel;

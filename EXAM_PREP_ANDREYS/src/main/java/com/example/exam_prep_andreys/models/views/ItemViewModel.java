@@ -1,8 +1,5 @@
 package com.example.exam_prep_andreys.models.views;
 
-import com.example.exam_prep_andreys.models.entities.enums.CategoryNameEnum;
-import com.example.exam_prep_andreys.models.entities.enums.GenderEnum;
-
 import java.math.BigDecimal;
 
 public class ItemViewModel {

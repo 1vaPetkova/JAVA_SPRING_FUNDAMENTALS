@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -31,7 +30,9 @@ public class UserController {
         if (!model.containsAttribute("userRegisterBindingModel")) {
             model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
         }
-        model.addAttribute("usernameNotAvailable", false);
+        if (!model.containsAttribute("userExists")){
+            model.addAttribute("userExists", false);
+        }
         return "register";
     }
 
@@ -51,7 +52,7 @@ public class UserController {
         if (!isSaved) {
             redirectAttributes
                     .addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
-                    .addFlashAttribute("usernameNotAvailable", true);
+                    .addFlashAttribute("userExists", true);
             return "redirect:register";
         }
         return "redirect:login";
