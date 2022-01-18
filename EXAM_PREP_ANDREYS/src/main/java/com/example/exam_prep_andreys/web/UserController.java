@@ -28,13 +28,15 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model) {
+        if (!model.containsAttribute("userRegisterBindingModel")) {
+            model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
+        }
         model.addAttribute("usernameNotAvailable", false);
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel")
-                                              UserRegisterBindingModel userRegisterBindingModel,
+    public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()
@@ -57,6 +59,9 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(Model model) {
+        if (!model.containsAttribute("userLoginBindingModel")) {
+            model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
+        }
         if (!model.containsAttribute("userNotFound")) {
             model.addAttribute("userNotFound", false);
         }
@@ -64,8 +69,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginConfirm(@Valid
-                                   @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
+    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
                                HttpSession httpSession) {
@@ -80,13 +84,14 @@ public class UserController {
         //Check if user exists
         UserServiceModel userServiceModel = this.userService.findUserByUsernameAndPassword(userLoginBindingModel);
 
-        if (userServiceModel == null) {
+        if (userServiceModel == null
+                || !userServiceModel.getPassword().equals(userLoginBindingModel.getPassword())) {
             redirectAttributes
                     .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
-                    .addFlashAttribute("userNotFound",true);
+                    .addFlashAttribute("userNotFound", true);
             return "redirect:login";
         }
-        httpSession.setAttribute("user",userServiceModel);
+        httpSession.setAttribute("user", userServiceModel);
         return "redirect:/";
     }
 
