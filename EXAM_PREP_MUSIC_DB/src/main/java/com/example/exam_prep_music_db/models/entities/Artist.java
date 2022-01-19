@@ -1,25 +1,30 @@
 package com.example.exam_prep_music_db.models.entities;
 
-import com.example.exam_prep_music_db.models.entities.enums.ArtistName;
+import com.example.exam_prep_music_db.models.entities.enums.ArtistNameEnum;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "artists")
 public class Artist extends BaseEntity {
-    private ArtistName name;
+    private ArtistNameEnum name;
     private String careerInformation;
 
     public Artist() {
     }
 
+    public Artist(ArtistNameEnum name, String careerInformation) {
+        this.name = name;
+        this.careerInformation = careerInformation;
+    }
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    public ArtistName getName() {
+    public ArtistNameEnum getName() {
         return name;
     }
 
-    public Artist setName(ArtistName name) {
+    public Artist setName(ArtistNameEnum name) {
         this.name = name;
         return this;
     }
