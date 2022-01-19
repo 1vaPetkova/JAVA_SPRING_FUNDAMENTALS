@@ -10,45 +10,80 @@
     <h1 class="text-light border-bottom">Add Album</h1>
     <div class="d-flex justify-content-center">
         <form
-                th:action="@{}" method="POST"
-              class="text-light">
+                th:action="@{/albums/add}"
+                th:method="POST"
+                th:object="${albumAddBindingModel}"
+                class="text-light">
             <div class="form-row m-5">
                 <div class="col">
                     <label for="name">Album name</label>
-                    <input name="name" id="name" type="text" class="form-control" placeholder="Album name">
-                    <small id="nameError" class="form-text bg-danger rounded">Name must be between 3 and 20
+                    <input
+                            th:field="*{name}"
+                            th:errorclass="bg-danger"
+                            name="name" id="name" type="text" class="form-control" placeholder="Album name">
+                    <small
+                            th:if="${#fields.hasErrors('name')}"
+                            th:errors="*{name}"
+                            id="nameError" class="form-text bg-danger rounded">Name must be between 3 and 20
                         characters</small>
                 </div>
                 <div class="col">
                     <label for="imgUrl">Image Url</label>
-                    <input name="imgUrl" id="imgUrl" type="text" class="form-control" placeholder="Image Url">
-                    <small id="imageUrlError" class="form-text bg-danger rounded">Image url must be more than 5
+                    <input
+                            th:field="*{imageUrl}"
+                            th:errorclass="bg-danger"
+                            name="imgUrl" id="imgUrl" type="text" class="form-control" placeholder="Image Url">
+                    <small
+                            th:if="${#fields.hasErrors('imageUrl')}"
+                            th:errors="*{imageUrl}"
+                            id="imageUrlError" class="form-text bg-danger rounded">Image url must be more than 5
                         characters</small>
                 </div>
             </div>
             <div class="form-row m-5">
                 <div class="col">
                     <label for="price">Price</label>
-                    <input name="price" id="price" type="number" class="form-control" placeholder="Price">
-                    <small id="priceError" class="form-text bg-danger rounded">Price must be positive</small>
+                    <input
+                            th:field="*{price}"
+                            th:errorclass="bg-danger"
+                            name="price" id="price" type="number" class="form-control" placeholder="Price">
+                    <small
+                            th:if="${#fields.hasErrors('price')}"
+                            th:errors="*{price}"
+                            id="priceError" class="form-text bg-danger rounded">Price must be positive</small>
                 </div>
                 <div class="col">
                     <label for="copies">Copies</label>
-                    <input name="copies" id="copies" type="number" class="form-control" placeholder="Copies">
-                    <small id="copiesError" class="form-text bg-danger rounded">Copies must be positive</small>
+                    <input
+                            th:field="*{copies}"
+                            th:errorclass="bg-danger"
+                            name="copies" id="copies" type="number" class="form-control" placeholder="Copies">
+                    <small
+                            th:if="${#fields.hasErrors('copies')}"
+                            th:errors="*{copies}"
+                            id="copiesError" class="form-text bg-danger rounded">Copies must be positive</small>
                 </div>
             </div>
             <div class="form-row m-5">
                 <div class="col">
                     <label for="releaseDate">Release date</label>
-                    <input name="releaseDate" id="releaseDate" type="date" class="form-control"
-                           placeholder="Release date">
-                    <small id="releaseDateError" class="form-text bg-danger rounded">Release date cannot be in the
+                    <input
+                            th:field="*{releasedDate}"
+                            th:errorclass="bg-danger"
+                            name="releaseDate" id="releaseDate" type="date" class="form-control"
+                            placeholder="Release date">
+                    <small
+                            th:if="${#fields.hasErrors('releasedDate')}"
+                            th:errors="*{releasedDate}"
+                            id="releaseDateError" class="form-text bg-danger rounded">Release date cannot be in the
                         future</small>
                 </div>
                 <div class="col">
                     <label for="producer">Producer</label>
-                    <input name="producer" id="producer" type="text" class="form-control" placeholder="Producer">
+                    <input
+                            th:field="*{producer}"
+                            th:errorclass="bg-danger"
+                            name="producer" id="producer" type="text" class="form-control" placeholder="Producer">
                 </div>
             </div>
             <div class="form-row m-5">
@@ -56,24 +91,52 @@
                     <label for="artist">Artist</label>
                     <select name="artist" id="artist" class="custom-select">
                         <option value="" selected>Select Artist</option>
+                        <option
+                                th:each="artist : ${T(com.example.exam_prep_music_db.models.entities.enums.ArtistNameEnum).values()}"
+                                th:value="${artist}"
+                                th:text="${artist}"
+                        >Select Artist
+                        </option>
                     </select>
-                    <small id="artistError" class="form-text bg-danger rounded">You must select artist</small>
+                    <small
+                            th:if="${#fields.hasErrors('artist')}"
+                            th:errors="*{artist}"
+                            id="artistError" class="form-text bg-danger rounded">You must select artist</small>
                 </div>
                 <div class="col">
                     <label for="genre">Genre</label>
                     <select name="genre" id="genre" class="custom-select">
-                        <option value="" selected>Select genre</option>
+                        <option
+                                value="" selected>Select Genre
+                        </option>
+                        <option
+                                th:each="genre : ${T(com.example.exam_prep_music_db.models.entities.enums.GenreEnum).values()}"
+                                th:value="${genre}"
+                                th:text="${genre}"
+                                th:erroclass="bg-danger"
+                        >Select genre
+                        </option>
                     </select>
-                    <small id="genreError" class="form-text bg-danger rounded">You must select genre</small>
+                    <small
+                            th:if="${#fields.hasErrors('genre')}"
+                            th:errors="*{genre}"
+                            id="genreError" class="form-text bg-danger rounded">You must select genre</small>
                 </div>
             </div>
 
             <div class="form-row m-5">
                 <div class="col">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" type="text" class="form-control"
-                              placeholder="Description"></textarea>
-                    <small id="descriptionError" class="form-text bg-danger rounded">Description length must be more
+                    <textarea
+                            th:field="*{description}"
+                            th:text="*{description}"
+                            th:errorclass="bg-danger"
+                            name="description" id="description" type="text" class="form-control"
+                            placeholder="Description"></textarea>
+                    <small
+                            th:if="${#fields.hasErrors('description')}"
+                            th:errors="*{description}"
+                            id="descriptionError" class="form-text bg-danger rounded">Description length must be more
                         than 5 characters</small>
                 </div>
             </div>

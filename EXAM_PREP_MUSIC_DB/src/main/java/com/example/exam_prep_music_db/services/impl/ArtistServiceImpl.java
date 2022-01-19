@@ -28,4 +28,9 @@ public class ArtistServiceImpl implements ArtistService {
                             .save(new Artist(artistName, artistName.name() + " career info")));
         }
     }
+
+    @Override
+    public Artist findArtistByName(ArtistNameEnum artist) {
+        return this.artistRepository.findByName(artist).orElse(null);
+    }
 }
