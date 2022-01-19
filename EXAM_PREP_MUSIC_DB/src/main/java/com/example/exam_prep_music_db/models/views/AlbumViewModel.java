@@ -5,7 +5,6 @@ import com.example.exam_prep_music_db.models.entities.enums.GenreEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class AlbumViewModel {
 
@@ -15,6 +14,8 @@ public class AlbumViewModel {
     private GenreEnum genre;
     private BigDecimal price;
     private LocalDate releaseDate;
+    private Integer copies;
+    private String imageUrl;
 
     public AlbumViewModel() {
     }
@@ -70,6 +71,24 @@ public class AlbumViewModel {
 
     public AlbumViewModel setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+        return this;
+    }
+
+    public Integer getCopies() {
+        return copies;
+    }
+
+    public AlbumViewModel setCopies(Integer copies) {
+        this.copies = copies;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public AlbumViewModel setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 }

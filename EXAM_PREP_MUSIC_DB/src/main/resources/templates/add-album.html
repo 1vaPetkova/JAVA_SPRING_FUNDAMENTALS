@@ -46,7 +46,7 @@
                     <input
                             th:field="*{price}"
                             th:errorclass="bg-danger"
-                            name="price" id="price" type="number" class="form-control" placeholder="Price">
+                            name="price"  id="price" type="number" class="form-control" placeholder="Price">
                     <small
                             th:if="${#fields.hasErrors('price')}"
                             th:errors="*{price}"

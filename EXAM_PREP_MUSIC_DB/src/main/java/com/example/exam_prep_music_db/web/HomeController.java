@@ -23,7 +23,7 @@ public class HomeController {
         } else {
             modelAndView.setViewName("home");
             modelAndView.addObject("totalCopies", this.albumService.getTotalItems());
-           // modelAndView.addObject("items", this.albumService.getAlbums());
+           modelAndView.addObject("albums", this.albumService.getAlbums());
         }
         return modelAndView;
     }

@@ -7,6 +7,7 @@ import com.example.exam_prep_music_db.models.entities.User;
 import com.example.exam_prep_music_db.models.entities.enums.ArtistNameEnum;
 import com.example.exam_prep_music_db.models.services.AlbumServiceModel;
 import com.example.exam_prep_music_db.models.services.UserServiceModel;
+import com.example.exam_prep_music_db.models.views.AlbumViewModel;
 import com.example.exam_prep_music_db.repositories.AlbumRepository;
 import com.example.exam_prep_music_db.services.AlbumService;
 import com.example.exam_prep_music_db.services.ArtistService;
@@ -14,6 +15,9 @@ import com.example.exam_prep_music_db.services.UserService;
 import com.example.exam_prep_music_db.util.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AlbumServiceImpl implements AlbumService {
@@ -49,6 +53,24 @@ public class AlbumServiceImpl implements AlbumService {
                 .findAll()
                 .stream()
                 .mapToLong(Album::getCopies).sum();
+    }
+
+    @Override
+    public List<AlbumViewModel> getAlbums() {
+        return this.albumRepository
+                .findAllByOrderByCopiesDesc()
+                .stream()
+                .map(album -> {
+                    AlbumViewModel albumViewModel = this.modelMapper.map(album, AlbumViewModel.class);
+                    albumViewModel.setArtist(album.getArtist().getName())
+                            .setImageUrl(String.format("/img/%s.jpg", albumViewModel.getArtist().name().toLowerCase()));
+                    return albumViewModel;
+                }).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteAlbum(Long id) {
+        this.albumRepository.deleteById(id);
     }
 
 }

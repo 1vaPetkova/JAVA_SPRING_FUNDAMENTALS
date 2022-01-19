@@ -19,8 +19,7 @@
                     <h6 th:text="*{itemViewModel.getName()}">Item name</h6>
                     <p
                             th:text="*{description}"
-                            class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi enim,
-                        excepturi ha </p>
+                            class="card-text">Lorem ipsum </p>
                     <h6 th:text="*{itemViewModel.price}">Price</h6>
                     <a th:href="@{/items/delete/{id}(id=*{itemViewModel.id})}"
                        class="btn btn-danger">Delete</a>
@@ -29,12 +28,6 @@
         </div>
     </div>
 </main>
-<footer class="footer bg-dark  py-2">
-    <div class="container-fluid text-center">
-        <div class="footer-background h5 text-white">
-            Andrey's & Spring Team 2020.
-        </div>
-    </div>
-</footer>
+<footer th:replace="fragments/common::footer"></footer>
 </body>
 </html>
