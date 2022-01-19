@@ -1,8 +1,7 @@
 package com.example.exam_prep_music_db.models.services;
 
 import com.example.exam_prep_music_db.models.entities.Artist;
-import com.example.exam_prep_music_db.models.entities.User;
-import com.example.exam_prep_music_db.models.entities.enums.GengeEnum;
+import com.example.exam_prep_music_db.models.entities.enums.GenreEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,7 +15,7 @@ public class AlbumServiceModel extends BaseServiceModel{
     private BigDecimal price;
     private LocalDate releasedDate;
     private String producer;
-    private GengeEnum genre;
+    private GenreEnum genre;
     private Artist artist;
     private UserServiceModel addedFrom;
 
@@ -86,11 +85,11 @@ public class AlbumServiceModel extends BaseServiceModel{
         return this;
     }
 
-    public GengeEnum getGenre() {
+    public GenreEnum getGenre() {
         return genre;
     }
 
-    public AlbumServiceModel setGenre(GengeEnum genre) {
+    public AlbumServiceModel setGenre(GenreEnum genre) {
         this.genre = genre;
         return this;
     }

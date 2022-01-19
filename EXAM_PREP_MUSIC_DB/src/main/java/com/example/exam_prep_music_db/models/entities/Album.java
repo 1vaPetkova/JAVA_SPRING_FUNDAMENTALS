@@ -1,6 +1,6 @@
 package com.example.exam_prep_music_db.models.entities;
 
-import com.example.exam_prep_music_db.models.entities.enums.GengeEnum;
+import com.example.exam_prep_music_db.models.entities.enums.GenreEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ public class Album extends BaseEntity {
     private BigDecimal price;
     private LocalDate releasedDate;
     private String producer;
-    private GengeEnum genre;
+    private GenreEnum genre;
     private Artist artist;
     private User addedFrom;
 
@@ -95,11 +95,11 @@ public class Album extends BaseEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    public GengeEnum getGenre() {
+    public GenreEnum getGenre() {
         return genre;
     }
 
-    public Album setGenre(GengeEnum genre) {
+    public Album setGenre(GenreEnum genre) {
         this.genre = genre;
         return this;
     }

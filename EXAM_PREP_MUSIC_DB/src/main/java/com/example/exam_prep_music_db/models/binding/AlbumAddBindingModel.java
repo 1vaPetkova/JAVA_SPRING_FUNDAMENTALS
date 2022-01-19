@@ -1,8 +1,7 @@
 package com.example.exam_prep_music_db.models.binding;
 
-import com.example.exam_prep_music_db.models.entities.Artist;
-import com.example.exam_prep_music_db.models.entities.enums.GengeEnum;
-import com.example.exam_prep_music_db.models.services.UserServiceModel;
+import com.example.exam_prep_music_db.models.entities.enums.ArtistNameEnum;
+import com.example.exam_prep_music_db.models.entities.enums.GenreEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -19,14 +18,13 @@ public class AlbumAddBindingModel {
     private BigDecimal price;
     private LocalDate releasedDate;
     private String producer;
-    private GengeEnum genre;
-    private Artist artist;
-    private UserServiceModel addedFrom;
+    private GenreEnum genre;
+    private ArtistNameEnum artist;
 
     public AlbumAddBindingModel() {
     }
 
-    @NotBlank
+    @NotBlank(message = "Name cannot be empty!")
     @Size(min = 3, max = 10, message = "Name length must be between 3 and 20 characters!")
     public String getName() {
         return name;
@@ -37,7 +35,7 @@ public class AlbumAddBindingModel {
         return this;
     }
 
-    @NotBlank
+    @NotBlank(message = "Image Url cannot be empty!")
     @Size(min = 5, message = "Image Url length must be minimum 5 characters!")
     public String getImageUrl() {
         return imageUrl;
@@ -48,7 +46,7 @@ public class AlbumAddBindingModel {
         return this;
     }
 
-    @NotBlank
+    @NotBlank(message = "Description cannot be empty!")
     @Size(min = 5, message = "Description length must be minimum 5 characters!")
     public String getDescription() {
         return description;
@@ -59,7 +57,7 @@ public class AlbumAddBindingModel {
         return this;
     }
 
-    @NotNull
+    @NotNull(message = "Copies cannot be empty!")
     @Min(value = 10, message = "Copies must be more than or equal to 10!")
     public Integer getCopies() {
         return copies;
@@ -70,7 +68,7 @@ public class AlbumAddBindingModel {
         return this;
     }
 
-    @NotNull
+    @NotNull(message = "Price cannot be empty!")
     @DecimalMin(value = "0", message = "Price must be a positive number!")
     public BigDecimal getPrice() {
         return price;
@@ -103,30 +101,23 @@ public class AlbumAddBindingModel {
     }
 
     @NotNull(message = "You must select genre!")
-    public GengeEnum getGenre() {
+    public GenreEnum getGenre() {
         return genre;
     }
 
-    public AlbumAddBindingModel setGenre(GengeEnum genre) {
+    public AlbumAddBindingModel setGenre(GenreEnum genre) {
         this.genre = genre;
         return this;
     }
+
     @NotNull(message = "You must select select artist!")
-    public Artist getArtist() {
+    public ArtistNameEnum getArtist() {
         return artist;
     }
 
-    public AlbumAddBindingModel setArtist(Artist artist) {
+    public AlbumAddBindingModel setArtist(ArtistNameEnum artist) {
         this.artist = artist;
         return this;
     }
 
-    public UserServiceModel getAddedFrom() {
-        return addedFrom;
-    }
-
-    public AlbumAddBindingModel setAddedFrom(UserServiceModel addedFrom) {
-        this.addedFrom = addedFrom;
-        return this;
-    }
 }
