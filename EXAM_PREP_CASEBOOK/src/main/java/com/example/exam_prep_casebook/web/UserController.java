@@ -72,32 +72,50 @@ public class UserController {
     }
 
 
-   @PostMapping("/login")
+    @PostMapping("/login")
     public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
                                BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                               HttpSession httpSession){
+                               HttpSession httpSession) {
 
-       if (bindingResult.hasErrors()) {
-           redirectAttributes
-                   .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
-                   .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",
-                           bindingResult);
-           return "redirect:login";
-       }
+        if (bindingResult.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",
+                            bindingResult);
+            return "redirect:login";
+        }
 
-       //Check if user exists
-       UserServiceModel userServiceModel = this.userService.findUserByUsernameAndPassword(userLoginBindingModel);
+        //Check if user exists
+        UserServiceModel userServiceModel = this.userService.findUserByUsernameAndPassword(userLoginBindingModel);
 
-       if (userServiceModel == null
-               || !userServiceModel.getPassword().equals(userLoginBindingModel.getPassword())) {
-           redirectAttributes
-                   .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
-                   .addFlashAttribute("userNotFound", true);
-           return "redirect:login";
-       }
-       httpSession.setAttribute("user", userServiceModel);
-       return "redirect:/";
-   }
+        if (userServiceModel == null
+                || !userServiceModel.getPassword().equals(userLoginBindingModel.getPassword())) {
+            redirectAttributes
+                    .addFlashAttribute("userLoginBindingModel", userLoginBindingModel)
+                    .addFlashAttribute("userNotFound", true);
+            return "redirect:login";
+        }
+        httpSession.setAttribute("user", userServiceModel);
+        this.userService.loginCurrentUser(userServiceModel);
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/profile")
+    public String loggedInProfile(Model model, HttpSession httpSession) {
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:login";
+        }
+        model.addAttribute("loggedInUser",this.userService.getLoggedInUserProfile());
+        return "profile";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.invalidate();
+        this.userService.logoutCurrentUser();
+        return "redirect:/";
+    }
 
     @GetMapping("/friends")
     public String friends() {
