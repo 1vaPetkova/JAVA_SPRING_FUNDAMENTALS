@@ -33,7 +33,7 @@ public class UserController {
         return "register";
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {
