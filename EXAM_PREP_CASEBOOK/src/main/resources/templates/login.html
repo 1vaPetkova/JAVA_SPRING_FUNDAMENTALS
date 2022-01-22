@@ -10,18 +10,38 @@
         <hr class="my-2"/>
         <h1 class="text-center">Login</h1>
         <hr class="hr-2"/>
-        <form class="mx-auto w-15" method="post" action="users/login">
+        <form class="mx-auto w-15"
+              th:method="post"
+              th:action="@{/users/login}"
+              th:object="${userLoginBindingModel}">
+            <h4
+                    th:if="${userNotFound}"
+                    class="text-center bg-dark text-danger">Wrong username or password</h4>
             <div class="form-group">
                 <div class="label-holder d-flex justify-content-center">
                     <label for="username" class="h3 mb-2">Username</label>
                 </div>
-                <input type="text" class="form-control" id="username" name="username">
+                <input
+                        th:field="*{username}"
+                        th:errorclass="bg-danger"
+                        type="text" class="form-control" id="username" name="username">
+                <small
+                        th:if="${#fields.hasErrors('username')}"
+                        th:errors="*{username}"
+                        class="text-danger">Gender error message!</small>
             </div>
             <div class="form-group">
                 <div class="label-holder d-flex justify-content-center">
                     <label for="password" class="h3 mb-2">Password</label>
                 </div>
-                <input type="password" class="form-control" id="password" name="password">
+                <input
+                        th:field="*{password}"
+                        th:errorclass="bg-danger"
+                        type="password" class="form-control" id="password" name="password">
+                <small
+                        th:if="${#fields.hasErrors('password')}"
+                        th:errors="*{password}"
+                        class="text-danger">Password error message!</small>
             </div>
             <div class="button-holder d-flex justify-content-center">
                 <button type="submit" class="btn btn-info text-white">Login</button>

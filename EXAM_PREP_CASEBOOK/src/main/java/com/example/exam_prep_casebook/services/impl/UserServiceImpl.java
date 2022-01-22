@@ -1,5 +1,6 @@
 package com.example.exam_prep_casebook.services.impl;
 
+import com.example.exam_prep_casebook.models.binding.UserLoginBindingModel;
 import com.example.exam_prep_casebook.models.binding.UserRegisterBindingModel;
 import com.example.exam_prep_casebook.models.entities.User;
 import com.example.exam_prep_casebook.models.services.UserServiceModel;
@@ -28,5 +29,13 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public UserServiceModel findUserByUsernameAndPassword(UserLoginBindingModel userLoginBindingModel) {
+      return  this.userRepository
+                .findByUsernameAndPassword(userLoginBindingModel.getUsername(), userLoginBindingModel.getPassword())
+              .map(user -> this.modelMapper.map(user, UserServiceModel.class))
+              .orElse(null);
     }
 }

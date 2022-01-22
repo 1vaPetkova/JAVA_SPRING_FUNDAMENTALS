@@ -62,7 +62,7 @@ public class User {
         return this;
     }
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     public Set<User> getFriends() {
         return friends;
     }
