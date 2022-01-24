@@ -11,6 +11,7 @@ import com.example.exam_prep_casebook.util.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,18 +56,63 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logoutCurrentUser() {
-        this.currentUser.setId(null).setUsername(null).setGender(null);
+        this.currentUser.setId(null).setUsername(null).setGender(null).setFriends(new HashSet<>());
+    }
+
+    @Override
+    public UserViewModel getUserProfile(Long id) {
+        UserServiceModel userServiceModel = this.userRepository.findById(id)
+                .map(user -> this.modelMapper.map(user, UserServiceModel.class)).orElse(null);
+        return this.modelMapper.map(userServiceModel, UserViewModel.class).setImageUrl();
+    }
+
+    @Override
+    public void addFriend(Long id) {
+        User userToAdd = this.userRepository
+                .findById(id).orElse(null);
+        this.currentUser.getFriends().add(userToAdd);
+        User user = this.userRepository.findById(this.currentUser.getId()).orElse(null);
+               user.getFriends().add(userToAdd);
+               this.userRepository.save(user);
+    }
+
+    @Override
+    public List<UserViewModel> getFriends() {
+        return this.userRepository.findById(this.currentUser.getId())
+                .orElse(null)
+                .getFriends()
+                .stream().map(friend->this.modelMapper.map(friend, UserViewModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void unfriendUser(Long id) {
+        User userToUnfriend = this.userRepository
+                .findById(id).orElse(null);
+        this.currentUser.getFriends().remove(userToUnfriend);
+        User user = this.userRepository.findById(this.currentUser.getId()).orElse(null);
+        user.getFriends().remove(userToUnfriend);
+        this.userRepository.save(user);
     }
 
     @Override
     public UserViewModel getLoggedInUserProfile() {
-        return this.modelMapper.map(this.currentUser, UserViewModel.class).setImageUrl();
+        return this.getUserProfile(this.currentUser.getId());
     }
 
+
     @Override
-    public List<UserViewModel> getAllUsers() {
+    public List<UserViewModel> getAllUsersThatAreNotFriends() {
         return this.userRepository.findAll()
-                .stream().filter(user -> !user.getUsername().equals(this.currentUser.getUsername()))
+                .stream()
+                .filter(user -> !user.getUsername().equals(this.currentUser.getUsername())
+                        &&
+                        this.userRepository.findById(this.currentUser.getId())
+                                .orElse(null)
+                                .getFriends()
+                                .stream()
+                                .noneMatch(u -> u.getUsername().equals(user.getUsername())
+                ))
                 .map(user -> this.modelMapper.map(user, UserViewModel.class).setImageUrl())
                 .collect(Collectors.toList());
     }

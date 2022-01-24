@@ -18,5 +18,13 @@ public interface UserService {
 
     UserViewModel getLoggedInUserProfile();
 
-    List<UserViewModel> getAllUsers();
+    List<UserViewModel> getAllUsersThatAreNotFriends();
+
+    UserViewModel getUserProfile(Long id);
+
+    void addFriend(Long id);
+
+    List<UserViewModel> getFriends();
+
+    void unfriendUser(Long id);
 }

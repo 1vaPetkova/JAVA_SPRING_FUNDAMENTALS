@@ -4,10 +4,12 @@ import com.example.exam_prep_casebook.models.binding.UserLoginBindingModel;
 import com.example.exam_prep_casebook.models.binding.UserRegisterBindingModel;
 import com.example.exam_prep_casebook.models.services.UserServiceModel;
 import com.example.exam_prep_casebook.services.UserService;
+import com.example.exam_prep_casebook.util.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,9 +22,10 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
+    private final CurrentUser currentUser;
+    public UserController(UserService userService, CurrentUser currentUser) {
         this.userService = userService;
+        this.currentUser = currentUser;
     }
 
     @GetMapping("/register")
@@ -106,9 +109,20 @@ public class UserController {
         if (httpSession.getAttribute("user") == null) {
             return "redirect:login";
         }
-        model.addAttribute("loggedInUser",this.userService.getLoggedInUserProfile());
+        model.addAttribute("userProfile", this.userService.getUserProfile(this.currentUser.getId()));
         return "profile";
     }
+
+    @GetMapping("/profile/{id}")
+    public String getUserProfile(@PathVariable Long id,  Model model, HttpSession httpSession) {
+        if (httpSession.getAttribute("user") == null) {
+            return "redirect:login";
+        }
+        model.addAttribute("userProfile", this.userService.getUserProfile(id));
+        return "profile";
+    }
+
+
 
     @GetMapping("/logout")
     public String logout(HttpSession httpSession) {
@@ -117,8 +131,5 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/friends")
-    public String friends() {
-        return "friends";
-    }
+
 }

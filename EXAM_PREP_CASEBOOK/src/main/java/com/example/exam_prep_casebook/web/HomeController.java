@@ -23,7 +23,7 @@ public class HomeController {
         } else {
             modelAndView.setViewName("home");
             modelAndView.addObject("loggedInUsername", this.userService.getLoggedInUserProfile().getUsername());
-            modelAndView.addObject("users", this.userService.getAllUsers());
+            modelAndView.addObject("users", this.userService.getAllUsersThatAreNotFriends());
         }
         return modelAndView;
     }

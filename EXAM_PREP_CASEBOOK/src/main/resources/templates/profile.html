@@ -11,7 +11,7 @@
             <div
                     class="row d-flex justify-content-center">
                 <div class="row d-flex justify-content-center">
-                    <div th:object="${loggedInUser}" class="col-md-6 d-flex flex-column">
+                    <div th:object="${userProfile}" class="col-md-6 d-flex flex-column">
                         <img th:src="*{imageUrl}" class="mx-auto img-thumbnail" width="200" height="200"
                              alt="Profile picture">
                         <h4 th:text="*{username}" class="mx-auto mt-3">Pesho</h4>
