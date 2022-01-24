@@ -4,6 +4,7 @@ import com.example.exam_prep_casebook.models.entities.User;
 import com.example.exam_prep_casebook.models.entities.enums.Gender;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class UserServiceModel {
@@ -15,7 +16,7 @@ public class UserServiceModel {
     private Set<User> friends;
 
     public UserServiceModel() {
-        this.friends = new HashSet<>();
+        this.friends = new LinkedHashSet<>();
     }
 
     public Long getId() {

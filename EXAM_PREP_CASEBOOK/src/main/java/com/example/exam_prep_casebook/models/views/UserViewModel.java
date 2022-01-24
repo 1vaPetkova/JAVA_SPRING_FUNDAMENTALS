@@ -4,6 +4,7 @@ import com.example.exam_prep_casebook.models.entities.User;
 import com.example.exam_prep_casebook.models.entities.enums.Gender;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class UserViewModel {
@@ -15,7 +16,7 @@ public class UserViewModel {
     private Set<User> friends;
 
     public UserViewModel() {
-        this.friends=new HashSet<>();
+        this.friends = new LinkedHashSet<>();
     }
 
     public Long getId() {
@@ -50,7 +51,7 @@ public class UserViewModel {
     }
 
     public UserViewModel setImageUrl() {
-        this.imageUrl = String.format("/png/%s.png",this.gender.name().toLowerCase());
+        this.imageUrl = String.format("/png/%s.png", this.gender.name().toLowerCase());
         return this;
     }
 
