@@ -44,7 +44,7 @@ public class UserViewModel {
     }
 
     public UserViewModel setImageUrl() {
-        this.imageUrl = String.format("png/%s.png",this.gender.name().toLowerCase());
+        this.imageUrl = String.format("/png/%s.png",this.gender.name().toLowerCase());
         return this;
     }
 }

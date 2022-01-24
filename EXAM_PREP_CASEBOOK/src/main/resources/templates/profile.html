@@ -2,19 +2,18 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/common::head"></head>
->
 <body>
 <div class="container-fluid">
     <header th:replace="fragments/common::navbar"></header>
     <main>
         <hr class="my-2">
-        <div
-                th:object="${loggedInUser}"
-                class="container-fluid">
-            <div class="row d-flex justify-content-center">
+        <div class="container-fluid">
+            <div
+                    class="row d-flex justify-content-center">
                 <div class="row d-flex justify-content-center">
-                    <div class="col-md-6 d-flex flex-column">
-                        <img th:src="*{imageUrl}" class="mx-auto img-thumbnail" width="200" height="200">
+                    <div th:object="${loggedInUser}" class="col-md-6 d-flex flex-column">
+                        <img th:src="*{imageUrl}" class="mx-auto img-thumbnail" width="200" height="200"
+                             alt="Profile picture">
                         <h4 th:text="*{username}" class="mx-auto mt-3">Pesho</h4>
                         <h5 th:text="*{gender}" class="mx-auto mt-3">Male</h5>
                     </div>
