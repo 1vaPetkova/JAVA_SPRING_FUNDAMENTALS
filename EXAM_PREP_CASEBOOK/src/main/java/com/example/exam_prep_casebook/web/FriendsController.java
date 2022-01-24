@@ -22,7 +22,7 @@ public class FriendsController {
     @GetMapping()
     public String friends(HttpSession httpSession, Model model) {
         if (httpSession.getAttribute("user") == null) {
-            return "redirect:login";
+            return "redirect:/users/login";
         }
         model.addAttribute("friends",this.userService.getFriends());
         return "friends";
@@ -31,7 +31,7 @@ public class FriendsController {
     @GetMapping("/add/{id}")
     public String addFriend(@PathVariable Long id, HttpSession httpSession) {
         if (httpSession.getAttribute("user") == null) {
-            return "redirect:login";
+            return "redirect:/users/login";
         }
         this.userService.addFriend(id);
         return "redirect:/";
@@ -43,6 +43,6 @@ public class FriendsController {
             return "redirect:login";
         }
         this.userService.unfriendUser(id);
-        return "redirect:friends";
+        return "redirect:/friends";
     }
 }

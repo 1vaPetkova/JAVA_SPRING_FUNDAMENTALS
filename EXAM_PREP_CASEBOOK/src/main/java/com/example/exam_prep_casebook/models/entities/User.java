@@ -5,6 +5,8 @@ import com.example.exam_prep_casebook.models.entities.enums.Gender;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,7 +19,7 @@ public class User {
     private Set<User> friends;
 
     public User() {
-        this.friends = new HashSet<>();
+        this.friends = new LinkedHashSet<>();
     }
 
     @Id
@@ -62,7 +64,7 @@ public class User {
         return this;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     public Set<User> getFriends() {
         return friends;
     }
@@ -70,5 +72,18 @@ public class User {
     public User setFriends(Set<User> friends) {
         this.friends = friends;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

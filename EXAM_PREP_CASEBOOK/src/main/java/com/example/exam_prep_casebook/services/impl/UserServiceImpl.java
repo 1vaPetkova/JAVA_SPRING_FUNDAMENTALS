@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logoutCurrentUser() {
-        this.currentUser.setId(null).setUsername(null).setGender(null).setFriends(new HashSet<>());
+        this.currentUser.setId(null).setUsername(null).setGender(null);
     }
 
     @Override
@@ -70,7 +71,6 @@ public class UserServiceImpl implements UserService {
     public void addFriend(Long id) {
         User userToAdd = this.userRepository
                 .findById(id).orElse(null);
-        this.currentUser.getFriends().add(userToAdd);
         User user = this.userRepository.findById(this.currentUser.getId()).orElse(null);
                user.getFriends().add(userToAdd);
                this.userRepository.save(user);
@@ -89,10 +89,13 @@ public class UserServiceImpl implements UserService {
     public void unfriendUser(Long id) {
         User userToUnfriend = this.userRepository
                 .findById(id).orElse(null);
-        this.currentUser.getFriends().remove(userToUnfriend);
-        User user = this.userRepository.findById(this.currentUser.getId()).orElse(null);
-        user.getFriends().remove(userToUnfriend);
+        User user = this.userRepository
+                .findById(this.currentUser.getId()).orElse(null);
+
+       user.getFriends().remove(userToUnfriend);
         this.userRepository.save(user);
+        System.out.println();
+
     }
 
     @Override

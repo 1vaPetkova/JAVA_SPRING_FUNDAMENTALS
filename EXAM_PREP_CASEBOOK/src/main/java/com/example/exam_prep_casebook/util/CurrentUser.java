@@ -14,10 +14,8 @@ public class CurrentUser {
     private String username;
     private Gender gender;
     private String imageUrl;
-    private Set<User> friends;
 
     public CurrentUser() {
-        this.friends = new HashSet<>();
     }
 
     public Long getId() {
@@ -61,12 +59,4 @@ public class CurrentUser {
         return this;
     }
 
-    public Set<User> getFriends() {
-        return friends;
-    }
-
-    public CurrentUser setFriends(Set<User> friends) {
-        this.friends = friends;
-        return this;
-    }
 }
