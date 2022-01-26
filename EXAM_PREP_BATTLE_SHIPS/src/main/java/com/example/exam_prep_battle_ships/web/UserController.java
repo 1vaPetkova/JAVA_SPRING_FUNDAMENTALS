@@ -4,6 +4,7 @@ import com.example.exam_prep_battle_ships.models.binding.UserLoginBindingModel;
 import com.example.exam_prep_battle_ships.models.binding.UserRegisterBindingModel;
 import com.example.exam_prep_battle_ships.models.services.UserServiceModel;
 import com.example.exam_prep_battle_ships.services.UserService;
+import com.example.exam_prep_battle_ships.util.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -93,6 +94,15 @@ public class UserController {
             return "redirect:login";
         }
         httpSession.setAttribute("user", userServiceModel);
+        this.userService.loginCurrentUser(userServiceModel);
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.invalidate();
+        this.userService.logoutCurrentUser();
         return "redirect:/";
     }
 }

@@ -46,7 +46,7 @@
                     <input
                             th:field="*{price}"
                             th:errorclass="bg-danger"
-                            name="price"  id="price" type="number" class="form-control" placeholder="Price">
+                            name="price" id="price" type="number" class="form-control" placeholder="Price">
                     <small
                             th:if="${#fields.hasErrors('price')}"
                             th:errors="*{price}"
@@ -89,7 +89,8 @@
             <div class="form-row m-5">
                 <div class="col">
                     <label for="artist">Artist</label>
-                    <select name="artist" id="artist" class="custom-select">
+                    <select th:errorclass="bg-danger"
+                            name="artist" id="artist" class="custom-select">
                         <option value="" selected>Select Artist</option>
                         <option
                                 th:each="artist : ${T(com.example.exam_prep_music_db.models.entities.enums.ArtistNameEnum).values()}"
@@ -105,7 +106,8 @@
                 </div>
                 <div class="col">
                     <label for="genre">Genre</label>
-                    <select name="genre" id="genre" class="custom-select">
+                    <select th:errorclass="bg-danger"
+                            name="genre" id="genre" class="custom-select">
                         <option
                                 value="" selected>Select Genre
                         </option>
@@ -113,7 +115,6 @@
                                 th:each="genre : ${T(com.example.exam_prep_music_db.models.entities.enums.GenreEnum).values()}"
                                 th:value="${genre}"
                                 th:text="${genre}"
-                                th:erroclass="bg-danger"
                         >Select genre
                         </option>
                     </select>
