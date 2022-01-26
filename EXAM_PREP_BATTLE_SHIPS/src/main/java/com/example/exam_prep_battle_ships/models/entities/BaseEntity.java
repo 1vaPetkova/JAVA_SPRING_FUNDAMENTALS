@@ -1,4 +1,4 @@
-package com.example.exam_prep_battle_ships.domain.entities;
+package com.example.exam_prep_battle_ships.models.entities;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -1,6 +1,6 @@
-package com.example.exam_prep_battle_ships.domain.entities;
+package com.example.exam_prep_battle_ships.models.entities;
 
-import com.example.exam_prep_battle_ships.domain.entities.enums.CategoryEnum;
+import com.example.exam_prep_battle_ships.models.entities.enums.CategoryEnum;
 
 import javax.persistence.*;
 
@@ -12,6 +12,11 @@ public class Category extends BaseEntity{
     private String description;
 
     public Category() {
+    }
+
+    public Category(CategoryEnum name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     @Column(unique = true, nullable = false)
