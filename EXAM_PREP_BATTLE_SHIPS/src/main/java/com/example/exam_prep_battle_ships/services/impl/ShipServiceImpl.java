@@ -32,10 +32,10 @@ public class ShipServiceImpl implements ShipService {
         try {
             ShipServiceModel shipServiceModel = this.modelMapper
                     .map(shipAddBindingModel, ShipServiceModel.class);
-            this.shipRepository.save(this.modelMapper.map(shipServiceModel, Ship.class)
-                    .setUser(this.userService.findUserById(this.currentUser.getId())))
+            this.shipRepository.save( this.modelMapper.map(shipServiceModel, Ship.class)
+                    .setUser(this.userService.findUserById(this.currentUser.getId()))
                     .setCategory(this.categoryService
-                            .findByCategoryEnum(shipServiceModel.getCategory()));
+                            .findByCategoryEnum(shipServiceModel.getCategory())));
         } catch (Exception e) {
             return false;
         }
