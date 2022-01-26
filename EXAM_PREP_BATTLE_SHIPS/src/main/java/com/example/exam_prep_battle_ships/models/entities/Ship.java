@@ -1,8 +1,4 @@
-package com.example.exam_prep_battle_ships.domain.entities.enums;
-
-import com.example.exam_prep_battle_ships.domain.entities.BaseEntity;
-import com.example.exam_prep_battle_ships.domain.entities.Category;
-import com.example.exam_prep_battle_ships.domain.entities.User;
+package com.example.exam_prep_battle_ships.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,7 +61,6 @@ public class Ship extends BaseEntity {
     }
 
     @ManyToOne
-    @Column(nullable = false)
     public Category getCategory() {
         return category;
     }
@@ -76,7 +71,6 @@ public class Ship extends BaseEntity {
     }
 
     @ManyToOne
-    @Column(nullable = false)
     public User getUser() {
         return user;
     }
