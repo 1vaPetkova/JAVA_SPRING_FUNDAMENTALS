@@ -3,7 +3,7 @@ package com.example.java_spring_fund_lab_01;
 import com.example.java_spring_fund_lab_01.models.entities.*;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Category;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
-import com.example.java_spring_fund_lab_01.models.entities.enums.RoleEnum;
+import com.example.java_spring_fund_lab_01.models.entities.enums.UserRoleEnum;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
 import com.example.java_spring_fund_lab_01.repositories.*;
 import org.springframework.boot.CommandLineRunner;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 
@@ -119,26 +118,26 @@ public class DBInit implements CommandLineRunner {
                 setLastName("Peshov").
                 setUsername("admin").
                 setPassword(passwordEncoder.encode("topsecret")).
-                setRoles(Set.of(this.userRolesRepository.findByRole(RoleEnum.ADMIN),
-                        this.userRolesRepository.findByRole(RoleEnum.USER)));
+                setRoles(Set.of(this.userRolesRepository.findByRole(UserRoleEnum.ADMIN),
+                        this.userRolesRepository.findByRole(UserRoleEnum.USER)));
 
         User kiro = new User().
                 setFirstName("Kiro").
                 setLastName("Kirov").
                 setUsername("kireto").
                 setPassword(passwordEncoder.encode("topsecret")).
-                setRoles(Set.of(this.userRolesRepository.findByRole(RoleEnum.USER)));
+                setRoles(Set.of(this.userRolesRepository.findByRole(UserRoleEnum.USER)));
         this.userRepository.saveAll(List.of(admin, kiro));
     }
 
     private void initRoles() {
-        UserRole adminRole = new UserRole().setRole(RoleEnum.ADMIN);
-        if (this.userRolesRepository.findByRole(RoleEnum.ADMIN) == null) {
+        UserRole adminRole = new UserRole().setRole(UserRoleEnum.ADMIN);
+        if (this.userRolesRepository.findByRole(UserRoleEnum.ADMIN) == null) {
             this.userRolesRepository.save(adminRole);
         }
 
-        UserRole userRole = new UserRole().setRole(RoleEnum.USER);
-        if (this.userRolesRepository.findByRole(RoleEnum.USER) == null) {
+        UserRole userRole = new UserRole().setRole(UserRoleEnum.USER);
+        if (this.userRolesRepository.findByRole(UserRoleEnum.USER) == null) {
             this.userRolesRepository.save(userRole);
         }
     }

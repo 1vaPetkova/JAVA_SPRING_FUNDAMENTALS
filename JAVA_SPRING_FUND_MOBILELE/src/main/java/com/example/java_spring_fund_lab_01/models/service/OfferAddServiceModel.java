@@ -8,8 +8,9 @@ import com.example.java_spring_fund_lab_01.models.validation.YearInPastOrPresent
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
-public class OfferServiceModel {
+public class OfferAddServiceModel {
 
+    private Long id;
     private Long modelId;
     private BigDecimal price;
     private Engine engine;
@@ -20,11 +21,21 @@ public class OfferServiceModel {
     private String imageUrl;
 
     @NotNull
+    public Long getId() {
+        return id;
+    }
+
+    public OfferAddServiceModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    @NotNull
     public Long getModelId() {
         return modelId;
     }
 
-    public OfferServiceModel setModelId(Long modelId) {
+    public OfferAddServiceModel setModelId(Long modelId) {
         this.modelId = modelId;
         return this;
     }
@@ -35,7 +46,7 @@ public class OfferServiceModel {
         return price;
     }
 
-    public OfferServiceModel setPrice(BigDecimal price) {
+    public OfferAddServiceModel setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -45,7 +56,7 @@ public class OfferServiceModel {
         return engine;
     }
 
-    public OfferServiceModel setEngine(Engine engine) {
+    public OfferAddServiceModel setEngine(Engine engine) {
         this.engine = engine;
         return this;
     }
@@ -56,7 +67,7 @@ public class OfferServiceModel {
         return transmission;
     }
 
-    public OfferServiceModel setTransmission(Transmission transmission) {
+    public OfferAddServiceModel setTransmission(Transmission transmission) {
         this.transmission = transmission;
         return this;
     }
@@ -67,7 +78,7 @@ public class OfferServiceModel {
         return year;
     }
 
-    public OfferServiceModel setYear(Integer year) {
+    public OfferAddServiceModel setYear(Integer year) {
         this.year = year;
         return this;
     }
@@ -78,7 +89,7 @@ public class OfferServiceModel {
         return mileage;
     }
 
-    public OfferServiceModel setMileage(Integer mileage) {
+    public OfferAddServiceModel setMileage(Integer mileage) {
         this.mileage = mileage;
         return this;
     }
@@ -89,7 +100,7 @@ public class OfferServiceModel {
         return description;
     }
 
-    public OfferServiceModel setDescription(String description) {
+    public OfferAddServiceModel setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -99,7 +110,7 @@ public class OfferServiceModel {
         return imageUrl;
     }
 
-    public OfferServiceModel setImageUrl(String imageUrl) {
+    public OfferAddServiceModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }

@@ -3,6 +3,7 @@ package com.example.java_spring_fund_lab_01.services.impl;
 import com.example.java_spring_fund_lab_01.models.entities.Brand;
 import com.example.java_spring_fund_lab_01.models.view.BrandViewModel;
 import com.example.java_spring_fund_lab_01.models.view.ModelViewModel;
+import com.example.java_spring_fund_lab_01.repositories.BrandRepository;
 import com.example.java_spring_fund_lab_01.repositories.ModelRepository;
 import com.example.java_spring_fund_lab_01.services.BrandService;
 import org.modelmapper.ModelMapper;
@@ -13,12 +14,24 @@ import java.util.List;
 
 @Service
 public class BrandServiceImpl implements BrandService {
+
+    private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
 
-    public BrandServiceImpl(ModelRepository modelRepository, ModelMapper modelMapper) {
+    public BrandServiceImpl(BrandRepository brandRepository, ModelRepository modelRepository, ModelMapper modelMapper) {
+        this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
         this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public void initializeBrand() {
+        if (this.brandRepository.count() == 0) {
+            Brand ford = new Brand();
+            ford.setName("Ford");
+            this.brandRepository.save(ford);
+        }
     }
 
     @Override
