@@ -1,7 +1,7 @@
 package com.example.java_spring_fund_lab_01.models.entities;
 
-import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
-import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
+import com.example.java_spring_fund_lab_01.models.entities.enums.EngineEnum;
+import com.example.java_spring_fund_lab_01.models.entities.enums.TransmissionEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,11 +11,11 @@ import java.math.BigDecimal;
 public class Offer extends BaseEntity {
 
     private String description;
-    private Engine engine;
+    private EngineEnum engine;
     private String imageUrl;
     private Integer mileage;
     private BigDecimal price;
-    private Transmission transmission;
+    private TransmissionEnum transmission;
     private Integer year;
     private Model model;
     private User seller;
@@ -27,7 +27,7 @@ public class Offer extends BaseEntity {
 
     @Column
     @Enumerated(EnumType.ORDINAL)
-    public Engine getEngine() {
+    public EngineEnum getEngine() {
         return engine;
     }
 
@@ -48,7 +48,7 @@ public class Offer extends BaseEntity {
 
     @Column
     @Enumerated(EnumType.ORDINAL)
-    public Transmission getTransmission() {
+    public TransmissionEnum getTransmission() {
         return transmission;
     }
 
@@ -77,7 +77,7 @@ public class Offer extends BaseEntity {
         return this;
     }
 
-    public Offer setEngine(Engine engine) {
+    public Offer setEngine(EngineEnum engine) {
         this.engine = engine;
         return this;
     }
@@ -97,7 +97,7 @@ public class Offer extends BaseEntity {
         return this;
     }
 
-    public Offer setTransmission(Transmission transmission) {
+    public Offer setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
         return this;
     }

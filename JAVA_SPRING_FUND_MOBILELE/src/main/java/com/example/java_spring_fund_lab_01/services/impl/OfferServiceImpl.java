@@ -1,12 +1,13 @@
 package com.example.java_spring_fund_lab_01.services.impl;
 
+import com.example.java_spring_fund_lab_01.models.binding.OfferAddBindingModel;
 import com.example.java_spring_fund_lab_01.models.entities.Offer;
-import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
-import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
+import com.example.java_spring_fund_lab_01.models.entities.enums.EngineEnum;
+import com.example.java_spring_fund_lab_01.models.entities.enums.TransmissionEnum;
 import com.example.java_spring_fund_lab_01.models.service.OfferAddServiceModel;
+import com.example.java_spring_fund_lab_01.models.service.OfferUpdateServiceModel;
 import com.example.java_spring_fund_lab_01.models.view.OfferDetailsView;
 import com.example.java_spring_fund_lab_01.models.view.OfferSummaryView;
-import com.example.java_spring_fund_lab_01.models.view.OfferSummaryViewModel;
 import com.example.java_spring_fund_lab_01.repositories.ModelRepository;
 import com.example.java_spring_fund_lab_01.repositories.OfferRepository;
 import com.example.java_spring_fund_lab_01.repositories.UserRepository;
@@ -40,8 +41,8 @@ public class OfferServiceImpl implements OfferService {
             Offer offer1 = new Offer();
             offer1
                     .setModel(modelRepository.findById(1L).orElse(null))
-                    .setEngine(Engine.GASOLINE)
-                    .setTransmission(Transmission.MANUAL)
+                    .setEngine(EngineEnum.GASOLINE)
+                    .setTransmission(TransmissionEnum.MANUAL)
                     .setMileage(22500)
                     .setImageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXp1KBpDKgYs6VqndkBpX8twjPOZbHV86yg&usqp=CAU")
                     .setPrice(new BigDecimal(14300))
@@ -53,8 +54,8 @@ public class OfferServiceImpl implements OfferService {
             Offer offer2 = new Offer();
             offer2
                     .setModel(modelRepository.findById(1L).orElse(null))
-                    .setEngine(Engine.DIESEL)
-                    .setTransmission(Transmission.AUTOMATIC)
+                    .setEngine(EngineEnum.DIESEL)
+                    .setTransmission(TransmissionEnum.AUTOMATIC)
                     .setMileage(209000)
                     .setPrice(new BigDecimal(5500))
                     .setImageUrl(
@@ -103,7 +104,7 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public OfferAddServiceModel addOffer(OfferAddBindModel offerAddBindModel, String ownerId) {
+    public OfferAddServiceModel addOffer(OfferAddBindingModel offerAddBindModel, String ownerId) {
         return null;
     }
 

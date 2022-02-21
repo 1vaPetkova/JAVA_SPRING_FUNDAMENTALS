@@ -1,7 +1,7 @@
 package com.example.java_spring_fund_lab_01.web;
 
-import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
-import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
+import com.example.java_spring_fund_lab_01.models.entities.enums.EngineEnum;
+import com.example.java_spring_fund_lab_01.models.entities.enums.TransmissionEnum;
 import com.example.java_spring_fund_lab_01.models.service.OfferAddServiceModel;
 import com.example.java_spring_fund_lab_01.services.BrandService;
 import com.example.java_spring_fund_lab_01.services.OfferService;
@@ -32,8 +32,8 @@ public class OffersController {
     @GetMapping("/add")
     public String newOffer(Model model) {
         model.addAttribute("brands", brandService.getAllBrands());
-        model.addAttribute("engines", Engine.values());
-        model.addAttribute("transmissions", Transmission.values());
+        model.addAttribute("engines", EngineEnum.values());
+        model.addAttribute("transmissions", TransmissionEnum.values());
         return "offer-add";
     }
 
