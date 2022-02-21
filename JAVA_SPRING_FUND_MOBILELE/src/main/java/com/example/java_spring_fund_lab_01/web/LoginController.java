@@ -42,14 +42,14 @@ public class LoginController {
             );
             return "redirect:/users/login";
         }
-        if (userService.isAuthenticated(userModel.getUsername(), userModel.getPassword())) {
-            this.userService.loginUser(userModel.getUsername());
-            return "redirect:/";
-        } else {
-            redirectAttributes.addFlashAttribute("userModel", userModel);
-            redirectAttributes.addFlashAttribute("notFound", true);
-            return "redirect:/users/login";
-        }
+//        if (userService.isAuthenticated(userModel.getUsername(), userModel.getPassword())) {
+//            this.userService.loginUser(userModel.getUsername());
+//            return "redirect:/";
+//        } else {
+//            redirectAttributes.addFlashAttribute("userModel", userModel);
+//            redirectAttributes.addFlashAttribute("notFound", true);
+//            return "redirect:/users/login";
+//        }
     }
 
     @PostMapping("/users/logout")
