@@ -50,11 +50,12 @@ public class LoginController {
 //            redirectAttributes.addFlashAttribute("notFound", true);
 //            return "redirect:/users/login";
 //        }
+        return null;
     }
 
     @PostMapping("/users/logout")
     public String logout() {
-        this.userService.logoutCurrentUser();
+      //  this.userService.logoutCurrentUser();
         return "redirect:/";
     }
 }
