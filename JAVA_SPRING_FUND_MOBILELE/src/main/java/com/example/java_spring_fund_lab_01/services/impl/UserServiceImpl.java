@@ -93,20 +93,20 @@ public class UserServiceImpl implements UserService {
         newUser = userRepository.save(newUser);
 
         // this is the Spring representation of a user
-        UserDetails principal = mobileleUserService.loadUserByUsername(newUser.getUsername());
-        Authentication authentication = new UsernamePasswordAuthenticationToken(
-                principal,
-                newUser.getPassword(),
-                principal.getAuthorities()
-        );
-
-        SecurityContextHolder.
-                getContext().
-                setAuthentication(authentication);
+//        UserDetails principal = mobileleUserService.loadUserByUsername(newUser.getUsername());
+//        Authentication authentication = new UsernamePasswordAuthenticationToken(
+//                principal,
+//                newUser.getPassword(),
+//                principal.getAuthorities()
+//        );
+//
+//        SecurityContextHolder.
+//                getContext().
+//                setAuthentication(authentication);
     }
 
     public boolean isUserNameFree(String username) {
-        return userRepository.findByUsernameIgnoreCase(username).isEmpty();
+        return this.userRepository.findByUsernameIgnoreCase(username).isEmpty();
     }
 
 }

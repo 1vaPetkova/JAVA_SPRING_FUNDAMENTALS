@@ -2,7 +2,7 @@ package com.example.java_spring_fund_lab_01.services.impl;
 
 import com.example.java_spring_fund_lab_01.models.entities.Brand;
 import com.example.java_spring_fund_lab_01.models.entities.Model;
-import com.example.java_spring_fund_lab_01.models.entities.enums.Category;
+import com.example.java_spring_fund_lab_01.models.entities.enums.CategoryEnum;
 import com.example.java_spring_fund_lab_01.repositories.BrandRepository;
 import com.example.java_spring_fund_lab_01.repositories.ModelRepository;
 import com.example.java_spring_fund_lab_01.services.ModelService;
@@ -29,7 +29,7 @@ public class ModelServiceImpl implements ModelService {
             Model fiesta = new Model();
             fiesta
                     .setName("Fiesta")
-                    .setCategory(Category.CAR)
+                    .setCategory(CategoryEnum.CAR)
                     .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/2017_Ford_Fiesta_Zetec_Turbo_1.0_Front.jpg/1920px-2017_Ford_Fiesta_Zetec_Turbo_1.0_Front.jpg")
                     .setStartYear(1976)
                     .setBrand(ford);
@@ -37,7 +37,7 @@ public class ModelServiceImpl implements ModelService {
             Model escort = new Model();
             escort
                     .setName("Escort")
-                    .setCategory(Category.CAR)
+                    .setCategory(CategoryEnum.CAR)
                     .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Ford_Escort_RS2000_MkI.jpg/420px-Ford_Escort_RS2000_MkI.jpg")
                     .setStartYear(1967)
                     .setEndYear(2004)

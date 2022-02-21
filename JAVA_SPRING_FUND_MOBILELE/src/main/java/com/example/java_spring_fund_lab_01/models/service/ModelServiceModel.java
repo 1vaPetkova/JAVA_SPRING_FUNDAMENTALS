@@ -1,8 +1,9 @@
-package com.example.java_spring_fund_lab_01.models.view;
+package com.example.java_spring_fund_lab_01.models.service;
+
 
 import com.example.java_spring_fund_lab_01.models.entities.enums.CategoryEnum;
 
-public class ModelViewModel {
+public class ModelServiceModel {
     private Long id;
     private String name;
     private CategoryEnum category;
@@ -10,64 +11,57 @@ public class ModelViewModel {
     private Integer startYear;
     private Integer endYear;
 
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public ModelServiceModel setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public ModelServiceModel setName(String name) {
         this.name = name;
+        return this;
     }
 
     public CategoryEnum getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEnum category) {
+    public ModelServiceModel setCategory(CategoryEnum category) {
         this.category = category;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public ModelServiceModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public Integer getStartYear() {
         return startYear;
     }
 
-    public void setStartYear(Integer startYear) {
+    public ModelServiceModel setStartYear(Integer startYear) {
         this.startYear = startYear;
+        return this;
     }
 
     public Integer getEndYear() {
         return endYear;
     }
 
-    public void setEndYear(Integer endYear) {
+    public ModelServiceModel setEndYear(Integer endYear) {
         this.endYear = endYear;
-    }
-
-    @Override
-    public String toString() {
-        return "ModelViewDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", category=" + category +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", startYear=" + startYear +
-                ", endYear=" + endYear +
-                '}';
+        return this;
     }
 }

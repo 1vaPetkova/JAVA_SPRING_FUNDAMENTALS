@@ -1,16 +1,16 @@
 package com.example.java_spring_fund_lab_01.models.view;
 
-import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
-import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
+import com.example.java_spring_fund_lab_01.models.entities.enums.EngineEnum;
+import com.example.java_spring_fund_lab_01.models.entities.enums.TransmissionEnum;
 
 public class OfferSummaryView {
     private long id;
     private String description;
-    private Engine engine;
+    private EngineEnum engine;
     private String imageUrl;
     private int mileage;
     private int price;
-    private Transmission transmission;
+    private TransmissionEnum transmission;
     private int year;
     private String model;
     private String brand;
@@ -42,11 +42,11 @@ public class OfferSummaryView {
         return this;
     }
 
-    public Engine getEngine() {
+    public EngineEnum getEngine() {
         return engine;
     }
 
-    public OfferSummaryView setEngine(Engine engine) {
+    public OfferSummaryView setEngine(EngineEnum engine) {
         this.engine = engine;
         return this;
     }
@@ -78,12 +78,12 @@ public class OfferSummaryView {
         return this;
     }
 
-    public Transmission getTransmission() {
+    public TransmissionEnum getTransmission() {
         return transmission;
     }
 
     public OfferSummaryView setTransmission(
-            Transmission transmission) {
+            TransmissionEnum transmission) {
         this.transmission = transmission;
         return this;
     }
