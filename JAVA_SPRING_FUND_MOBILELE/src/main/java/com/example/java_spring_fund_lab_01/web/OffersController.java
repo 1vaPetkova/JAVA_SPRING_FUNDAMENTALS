@@ -2,7 +2,7 @@ package com.example.java_spring_fund_lab_01.web;
 
 import com.example.java_spring_fund_lab_01.models.entities.enums.Engine;
 import com.example.java_spring_fund_lab_01.models.entities.enums.Transmission;
-import com.example.java_spring_fund_lab_01.models.service.OfferServiceModel;
+import com.example.java_spring_fund_lab_01.models.service.OfferAddServiceModel;
 import com.example.java_spring_fund_lab_01.services.BrandService;
 import com.example.java_spring_fund_lab_01.services.OfferService;
 import org.springframework.stereotype.Controller;
@@ -25,8 +25,8 @@ public class OffersController {
     }
 
     @ModelAttribute("offerModel")
-    public OfferServiceModel offerModel() {
-        return new OfferServiceModel();
+    public OfferAddServiceModel offerModel() {
+        return new OfferAddServiceModel();
     }
 
     @GetMapping("/add")
@@ -38,7 +38,7 @@ public class OffersController {
     }
 
     @PostMapping("/add")
-    public String addOffer(@Valid @ModelAttribute OfferServiceModel offerModel, BindingResult bindingResult,
+    public String addOffer(@Valid @ModelAttribute OfferAddServiceModel offerModel, BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("offerModel", offerModel);

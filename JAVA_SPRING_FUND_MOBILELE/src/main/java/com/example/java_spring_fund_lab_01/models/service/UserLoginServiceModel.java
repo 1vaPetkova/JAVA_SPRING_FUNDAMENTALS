@@ -5,14 +5,13 @@ import javax.validation.constraints.Size;
 
 public class UserLoginServiceModel {
 
-    @NotBlank
-    @Size(min = 2)
+
     private String username;
 
-    @NotBlank
-    @Size(min = 3)
-    private String password;
+    private String rawPassword;
 
+    @NotBlank
+    @Size(min = 2)
     public String getUsername() {
         return username;
     }
@@ -22,12 +21,14 @@ public class UserLoginServiceModel {
         return this;
     }
 
-    public String getPassword() {
-        return password;
+    @NotBlank
+    @Size(min = 3)
+    public String getRawPassword() {
+        return rawPassword;
     }
 
-    public UserLoginServiceModel setPassword(String password) {
-        this.password = password;
+    public UserLoginServiceModel setRawPassword(String rawPassword) {
+        this.rawPassword = rawPassword;
         return this;
     }
 }

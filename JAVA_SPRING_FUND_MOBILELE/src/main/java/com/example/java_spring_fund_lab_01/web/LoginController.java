@@ -1,7 +1,6 @@
 package com.example.java_spring_fund_lab_01.web;
 
 import com.example.java_spring_fund_lab_01.models.service.UserLoginServiceModel;
-import com.example.java_spring_fund_lab_01.security.CurrentUser;
 import com.example.java_spring_fund_lab_01.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
