@@ -52,32 +52,33 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public void initializeOffers() {
         if (offerRepository.count() == 0) {
-            Offer offer1 = new Offer()
+            Offer offer1 = new Offer();
+            offer1
                     .setModel(modelRepository.findById(1L).orElse(null))
                     .setEngine(Engine.GASOLINE)
                     .setTransmission(Transmission.MANUAL)
                     .setMileage(22500)
+                    .setImageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXp1KBpDKgYs6VqndkBpX8twjPOZbHV86yg&usqp=CAU")
                     .setPrice(new BigDecimal(14300))
                     .setYear(2019)
                     .setDescription("Used, but well services and in good condition.")
                     .setSeller(userRepository.findByUsername("pesho")
-                            .orElse(null)) // or currentUser.getUserName()
-                    .setImageUrl(
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXp1KBpDKgYs6VqndkBpX8twjPOZbHV86yg&usqp=CAU");
+                            .orElse(null));// or currentUser.getUserName()
 
-            Offer offer2 = new Offer()
+            Offer offer2 = new Offer();
+            offer2
                     .setModel(modelRepository.findById(1L).orElse(null))
                     .setEngine(Engine.DIESEL)
                     .setTransmission(Transmission.AUTOMATIC)
                     .setMileage(209000)
                     .setPrice(new BigDecimal(5500))
+                    .setImageUrl(
+                            "https://www.picclickimg.com/d/l400/pict/283362908243_/FORD-ESCORT-MK5-16L-DOHC-16v-ZETEC.jpg")
                     .setYear(2000)
                     .setDescription("After full maintenance, insurance, new tires...")
                     .setSeller(userRepository.findByUsername("admin")
-                            .orElse(null)) // or currentUser.getUserName()
-                    .setImageUrl(
-                            "https://www.picclickimg.com/d/l400/pict/283362908243_/FORD-ESCORT-MK5-16L-DOHC-16v-ZETEC.jpg");
-
+                            .orElse(null)); // or currentUser.getUserName()
+            
             offerRepository.saveAll(List.of(offer1, offer2));
         }
     }
