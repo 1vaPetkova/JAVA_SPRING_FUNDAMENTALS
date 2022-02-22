@@ -1,6 +1,7 @@
 package com.example.java_spring_fund_lab_01.config;
 
-import bg.softuni.mobilelele.service.OfferService;
+
+import com.example.java_spring_fund_lab_01.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

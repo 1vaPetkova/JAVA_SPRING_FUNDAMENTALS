@@ -1,6 +1,7 @@
 package com.example.java_spring_fund_lab_01.config;
 
-import bg.softuni.mobilelele.service.OfferService;
+
+import com.example.java_spring_fund_lab_01.service.OfferService;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;

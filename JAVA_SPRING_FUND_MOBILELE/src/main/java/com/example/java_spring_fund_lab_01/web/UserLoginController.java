@@ -15,16 +15,16 @@ public class UserLoginController {
     return "auth-login";
   }
 
-//  @PostMapping("/users/login-error")
-//  public String failedLogin(
-//      @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
-//      String userName,
-//      RedirectAttributes attributes
-//  ) {
-//
-//    attributes.addFlashAttribute("bad_credentials", true);
-//    attributes.addFlashAttribute("username", userName);
-//
-//    return "redirect:/users/login";
-//  }
+  @PostMapping("/users/login-error")
+  public String failedLogin(
+      @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
+      String userName,
+      RedirectAttributes attributes
+  ) {
+
+    attributes.addFlashAttribute("bad_credentials", true);
+    attributes.addFlashAttribute("username", userName);
+
+    return "redirect:/users/login";
+  }
 }

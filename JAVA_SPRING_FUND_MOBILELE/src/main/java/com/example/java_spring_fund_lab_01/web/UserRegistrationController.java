@@ -1,8 +1,9 @@
 package com.example.java_spring_fund_lab_01.web;
 
-import com.example.java_spring_fund_lab_01.models.binding.UserRegistrationBindingModel;
-import com.example.java_spring_fund_lab_01.models.service.UserRegistrationServiceModel;
-import com.example.java_spring_fund_lab_01.services.UserService;
+
+import com.example.java_spring_fund_lab_01.model.binding.UserRegistrationBindingModel;
+import com.example.java_spring_fund_lab_01.model.service.UserRegistrationServiceModel;
+import com.example.java_spring_fund_lab_01.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
