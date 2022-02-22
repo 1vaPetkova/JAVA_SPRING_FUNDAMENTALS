@@ -1,9 +1,16 @@
 package com.example.java_spring_fund_lab_01.model.entity;
 
-import bg.softuni.mobilelele.model.entity.enums.UserRoleEnum;
+
 import com.example.java_spring_fund_lab_01.model.entity.enums.UserRoleEnum;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "roles")

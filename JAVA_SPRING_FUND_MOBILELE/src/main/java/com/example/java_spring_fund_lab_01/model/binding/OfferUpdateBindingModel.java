@@ -1,5 +1,6 @@
 package com.example.java_spring_fund_lab_01.model.binding;
 
+
 import com.example.java_spring_fund_lab_01.model.entity.enums.EngineEnum;
 import com.example.java_spring_fund_lab_01.model.entity.enums.TransmissionEnum;
 

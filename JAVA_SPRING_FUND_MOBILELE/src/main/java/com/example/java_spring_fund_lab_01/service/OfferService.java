@@ -14,13 +14,11 @@ public interface OfferService {
 
   List<OfferSummaryView> getAllOffers();
 
-  OfferDetailsView findById(Long id, String currentUser);
+  OfferDetailsView findById(Long id);
 
   void deleteOffer(Long id);
 
-  boolean isOwner(String userName, Long id);
-
   void updateOffer(OfferUpdateServiceModel offerModel);
 
-  OfferAddServiceModel addOffer(OfferAddBindModel offerAddBindModel, String ownerId);
+  OfferAddServiceModel addOffer(OfferAddBindModel offerAddBindModel);
 }

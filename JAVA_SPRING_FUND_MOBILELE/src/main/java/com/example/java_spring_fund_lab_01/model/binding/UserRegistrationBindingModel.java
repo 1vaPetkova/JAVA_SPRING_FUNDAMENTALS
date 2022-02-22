@@ -1,6 +1,8 @@
 package com.example.java_spring_fund_lab_01.model.binding;
 
+
 import com.example.java_spring_fund_lab_01.model.validator.UniqueUserName;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

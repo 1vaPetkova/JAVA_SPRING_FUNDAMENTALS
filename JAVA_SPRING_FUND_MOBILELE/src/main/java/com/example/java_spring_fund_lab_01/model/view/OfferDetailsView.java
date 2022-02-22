@@ -1,5 +1,7 @@
 package com.example.java_spring_fund_lab_01.model.view;
 
+
+
 import com.example.java_spring_fund_lab_01.model.entity.enums.EngineEnum;
 import com.example.java_spring_fund_lab_01.model.entity.enums.TransmissionEnum;
 
@@ -32,18 +34,7 @@ public class OfferDetailsView {
 
     private Long id;
 
-    private boolean canDelete;
-
     public OfferDetailsView() {
-    }
-
-    public boolean isCanDelete() {
-        return canDelete;
-    }
-
-    public OfferDetailsView setCanDelete(boolean canDelete) {
-        this.canDelete = canDelete;
-        return this;
     }
 
     public String getBrand() {

@@ -1,6 +1,9 @@
 package com.example.java_spring_fund_lab_01.service.impl;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.example.java_spring_fund_lab_01.model.entity.BrandEntity;
 import com.example.java_spring_fund_lab_01.model.entity.ModelEntity;
 import com.example.java_spring_fund_lab_01.model.view.BrandViewModel;
@@ -9,9 +12,6 @@ import com.example.java_spring_fund_lab_01.repository.BrandRepository;
 import com.example.java_spring_fund_lab_01.service.BrandService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BrandServiceImpl implements BrandService {

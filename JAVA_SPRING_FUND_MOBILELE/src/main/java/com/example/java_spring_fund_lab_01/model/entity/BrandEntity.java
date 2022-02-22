@@ -1,7 +1,8 @@
 package com.example.java_spring_fund_lab_01.model.entity;
 
-import javax.persistence.*;
+import java.time.Instant;
 import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "brands")

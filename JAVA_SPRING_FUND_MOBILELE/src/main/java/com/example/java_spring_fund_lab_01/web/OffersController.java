@@ -1,5 +1,8 @@
 package com.example.java_spring_fund_lab_01.web;
 
+
+import javax.validation.Valid;
+
 import com.example.java_spring_fund_lab_01.model.binding.OfferAddBindModel;
 import com.example.java_spring_fund_lab_01.model.binding.OfferUpdateBindingModel;
 import com.example.java_spring_fund_lab_01.model.entity.enums.EngineEnum;
@@ -9,18 +12,16 @@ import com.example.java_spring_fund_lab_01.model.service.OfferUpdateServiceModel
 import com.example.java_spring_fund_lab_01.model.view.OfferDetailsView;
 import com.example.java_spring_fund_lab_01.service.BrandService;
 import com.example.java_spring_fund_lab_01.service.OfferService;
-import com.example.java_spring_fund_lab_01.service.impl.MobileleUser;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 public class OffersController {
@@ -45,24 +46,14 @@ public class OffersController {
 
     @GetMapping("/offers/{id}/details")
     public String showOffer(
-            @PathVariable Long id, Model model,
-            Principal principal) {
-        model.addAttribute("offer", this.offerService.findById(id, principal.getName()));
+            @PathVariable Long id, Model model) {
+        model.addAttribute("offer", this.offerService.findById(id));
         return "details";
     }
 
     // DELETE
-    @PreAuthorize("isOwner(#id)")
-    //@PreAuthorize("@offerServiceImpl.isOwner(#principal.name, #id)")
     @DeleteMapping("/offers/{id}")
-    public String deleteOffer(@PathVariable Long id,
-        Principal principal) {
-
-        // Most naive approach - check explicitly if the current user is an
-        //owner and throw exception if this is not the case.
-//        if (!offerService.isOwner(principal.getName(), id)) {
-//            throw new RuntimeException();
-//        }
+    public String deleteOffer(@PathVariable Long id) {
         offerService.deleteOffer(id);
 
         return "redirect:/offers/all";
@@ -71,10 +62,9 @@ public class OffersController {
     // UPDATE
 
     @GetMapping("/offers/{id}/edit")
-    public String editOffer(@PathVariable Long id, Model model,
-        @AuthenticationPrincipal MobileleUser currentUser) {
+    public String editOffer(@PathVariable Long id, Model model) {
 
-        OfferDetailsView offerDetailsView = offerService.findById(id, currentUser.getUserIdentifier());
+        OfferDetailsView offerDetailsView = offerService.findById(id);
         OfferUpdateBindingModel offerModel = modelMapper.map(
                 offerDetailsView,
                 OfferUpdateBindingModel.class
@@ -129,16 +119,14 @@ public class OffersController {
 
     @PostMapping("/offers/add")
     public String addOffer(@Valid OfferAddBindModel offerAddBindModel,
-                           BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes,
-                            @AuthenticationPrincipal MobileleUser user) {
+                           BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("offerAddBindModel", offerAddBindModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.offerAddBindModel", bindingResult)
                     .addFlashAttribute("brandsModels", brandService.getAllBrands());
             return "redirect:/offers/add";
         }
-        OfferAddServiceModel savedOfferAddServiceModel = offerService.addOffer(offerAddBindModel, user.getUserIdentifier());
+        OfferAddServiceModel savedOfferAddServiceModel = offerService.addOffer(offerAddBindModel);
         return "redirect:/offers/" + savedOfferAddServiceModel.getId() + "/details";
     }
 }

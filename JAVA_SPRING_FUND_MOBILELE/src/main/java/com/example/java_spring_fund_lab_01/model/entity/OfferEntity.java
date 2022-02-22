@@ -1,9 +1,15 @@
 package com.example.java_spring_fund_lab_01.model.entity;
 
+
 import com.example.java_spring_fund_lab_01.model.entity.enums.EngineEnum;
 import com.example.java_spring_fund_lab_01.model.entity.enums.TransmissionEnum;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "offers")

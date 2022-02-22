@@ -1,8 +1,5 @@
 package com.example.java_spring_fund_lab_01.config;
 
-
-import com.example.java_spring_fund_lab_01.model.entity.enums.UserRoleEnum;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,12 +28,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
           authorizeRequests().
           // with this line we allow access to all static resources
           requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-          // allow actuator endpoints
-          requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll().
           // the next line allows access to the home page, login page and registration for everyone
-          antMatchers("/", "/users/login", "/users/register", "/logger/**").permitAll().
-          // we permit the page below only for admin users
-          antMatchers("/statistics").hasRole(UserRoleEnum.ADMIN.name()).
+          antMatchers("/", "/users/login", "/users/register").permitAll().
           // next we forbid all other pages for unauthenticated users.
           antMatchers("/**").authenticated().
         and().

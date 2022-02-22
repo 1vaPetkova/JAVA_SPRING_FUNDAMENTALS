@@ -1,6 +1,8 @@
 package com.example.java_spring_fund_lab_01.service.impl;
 
 
+import java.util.List;
+
 import com.example.java_spring_fund_lab_01.model.entity.BrandEntity;
 import com.example.java_spring_fund_lab_01.model.entity.ModelEntity;
 import com.example.java_spring_fund_lab_01.model.entity.enums.CategoryEnum;
@@ -8,8 +10,6 @@ import com.example.java_spring_fund_lab_01.repository.BrandRepository;
 import com.example.java_spring_fund_lab_01.repository.ModelRepository;
 import com.example.java_spring_fund_lab_01.service.ModelService;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ModelServiceImpl implements ModelService {

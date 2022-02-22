@@ -1,7 +1,13 @@
 package com.example.java_spring_fund_lab_01.model.entity;
 
-import javax.persistence.*;
 import java.time.Instant;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PostPersist;
+import javax.persistence.PrePersist;
 
 @MappedSuperclass
 public abstract class BaseEntity {

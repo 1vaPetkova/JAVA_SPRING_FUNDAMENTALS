@@ -1,16 +1,18 @@
 package com.example.java_spring_fund_lab_01.service.impl;
 
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.example.java_spring_fund_lab_01.model.entity.UserEntity;
 import com.example.java_spring_fund_lab_01.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MobileleUserServiceImpl implements UserDetailsService {
@@ -50,7 +52,7 @@ public class MobileleUserServiceImpl implements UserDetailsService {
             collect(Collectors.toList());
 
     // User is the spring implementation of UserDetails interface.
-    return new MobileleUser(
+    return new User(
         userEntity.getUsername(),
         userEntity.getPassword(),
         auhtorities

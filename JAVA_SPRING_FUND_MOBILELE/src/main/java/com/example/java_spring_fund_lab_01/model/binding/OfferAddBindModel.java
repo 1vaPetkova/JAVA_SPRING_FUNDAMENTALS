@@ -1,13 +1,17 @@
 package com.example.java_spring_fund_lab_01.model.binding;
 
+
 import com.example.java_spring_fund_lab_01.model.entity.enums.EngineEnum;
 import com.example.java_spring_fund_lab_01.model.entity.enums.TransmissionEnum;
 
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 public class OfferAddBindModel {
-    private Long id;
     @NotNull
     private Long modelId;
     @NotNull
@@ -34,15 +38,6 @@ public class OfferAddBindModel {
 
     public OfferAddBindModel setModelId(Long modelId) {
         this.modelId = modelId;
-        return this;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public OfferAddBindModel setId(Long id) {
-        this.id = id;
         return this;
     }
 

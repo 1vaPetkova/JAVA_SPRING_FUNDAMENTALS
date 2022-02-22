@@ -1,6 +1,8 @@
 package com.example.java_spring_fund_lab_01.web;
 
 
+import javax.validation.Valid;
+
 import com.example.java_spring_fund_lab_01.model.binding.UserRegistrationBindingModel;
 import com.example.java_spring_fund_lab_01.model.service.UserRegistrationServiceModel;
 import com.example.java_spring_fund_lab_01.service.UserService;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
 
 @Controller
 public class UserRegistrationController {

@@ -1,11 +1,14 @@
 package com.example.java_spring_fund_lab_01.model.entity;
 
+import static javax.persistence.EnumType.STRING;
 
 import com.example.java_spring_fund_lab_01.model.entity.enums.CategoryEnum;
 
-import javax.persistence.*;
-
-import static javax.persistence.EnumType.STRING;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "models")
