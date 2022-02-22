@@ -8,7 +8,7 @@ public class UserLoginServiceModel {
 
     private String username;
 
-    private String rawPassword;
+    private String password;
 
     @NotBlank
     @Size(min = 2)
@@ -23,12 +23,12 @@ public class UserLoginServiceModel {
 
     @NotBlank
     @Size(min = 3)
-    public String getRawPassword() {
-        return rawPassword;
+    public String getPassword() {
+        return password;
     }
 
     public UserLoginServiceModel setRawPassword(String rawPassword) {
-        this.rawPassword = rawPassword;
+        this.password = rawPassword;
         return this;
     }
 }
