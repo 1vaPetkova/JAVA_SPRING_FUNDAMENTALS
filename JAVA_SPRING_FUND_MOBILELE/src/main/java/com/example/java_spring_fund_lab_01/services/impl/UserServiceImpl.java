@@ -88,10 +88,10 @@ public class UserServiceImpl implements UserService {
                 setFirstName(userRegistrationServiceModel.getFirstName()).
                 setLastName(userRegistrationServiceModel.getLastName()).
                 setActive(true).
-                setPassword(passwordEncoder.encode(userRegistrationServiceModel.getPassword())).
+                setPassword(this.passwordEncoder.encode(userRegistrationServiceModel.getPassword())).
                 setRoles(Set.of(userRole));
 
-        newUser = userRepository.save(newUser);
+        newUser = this.userRepository.save(newUser);
 
         // this is the Spring representation of a user
 //        UserDetails principal = mobileleUserService.loadUserByUsername(newUser.getUsername());
