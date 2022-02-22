@@ -8,20 +8,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table( name = "models")
-public class Model extends BaseEntity {
+public class ModelEntity extends BaseEntity {
 private String name;
 private CategoryEnum category;
 private String imageUrl;
 private Integer startYear;
 private Integer endYear;
-private Brand brand;
+private BrandEntity brand;
 
     @Column(nullable = false)
     public String getName() {
         return name;
     }
 
-    public Model setName(String name) {
+    public ModelEntity setName(String name) {
         this.name = name;
         return this;
     }
@@ -31,7 +31,7 @@ private Brand brand;
         return category;
     }
 
-    public Model setCategory(CategoryEnum category) {
+    public ModelEntity setCategory(CategoryEnum category) {
         this.category = category;
         return this;
     }
@@ -43,7 +43,7 @@ private Brand brand;
         return imageUrl;
     }
 
-    public Model setImageUrl(String imageUrl) {
+    public ModelEntity setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
@@ -53,7 +53,7 @@ private Brand brand;
         return startYear;
     }
 
-    public Model setStartYear(Integer startYear) {
+    public ModelEntity setStartYear(Integer startYear) {
         this.startYear = startYear;
         return this;
     }
@@ -63,17 +63,17 @@ private Brand brand;
         return endYear;
     }
 
-    public Model setEndYear(Integer endYear) {
+    public ModelEntity setEndYear(Integer endYear) {
         this.endYear = endYear;
         return this;
     }
 
     @ManyToOne
-    public Brand getBrand() {
+    public BrandEntity getBrand() {
         return brand;
     }
 
-    public Model setBrand(Brand brand) {
+    public ModelEntity setBrand(BrandEntity brand) {
         this.brand = brand;
         return this;
     }

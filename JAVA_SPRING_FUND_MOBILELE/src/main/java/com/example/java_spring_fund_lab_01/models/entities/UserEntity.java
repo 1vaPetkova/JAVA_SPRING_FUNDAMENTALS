@@ -5,14 +5,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
 
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private boolean isActive;
-    private Set<UserRole> roles;
+    private Set<UserRoleEntity> roles;
     private String imageUrl;
 
     @Column(nullable = false, unique = true)
@@ -20,7 +20,7 @@ public class User extends BaseEntity {
         return username;
     }
 
-    public User setUsername(String username) {
+    public UserEntity setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -30,7 +30,7 @@ public class User extends BaseEntity {
         return password;
     }
 
-    public User setPassword(String password) {
+    public UserEntity setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -40,7 +40,7 @@ public class User extends BaseEntity {
         return firstName;
     }
 
-    public User setFirstName(String firstName) {
+    public UserEntity setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -50,7 +50,7 @@ public class User extends BaseEntity {
         return lastName;
     }
 
-    public User setLastName(String lastName) {
+    public UserEntity setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -60,17 +60,17 @@ public class User extends BaseEntity {
         return isActive;
     }
 
-    public User setActive(boolean active) {
+    public UserEntity setActive(boolean active) {
         isActive = active;
         return this;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
-    public Set<UserRole> getRoles() {
+    public Set<UserRoleEntity> getRoles() {
         return roles;
     }
 
-    public User setRoles(Set<UserRole> roles) {
+    public UserEntity setRoles(Set<UserRoleEntity> roles) {
         this.roles = roles;
         return this;
     }
@@ -80,7 +80,7 @@ public class User extends BaseEntity {
         return imageUrl;
     }
 
-    public User setImageUrl(String imageUrl) {
+    public UserEntity setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }

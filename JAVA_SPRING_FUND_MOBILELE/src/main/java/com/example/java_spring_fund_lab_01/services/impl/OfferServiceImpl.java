@@ -1,7 +1,7 @@
 package com.example.java_spring_fund_lab_01.services.impl;
 
 import com.example.java_spring_fund_lab_01.models.binding.OfferAddBindingModel;
-import com.example.java_spring_fund_lab_01.models.entities.Offer;
+import com.example.java_spring_fund_lab_01.models.entities.OfferEntity;
 import com.example.java_spring_fund_lab_01.models.entities.enums.EngineEnum;
 import com.example.java_spring_fund_lab_01.models.entities.enums.TransmissionEnum;
 import com.example.java_spring_fund_lab_01.models.service.OfferAddServiceModel;
@@ -38,7 +38,7 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public void initializeOffers() {
         if (offerRepository.count() == 0) {
-            Offer offer1 = new Offer();
+            OfferEntity offer1 = new OfferEntity();
             offer1
                     .setModel(modelRepository.findById(1L).orElse(null))
                     .setEngine(EngineEnum.GASOLINE)
@@ -51,7 +51,7 @@ public class OfferServiceImpl implements OfferService {
                     .setSeller(userRepository.findByUsername("pesho")
                             .orElse(null));// or currentUser.getUserName()
 
-            Offer offer2 = new Offer();
+            OfferEntity offer2 = new OfferEntity();
             offer2
                     .setModel(modelRepository.findById(1L).orElse(null))
                     .setEngine(EngineEnum.DIESEL)
@@ -109,7 +109,7 @@ public class OfferServiceImpl implements OfferService {
     }
 
 
-    private OfferSummaryView map(Offer offerEntity) {
+    private OfferSummaryView map(OfferEntity offerEntity) {
         OfferSummaryView summaryView = this.modelMapper
                 .map(offerEntity, OfferSummaryView.class);
 
@@ -119,7 +119,7 @@ public class OfferServiceImpl implements OfferService {
         return summaryView;
     }
 
-    private OfferDetailsView mapDetailsView(String currentUser, Offer offer) {
+    private OfferDetailsView mapDetailsView(String currentUser, OfferEntity offer) {
         OfferDetailsView offerDetailsView = this.modelMapper.map(offer, OfferDetailsView.class);
         offerDetailsView.setCanDelete(isOwner(currentUser, offer.getId()));
         offerDetailsView.setModel(offer.getModel().getName());

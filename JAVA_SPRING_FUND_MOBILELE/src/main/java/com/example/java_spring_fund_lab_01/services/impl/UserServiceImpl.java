@@ -1,7 +1,7 @@
 package com.example.java_spring_fund_lab_01.services.impl;
 
-import com.example.java_spring_fund_lab_01.models.entities.User;
-import com.example.java_spring_fund_lab_01.models.entities.UserRole;
+import com.example.java_spring_fund_lab_01.models.entities.UserEntity;
+import com.example.java_spring_fund_lab_01.models.entities.UserRoleEntity;
 import com.example.java_spring_fund_lab_01.models.entities.enums.UserRoleEnum;
 import com.example.java_spring_fund_lab_01.models.service.UserRegistrationServiceModel;
 import com.example.java_spring_fund_lab_01.repositories.UserRepository;
@@ -36,10 +36,10 @@ public class UserServiceImpl implements UserService {
     private void initializeUsers() {
         if (userRepository.count() == 0) {
 
-            UserRole adminRole = this.userRolesRepository.findByRole(UserRoleEnum.ADMIN);
-            UserRole userRole = this.userRolesRepository.findByRole(UserRoleEnum.USER);
+            UserRoleEntity adminRole = this.userRolesRepository.findByRole(UserRoleEnum.ADMIN);
+            UserRoleEntity userRole = this.userRolesRepository.findByRole(UserRoleEnum.USER);
 
-            User admin = new User();
+            UserEntity admin = new UserEntity();
             admin
                     .setUsername("admin")
                     .setPassword(passwordEncoder.encode("test"))
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             admin.setRoles(Set.of(adminRole, userRole));
             userRepository.save(admin);
 
-            User pesho = new User();
+            UserEntity pesho = new UserEntity();
             pesho
                     .setUsername("pesho")
                     .setPassword(passwordEncoder.encode("test"))
@@ -66,10 +66,10 @@ public class UserServiceImpl implements UserService {
     private void initializeRoles() {
 
         if (this.userRolesRepository.count() == 0) {
-            UserRole adminRole = new UserRole();
+            UserRoleEntity adminRole = new UserRoleEntity();
             adminRole.setRole(UserRoleEnum.ADMIN);
 
-            UserRole userRole = new UserRole();
+            UserRoleEntity userRole = new UserRoleEntity();
             userRole.setRole(UserRoleEnum.USER);
 
             this.userRolesRepository.saveAll(List.of(adminRole, userRole));
@@ -79,9 +79,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerAndLoginUser(UserRegistrationServiceModel userRegistrationServiceModel) {
 
-        UserRole userRole = this.userRolesRepository.findByRole(UserRoleEnum.USER);
+        UserRoleEntity userRole = this.userRolesRepository.findByRole(UserRoleEnum.USER);
 
-        User newUser = new User();
+        UserEntity newUser = new UserEntity();
 
         newUser.
                 setUsername(userRegistrationServiceModel.getUsername()).

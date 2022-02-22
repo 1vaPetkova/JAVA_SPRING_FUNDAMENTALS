@@ -1,7 +1,7 @@
 package com.example.java_spring_fund_lab_01.services.impl;
 
-import com.example.java_spring_fund_lab_01.models.entities.Brand;
-import com.example.java_spring_fund_lab_01.models.entities.Model;
+import com.example.java_spring_fund_lab_01.models.entities.BrandEntity;
+import com.example.java_spring_fund_lab_01.models.entities.ModelEntity;
 import com.example.java_spring_fund_lab_01.models.entities.enums.CategoryEnum;
 import com.example.java_spring_fund_lab_01.repositories.BrandRepository;
 import com.example.java_spring_fund_lab_01.repositories.ModelRepository;
@@ -23,10 +23,10 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public void initializeModels() {
         if (this.modelRepository.count() == 0) {
-            Brand ford = this.brandRepository.findByName("Ford")
+            BrandEntity ford = this.brandRepository.findByName("Ford")
                     .orElseThrow(IllegalArgumentException::new);
 
-            Model fiesta = new Model();
+            ModelEntity fiesta = new ModelEntity();
             fiesta
                     .setName("Fiesta")
                     .setCategory(CategoryEnum.CAR)
@@ -34,7 +34,7 @@ public class ModelServiceImpl implements ModelService {
                     .setStartYear(1976)
                     .setBrand(ford);
 
-            Model escort = new Model();
+            ModelEntity escort = new ModelEntity();
             escort
                     .setName("Escort")
                     .setCategory(CategoryEnum.CAR)

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "offers")
-public class Offer extends BaseEntity {
+public class OfferEntity extends BaseEntity {
 
     private String description;
     private EngineEnum engine;
@@ -17,8 +17,8 @@ public class Offer extends BaseEntity {
     private BigDecimal price;
     private TransmissionEnum transmission;
     private Integer year;
-    private Model model;
-    private User seller;
+    private ModelEntity model;
+    private UserEntity seller;
 
     @Column(columnDefinition = "TEXT")
     public String getDescription() {
@@ -58,56 +58,56 @@ public class Offer extends BaseEntity {
     }
 
     @ManyToOne
-    public Model getModel() {
+    public ModelEntity getModel() {
         return model;
     }
 
     @ManyToOne
-    public User getSeller() {
+    public UserEntity getSeller() {
         return seller;
     }
 
-    public void setSeller(User seller) {
+    public void setSeller(UserEntity seller) {
         this.seller = seller;
     }
 
 
-    public Offer setDescription(String description) {
+    public OfferEntity setDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public Offer setEngine(EngineEnum engine) {
+    public OfferEntity setEngine(EngineEnum engine) {
         this.engine = engine;
         return this;
     }
 
-    public Offer setImageUrl(String imageUrl) {
+    public OfferEntity setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
 
-    public Offer setMileage(Integer mileage) {
+    public OfferEntity setMileage(Integer mileage) {
         this.mileage = mileage;
         return this;
     }
 
-    public Offer setPrice(BigDecimal price) {
+    public OfferEntity setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
 
-    public Offer setTransmission(TransmissionEnum transmission) {
+    public OfferEntity setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
         return this;
     }
 
-    public Offer setYear(Integer year) {
+    public OfferEntity setYear(Integer year) {
         this.year = year;
         return this;
     }
 
-    public Offer setModel(Model model) {
+    public OfferEntity setModel(ModelEntity model) {
         this.model = model;
         return this;
     }
