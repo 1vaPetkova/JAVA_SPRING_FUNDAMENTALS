@@ -48,7 +48,7 @@ public class OffersController {
             );
             return "redirect:/offers/add";
         }
-        long newOfferId = this.offerService.saveOffer(offerModel);
+//        long newOfferId = this.offerService.saveOffer(offerModel);
         return "redirect:/offers/offer/" + newOfferId;
     }
 

@@ -20,7 +20,8 @@ public class UserServiceImpl implements UserService {
     private final UserRolesRepository userRolesRepository;
 
 
-    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRolesRepository userRolesRepository) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
+                           UserRolesRepository userRolesRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRolesRepository = userRolesRepository;
