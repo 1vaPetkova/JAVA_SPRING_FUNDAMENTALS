@@ -27,9 +27,9 @@ public class MobileleUserServiceImpl implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
     // The purpose of this method is to map our user representation (UserEntity)
-    // to the user representation in the spring sercurity world (UserDetails).
-    // The only thing that spring will provide to us is the user name.
-    // The user name will come from the HTML login form.
+    // to the user representation in the spring security world (UserDetails).
+    // The only thing that spring will provide to us is the username.
+    // The username will come from the HTML login form.
 
     UserEntity userEntity =
         userRepository.findByUsername(username).
@@ -44,7 +44,7 @@ public class MobileleUserServiceImpl implements UserDetailsService {
     // spring world. SimpleGrantedAuthority is an implementation of GrantedAuthority
     // which spring provides for our convenience.
     // Our representation of role is UserRoleEntity
-    List<GrantedAuthority> auhtorities =
+    List<GrantedAuthority> authorities =
         userEntity.
             getRoles().
             stream().
@@ -52,10 +52,10 @@ public class MobileleUserServiceImpl implements UserDetailsService {
             collect(Collectors.toList());
 
     // User is the spring implementation of UserDetails interface.
-    return new User(
+    return new MobileleUser(
         userEntity.getUsername(),
         userEntity.getPassword(),
-        auhtorities
+        authorities
     );
   }
 }

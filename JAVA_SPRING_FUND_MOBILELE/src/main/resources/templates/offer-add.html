@@ -50,7 +50,7 @@
                 <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
                 <select th:errorclass="is-invalid" id="engine" name="engine" class="form-control">
                     <option value="">- Select engine type -</option>
-                    <option th:each="e : ${T(bg.softuni.mobilelele.model.entity.enums.EngineEnum).values()}"
+                    <option th:each="e : ${T(com.example.java_spring_fund_lab_01.model.entity.enums.EngineEnum).values()}"
                             th:text="${e}" th:value="${e}" th:selected="${e} == *{engine}"
                     >Engine type</option>
                 </select>
@@ -62,7 +62,7 @@
                 <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
                 <select th:errorclass="is-invalid" name="transmission" id="transmission" class="form-control">
                     <option value="">- Select transmission type -</option>
-                    <option th:each="t : ${T(bg.softuni.mobilelele.model.entity.enums.TransmissionEnum).values()}"
+                    <option th:each="t : ${T(com.example.java_spring_fund_lab_01.model.entity.enums.TransmissionEnum).values()}"
                             th:text="${t}" th:value="${t}" th:selected="${t} == *{transmission}"
                     > Transmission type</option>
                 </select>

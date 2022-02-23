@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
+
 @Controller
 public class OffersController {
     private final OfferService offerService;
@@ -111,22 +113,23 @@ public class OffersController {
 
         if (!model.containsAttribute("offerAddBindModel")) {
             model.
-                addAttribute("offerAddBindModel", new OfferAddBindModel()).
-                addAttribute("brandsModels", brandService.getAllBrands());
+                    addAttribute("offerAddBindModel", new OfferAddBindModel()).
+                    addAttribute("brandsModels", brandService.getAllBrands());
         }
         return "offer-add";
     }
 
     @PostMapping("/offers/add")
     public String addOffer(@Valid OfferAddBindModel offerAddBindModel,
-                           BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                           BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                           Principal principal) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("offerAddBindModel", offerAddBindModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.offerAddBindModel", bindingResult)
                     .addFlashAttribute("brandsModels", brandService.getAllBrands());
             return "redirect:/offers/add";
         }
-        OfferAddServiceModel savedOfferAddServiceModel = offerService.addOffer(offerAddBindModel);
+        OfferAddServiceModel savedOfferAddServiceModel = offerService.addOffer(offerAddBindModel, principal);
         return "redirect:/offers/" + savedOfferAddServiceModel.getId() + "/details";
     }
 }
