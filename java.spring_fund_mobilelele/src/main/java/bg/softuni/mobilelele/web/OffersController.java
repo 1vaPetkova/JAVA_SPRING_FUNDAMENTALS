@@ -9,8 +9,12 @@ import bg.softuni.mobilelele.model.service.OfferUpdateServiceModel;
 import bg.softuni.mobilelele.model.view.OfferDetailsView;
 import bg.softuni.mobilelele.service.BrandService;
 import bg.softuni.mobilelele.service.OfferService;
+
 import javax.validation.Valid;
+
+import bg.softuni.mobilelele.service.impl.MobileleUser;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -109,22 +113,23 @@ public class OffersController {
 
         if (!model.containsAttribute("offerAddBindModel")) {
             model.
-                addAttribute("offerAddBindModel", new OfferAddBindModel()).
-                addAttribute("brandsModels", brandService.getAllBrands());
+                    addAttribute("offerAddBindModel", new OfferAddBindModel()).
+                    addAttribute("brandsModels", brandService.getAllBrands());
         }
         return "offer-add";
     }
 
     @PostMapping("/offers/add")
     public String addOffer(@Valid OfferAddBindModel offerAddBindModel,
-                           BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                           BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                           @AuthenticationPrincipal MobileleUser user) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("offerAddBindModel", offerAddBindModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.offerAddBindModel", bindingResult)
                     .addFlashAttribute("brandsModels", brandService.getAllBrands());
             return "redirect:/offers/add";
         }
-        OfferAddServiceModel savedOfferAddServiceModel = offerService.addOffer(offerAddBindModel);
+        OfferAddServiceModel savedOfferAddServiceModel = offerService.addOffer(offerAddBindModel, user.getUserIdentifier());
         return "redirect:/offers/" + savedOfferAddServiceModel.getId() + "/details";
     }
 }
